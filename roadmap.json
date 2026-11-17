@@ -1,0 +1,944 @@
+{
+ "version": "2026-11-09",
+ "sources": [
+  "Hypixel Forums: Hypixel SkyBlock Starter Guide (Level 0–15), обновлён 14.10.2026",
+  "Hypixel Forums: How do I make money in 2026; Decent Early Game Money Making Methods 2025",
+  "Hypixel SkyBlock Wiki: Tutorial:Ultimate Guide (ревизия 819565) и страницы локаций"
+ ],
+ "roles": {
+  "miner": {
+   "name": "Шахтёр",
+   "why": "Кормит кооп редстоуном и изумрудами для аксессуаров и качает Heart of the Mountain."
+  },
+  "fighter": {
+   "name": "Боец",
+   "why": "Ведёт кооп в The End, к слейерам и в данжи."
+  },
+  "farmer": {
+   "name": "Фермер",
+   "why": "Главный по монетам: урожай с Garden всегда продаётся на Базаре."
+  },
+  "forager": {
+   "name": "Лес и рыбалка",
+   "why": "Открывает Galatea и приносит быстрые монеты с рыбалки и грибов."
+  }
+ },
+ "assign": {
+  "itzwinged": "miner",
+  "thegreyden": "fighter",
+  "therestalk": "farmer",
+  "_levram_": "forager"
+ },
+ "chapters": [
+  {
+   "id": "c1",
+   "n": 1,
+   "title": "Старт: открыть Базар",
+   "goal": "SkyBlock 7 — открывается Базар",
+   "why": "Базар — рынок игроков: продаёшь добычу и покупаешь материалы в разы дешевле, чем у NPC. С ним всё остальное идёт быстрее.",
+   "reward": "Базар, а на SkyBlock 5 по пути откроется Garden",
+   "steps": [
+    {
+     "id": "c1_tools",
+     "t": "Инструменты",
+     "do": "Забери бесплатный Rogue Sword у Weaponsmith в Hub, купи Promising Pickaxe у Mine Merchant и Rookie Hoe у Farm Merchant, скрафти Golden Axe.",
+     "why": "Без инструментов всё добывается в разы медленнее, а Rogue Sword даёт скорость: меньше беготни.",
+     "how": [
+      "Weaponsmith — в Combat Settlement (от портала в The End в центре Hub на 11 часов).",
+      "Golden Axe: 2 палки и 3 золотых слитка, золото продаёт Mine Merchant.",
+      "NEU: наведи на предмет и нажми R — покажет рецепт."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "ROGUE_SWORD",
+         "PROMISING_PICKAXE",
+         "ROOKIE_HOE",
+         "GOLD_AXE"
+        ]
+       },
+       {
+        "skill": "MINING",
+        "lvl": 3
+       },
+       {
+        "skill": "FORAGING",
+        "lvl": 5
+       },
+       {
+        "skill": "FARMING",
+        "lvl": 3
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "c1_pet",
+     "t": "Питомец",
+     "do": "В Spider's Den поговори с Bramass Beastslayer (откроет Bestiary), потом наверху в том же доме — с Grandma Wolf: она даст первого питомца. Сразу надень его.",
+     "why": "Питомец качается вместе с тобой и даёт бонусы, а Bestiary превращает каждое убийство в опыт SkyBlock.",
+     "how": [
+      "Вход в Spider's Den — в конце Graveyard в Hub.",
+      "Дом Bramass — на высокой скале слева от входа."
+     ],
+     "check": {
+      "pet": [
+       "GRANDMA_WOLF"
+      ]
+     }
+    },
+    {
+     "id": "c1_farmhand",
+     "t": "Farmhand-броня",
+     "do": "Нарви 100 пшеницы на полях Hub (коллекция Wheat II) и скрафти Farmhand Armor через /craftingtable.",
+     "why": "Первая броня и первый урок: коллекции открывают рецепты. Коллекции в коопе общие.",
+     "how": [
+      "Поля пшеницы — на 2 часа от центра Hub.",
+      "Лишнюю пшеницу продай Farm Merchant."
+     ],
+     "check": {
+      "coll": "WHEAT",
+      "n": 100
+     }
+    },
+    {
+     "id": "c1_carp",
+     "t": "Карпентер",
+     "do": "Купи стак белой шерсти у Wool Weaver в Builder's House и отдай Carpenter в Foraging Camp.",
+     "why": "Carpentry потом качается сама от любого крафта и даёт опыт SkyBlock.",
+     "how": [
+      "Builder's House — между дорогой в Combat Settlement и шахтой.",
+      "Carpenter — в Foraging Camp, на 9 часов от центра Hub."
+     ],
+     "check": {
+      "quest": "carpentry"
+     }
+    },
+    {
+     "id": "c1_caverns",
+     "t": "Deep Caverns",
+     "do": "Качай Шахты до 5 в Coal и Gold Mine, найди кирку Lazy Miner, спустись в Deep Caverns до самого дна и поговори с Lift Operator.",
+     "why": "Лифт открывает быстрый спуск на любой этаж, а Шахты 5 дают доступ к лучшим рудам.",
+     "how": [
+      "Кирка Lazy Miner плавит руду сразу.",
+      "После дна: /lobby и обратно — окажешься у входа рядом с лифтом."
+     ],
+     "check": {
+      "all": [
+       {
+        "skill": "MINING",
+        "lvl": 5
+       },
+       {
+        "obj": "talk_to_lift_operator"
+       }
+      ]
+     }
+    },
+    {
+     "id": "c1_sb7",
+     "t": "SkyBlock 7",
+     "do": "Добери уровень: копай песок в Mushroom Desert, фарми пшеницу, крафти новых миньонов — каждый новый даёт опыт SkyBlock.",
+     "why": "Цель главы: Базар. С ним материалы для миньонов и брони покупаются за минуты.",
+     "how": [
+      "Опыт SkyBlock видно в меню SkyBlock Leveling.",
+      "Песок: Golden Shovel с Efficiency III, Mushroom Desert через портал-хаб (/warp)."
+     ],
+     "check": {
+      "sb": 7
+     }
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "n": 2,
+   "title": "Остров работает сам",
+   "goal": "7 слотов миньонов — 15 уникальных крафтов на кооп",
+   "why": "Миньоны копят ресурсы, пока вы спите или в школе: коллекции, рецепты и монеты без усилий.",
+   "reward": "Пассивный доход и быстрые коллекции",
+   "steps": [
+    {
+     "id": "c2_mine",
+     "t": "Миньоны шахты",
+     "do": "Скрафтите Coal, Iron, Gold и Redstone миньонов: деревянная кирка в центре, ресурс вокруг. Нужно примерно по 80 угля, железа и золота и 128+ редстоуна.",
+     "why": "Redstone-миньоны качают коллекцию, которая расширяет сумку аксессуаров всему коопу.",
+     "how": [
+      "Сделайте несколько Redstone-миньонов и апгрейдьте их.",
+      "SkyHanni и NEU показывают рецепты и что можно скрафтить."
+     ],
+     "check": {
+      "mtypes": [
+       "COAL",
+       "IRON",
+       "GOLD",
+       "REDSTONE"
+      ]
+     }
+    },
+    {
+     "id": "c2_storage",
+     "t": "Small Storage",
+     "do": "Нарубите 500 дуба (Oak IV на кооп) — откроется Small Storage. Поставьте сундучки рядом с миньонами.",
+     "why": "Заполненный миньон стоит без дела. Склад — это больше работы, пока вас нет.",
+     "how": [
+      "Golden Axe с Efficiency V рубит в разы быстрее.",
+      "Small Storage: 8 дубовых брёвен вокруг, как сундук."
+     ],
+     "check": {
+      "coll": "LOG",
+      "n": 500
+     }
+    },
+    {
+     "id": "c2_more",
+     "t": "Песок и урожай",
+     "do": "Скрафтите Sand и Wheat миньонов и поднимайте их до III–V тира.",
+     "why": "Каждый новый тип и тир миньона приближает новый слот.",
+     "how": [
+      "Sand: деревянная лопата в центре, песок вокруг.",
+      "Wheat: деревянная мотыга в центре, пшеница вокруг."
+     ],
+     "check": {
+      "mtypes": [
+       "SAND",
+       "WHEAT"
+      ]
+     }
+    },
+    {
+     "id": "c2_cookie",
+     "t": "Community Center",
+     "do": "У Elizabeth в Community Center (за спавном Hub) заберите бесплатный Booster Cookie: он даётся один раз на аккаунт. Купите апгрейды профиля: слоты миньонов и сумки.",
+     "why": "Cookie на 4 дня: монеты не теряются при смерти, /bz и /ah работают отовсюду, капают Bits. Бесплатно.",
+     "how": [
+      "Магазин Elizabeth открывается примерно после 5 часов игры на профиле.",
+      "Если бесплатного Cookie нет — его уже забирали на этом аккаунте."
+     ],
+     "check": {
+      "any": [
+       {
+        "cookie": true
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "c2_compactor",
+     "t": "Компактор",
+     "do": "Купите Compactor на Базаре через Buy Order и поставьте в миньонов.",
+     "why": "Компактор сжимает ресурсы в блоки — миньон заполняется в разы медленнее.",
+     "how": [
+      "Buy Order дешевле, чем Instant Buy, просто ждать дольше."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "c2_slots",
+     "t": "7 слотов",
+     "do": "Добейте 15 уникальных крафтов миньонов на кооп: новые типы (дерево, урожай, мобы) и новые тиры.",
+     "why": "Цель главы: каждый слот — это ещё один работник на острове.",
+     "how": [
+      "Считается каждый новый тип и каждый новый тир, крафт любого из вас.",
+      "Дешёвые варианты: Oak, Birch, Cobblestone, Carrot, Potato."
+     ],
+     "check": {
+      "minions": 15
+     }
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "n": 3,
+   "title": "Сумка и скорость",
+   "goal": "50 Accessory Power и быстрые перемещения",
+   "why": "Аксессуары дают Accessory Power, а Maxwell превращает его в статы: урон, крит, здоровье. Это самый дешёвый способ стать сильнее.",
+   "reward": "Больше урона и крита во всём: шахты, бой, данжи",
+   "steps": [
+    {
+     "id": "c3_acc",
+     "t": "Первые аксессуары",
+     "do": "Купи Zombie и Skeleton Talisman у Combat Merchant, скрафти Vaccine Talisman из 9 Poisoned Potato с Базара, положи всё в /accessories и выбери силу у Maxwell.",
+     "why": "Даже пара аксессуаров уже даёт силу у Maxwell — прибавка к урону сразу.",
+     "how": [
+      "Maxwell и Combat Merchant — в Combat Settlement.",
+      "Для начала подойдёт сила на урон, например Warrior."
+     ],
+     "check": {
+      "mp": 10
+     }
+    },
+    {
+     "id": "c3_move",
+     "t": "AOTE и крюк",
+     "do": "На аукционе (/ah, фильтр BIN) купи Grappling Hook и Aspect of the End.",
+     "why": "Телепорт и крюк в разы ускоряют перемещение — это время на всё остальное.",
+     "how": [
+      "Бери самые дешёвые: статы на старте не важны.",
+      "Держи их в хотбаре всегда."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "ASPECT_OF_THE_END"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "c3_emerald",
+     "t": "Монеты и магнит",
+     "do": "Добудьте 250 изумрудов (Emerald III на кооп) и скрафтите Talisman of Coins и Magnetic Talisman.",
+     "why": "Больше монет с мобов и подбор лута издалека.",
+     "how": [
+      "Изумруды: вагонетки с рудой над деревней Dwarven Mines или Базар.",
+      "Talisman of Coins открывается на Emerald II, Magnetic — на III."
+     ],
+     "check": {
+      "coll": "EMERALD",
+      "n": 250
+     }
+    },
+    {
+     "id": "c3_redstone",
+     "t": "Redstone: слоты",
+     "do": "Отдай редстоун Redstone Miner в Deep Caverns по его заданиям и докачайте коллекцию Redstone до 2 500 всем коопом.",
+     "why": "Каждый тир Redstone даёт +6 слотов сумки: на тире V это уже +24 слота каждому.",
+     "how": [
+      "Тиры: 250, 750, 1 500, 2 500, 5 000.",
+      "Шахтёр и Redstone-миньоны делают это быстрее всех."
+     ],
+     "check": {
+      "coll": "REDSTONE",
+      "n": 2500
+     }
+    },
+    {
+     "id": "c3_ench",
+     "t": "Enchanting 10",
+     "do": "Зачаруй инструменты и броню (бутылки опыта есть на Базаре), дойди до Enchanting 10 и поставь Experimentation Table.",
+     "why": "Experimentation Table — бесплатный опыт зачарования каждый день, а хорошие зачарования решают всё дальше.",
+     "how": [
+      "Стол зачарований на острове больше не требует книжных полок.",
+      "Мечу сначала: Sharpness, Critical, First Strike."
+     ],
+     "check": {
+      "skill": "ENCHANTING",
+      "lvl": 10
+     }
+    },
+    {
+     "id": "c3_mp50",
+     "t": "50 AP",
+     "do": "Speed Talisman (Sugar Cane II), Potion Affinity (Nether Wart III), Campfire Badge у Ryan в Park и бесплатный талисман у Archaeologist в Spider's Den.",
+     "why": "Цель главы: каждый новый аксессуар — больше силы у Maxwell.",
+     "how": [
+      "SkyHanni и NEU показывают, каких аксессуаров не хватает.",
+      "Цель на будущее: 100% шанса крита."
+     ],
+     "check": {
+      "mp": 50
+     }
+    }
+   ]
+  },
+  {
+   "id": "c4m",
+   "n": 4,
+   "role": "miner",
+   "title": "Шахтёр: сердце горы",
+   "goal": "HotM 4 — открывается Crystal Hollows",
+   "why": "Шахтёр кормит кооп ресурсами для сумки и монетами, а Heart of the Mountain — самое долгое и сильное развитие в шахтах.",
+   "reward": "Crystal Hollows и драгоценные камни",
+   "steps": [
+    {
+     "id": "m_dwarven",
+     "t": "Dwarven Mines",
+     "do": "Дойди до Шахт 12, купи на Базаре 15 любых зачарованных руд и отдай Rhys в Obsidian Sanctuary.",
+     "why": "Dwarven Mines — дом настоящей добычи: коммиссии, порошок и лучшие кирки.",
+     "how": [
+      "Быстрый опыт Шахт — песок в Mushroom Desert.",
+      "Rhys стоит у лифта в Obsidian Sanctuary."
+     ],
+     "check": {
+      "skill": "MINING",
+      "lvl": 12
+     }
+    },
+    {
+     "id": "m_pick",
+     "t": "Mithril-кирка",
+     "do": "Купи Fractured Mithril Pickaxe у Bubu и зачаруй её: Efficiency V, Fortune III, Experience III.",
+     "why": "С нормальной киркой добыча идёт в разы быстрее.",
+     "how": [
+      "Bubu — справа в деревне Dwarven Mines."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "FRACTURED_MITHRIL_PICKAXE"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "m_comm",
+     "t": "Коммиссии",
+     "do": "Каждый день делай 4 коммиссии (за них бонусный опыт HotM), Fetchur и Puzzler.",
+     "why": "Так Heart of the Mountain растёт быстрее всего, а порошок идёт на перки.",
+     "how": [
+      "Первые 4 коммиссии в день дают бонус.",
+      "Fetchur каждый день просит один предмет — простой порошок."
+     ],
+     "check": {
+      "hotm": 3
+     }
+    },
+    {
+     "id": "m_hotm4",
+     "t": "HotM 4",
+     "do": "Качай Heart of the Mountain до 4 тира.",
+     "why": "HotM 4 открывает Crystal Hollows: драгоценные камни и прибыльные руды.",
+     "how": [
+      "Перки качай на скорость добычи и удачу."
+     ],
+     "check": {
+      "hotm": 4
+     }
+    },
+    {
+     "id": "m_red",
+     "t": "Redstone 5 000",
+     "do": "Добей коллекцию Redstone до 5 000 — ещё +6 слотов сумки всему коопу.",
+     "why": "Ты главный по шахтам — это твой вклад в силу каждого.",
+     "how": [
+      "Redstone в Deep Caverns, плюс миньоны.",
+      "Компактор в Redstone-миньонов."
+     ],
+     "check": {
+      "coll": "REDSTONE",
+      "n": 5000
+     }
+    },
+    {
+     "id": "m_m20",
+     "t": "Шахты 20",
+     "do": "Качай Шахты до 20 на коммиссиях и Mithril.",
+     "why": "Цель роли: уровень Шахт даёт защиту и удачу добычи.",
+     "how": [
+      "Glacite Walkers у Great Ice Wall заодно качают Бой."
+     ],
+     "check": {
+      "skill": "MINING",
+      "lvl": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "c4f",
+   "n": 4,
+   "role": "fighter",
+   "title": "Боец: меч и броня",
+   "goal": "Бой 15 и первый слейер",
+   "why": "Боец ведёт кооп в данжи и к слейерам, а Wand of Healing лечит всю команду.",
+   "reward": "Вход в Catacombs и Wand of Healing",
+   "steps": [
+    {
+     "id": "f_end",
+     "t": "Бой 12: The End",
+     "do": "Качай Бой до 12 на Glacite Walkers у Great Ice Wall (их бьют киркой, 40 опыта за моба) или на Crypt Ghouls в Hub.",
+     "why": "Бой 12 открывает The End — там Void Sword и Ender-броня.",
+     "how": [
+      "Перед опасным фармом положи монеты в банк.",
+      "Glacite Walkers больно бьют — не стой на месте."
+     ],
+     "check": {
+      "skill": "COMBAT",
+      "lvl": 12
+     }
+    },
+    {
+     "id": "f_void",
+     "t": "Void Sword",
+     "do": "В The End убей 5 Endermen для Lone Adventurer и купи Void Sword за 200 000. Первый reforge у Blacksmith стоит всего 10 угля: сделай Sharp.",
+     "why": "Void Sword — главный меч раннего боя, особенно в The End.",
+     "how": [
+      "Засчитывается добивание.",
+      "Зачарования: Sharpness V, Critical V, Ender Slayer V, First Strike IV."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "VOID_SWORD"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "f_ender",
+     "t": "Ender-броня",
+     "do": "Фарми Endermen на полный сет Ender Armor, потом Ender Cloak (Seer), Belt (Obsidian Defender) и Gauntlet (Ender Node).",
+     "why": "В The End броня даёт двойные статы — живёшь дольше и бьёшь сильнее.",
+     "how": [
+      "Ender Node копаются киркой — ещё и монеты."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "ENDER_CHESTPLATE"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "f_rev",
+     "t": "Revenant I",
+     "do": "У Maddox the Slayer под таверной в Hub возьми Revenant Horror I и убей босса.",
+     "why": "Revenant Flesh и палка — это Wand of Healing, лечилка для всей команды.",
+     "how": [
+      "Босс Tier I по силам с Void Sword.",
+      "Рецепт Wand of Healing открывается на Zombie Slayer I."
+     ],
+     "check": {
+      "slayer": "zombie",
+      "lvl": 1
+     }
+    },
+    {
+     "id": "f_c15",
+     "t": "Бой 15",
+     "do": "Добей Бой 15 на Endermen в The End.",
+     "why": "Бой 15 открывает Catacombs — туда ты поведёшь кооп.",
+     "how": [
+      "Endermen на верхних уровнях дают больше опыта."
+     ],
+     "check": {
+      "skill": "COMBAT",
+      "lvl": 15
+     }
+    },
+    {
+     "id": "f_rev3",
+     "t": "Revenant III",
+     "do": "Доведи Zombie Slayer до 3.",
+     "why": "Цель роли: уровни слейера открывают Wand of Mending и сильные предметы.",
+     "how": [
+      "Mayor со слейер-перками делает это дешевле."
+     ],
+     "check": {
+      "slayer": "zombie",
+      "lvl": 3
+     }
+    }
+   ]
+  },
+  {
+   "id": "c4r",
+   "n": 4,
+   "role": "farmer",
+   "title": "Фермер: Garden и монеты",
+   "goal": "Farming 20 и первые 500 000 на кооп",
+   "why": "Фермер — главный источник монет коопа: урожай всегда продаётся на Базаре, а Garden развивается даже без вложений.",
+   "reward": "Стабильный доход для всего коопа",
+   "steps": [
+    {
+     "id": "r_garden",
+     "t": "Garden",
+     "do": "Дойди до SkyBlock 5 и зайди в Garden (/warp garden).",
+     "why": "Garden — твой личный остров-ферма: визитёры платят монетами и Copper.",
+     "how": [
+      "Первый уровень Garden дают просто за вход."
+     ],
+     "check": {
+      "sb": 5
+     }
+    },
+    {
+     "id": "r_f10",
+     "t": "Farming 10",
+     "do": "Rookie Hoe с Harvesting, фарми пшеницу, морковь и картофель в The Barn до Farming 10.",
+     "why": "Farming даёт здоровье и удачу урожая, а уровни — опыт SkyBlock.",
+     "how": [
+      "Сразу крафти Wheat, Carrot и Potato миньонов — слоты для коопа."
+     ],
+     "check": {
+      "skill": "FARMING",
+      "lvl": 10
+     }
+    },
+    {
+     "id": "r_visit",
+     "t": "Визитёры",
+     "do": "Выполняй заказы визитёров Garden: они дают Copper, опыт Garden и монеты.",
+     "why": "Copper покупает улучшения фермы в SkyMart.",
+     "how": [
+      "Невыгодные заказы можно отклонять."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "r_500k",
+     "t": "500 000 монет",
+     "do": "Фарми дыни или тыквы в Garden и продавай на Базаре через Sell Offer.",
+     "why": "Это стабильные монеты для всего коопа: Void Sword, AOTE, апгрейды.",
+     "how": [
+      "Sell Offer даёт больше, чем Instant Sell.",
+      "Считаются кошельки всех и банк коопа, если его видно в API."
+     ],
+     "check": {
+      "coins": 500000
+     }
+    },
+    {
+     "id": "r_pet",
+     "t": "Фермерский пет",
+     "do": "Купи Rabbit Pet или Mooshroom Cow на аукционе и носи его на ферме.",
+     "why": "Rabbit ускоряет опыт фермерства, Mooshroom даёт удачу урожая.",
+     "how": [
+      "Хватит и самого дешёвого."
+     ],
+     "check": {
+      "pet": [
+       "RABBIT",
+       "MOOSHROOM_COW",
+       "ELEPHANT"
+      ]
+     }
+    },
+    {
+     "id": "r_f20",
+     "t": "Farming 20",
+     "do": "Качай Farming до 20 на грядках Garden.",
+     "why": "Цель роли: дальше — инструменты фермера и прибыльные культуры.",
+     "how": [
+      "Грибы в Garden дают много опыта Farming."
+     ],
+     "check": {
+      "skill": "FARMING",
+      "lvl": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "c4l",
+   "n": 4,
+   "role": "forager",
+   "title": "Лес и рыбалка",
+   "goal": "Galatea и Foraging 20",
+   "why": "Лесник открывает новый контент Galatea и Hunting, а рыбалка и грибы приносят быстрые монеты.",
+   "reward": "Сила (Strength) для всех бойцов и ранние монеты",
+   "steps": [
+    {
+     "id": "l_park",
+     "t": "Квесты Park",
+     "do": "Пройди квесты Park: Charlie (берёза), Kelly (ель), Molbert (джунгли), Melody (акация).",
+     "why": "Бесплатная броня леса и быстрый опыт.",
+     "how": [
+      "Charlie — 64 березы, Kelly — 128 ели, Molbert — 512 джунглей, Melody — 512 акации."
+     ],
+     "check": {
+      "all": [
+       {
+        "quest": "into-the-woods"
+       },
+       {
+        "quest": "helping-hand"
+       },
+       {
+        "quest": "mole-problems"
+       },
+       {
+        "quest": "the-rebuild"
+       }
+      ]
+     }
+    },
+    {
+     "id": "l_axe",
+     "t": "Treecapitator",
+     "do": "Скрафти Jungle Axe, а потом Treecapitator: он рубит дерево целиком.",
+     "why": "Рубка в несколько раз быстрее.",
+     "how": [
+      "Рецепты открываются коллекциями дерева."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "TREECAPITATOR_AXE",
+         "JUNGLE_AXE"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    },
+    {
+     "id": "l_galatea",
+     "t": "Galatea",
+     "do": "После квестов Park отправляйся на Galatea, поговори с Hina и открой Heart of the Forest.",
+     "why": "Современный лес: древо навыков, Hunting и шарды.",
+     "how": [
+      "Просто выполняй задания острова — они учат механикам и дают много опыта.",
+      "Дорогие атрибуты пока не покупай."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "l_moby",
+     "t": "Moby и грибы",
+     "do": "В Glowing Mushroom Cave поговори с Moby, выполни его задания и купи Moby's Shears. Фарми Glowing Mushroom и сверяй цены Chum Bucket на Базаре.",
+     "why": "Один из лучших ранних заработков без вложений.",
+     "how": [
+      "Сначала проверь цены пустых и полных Chum Bucket на Базаре."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "l_fish10",
+     "t": "Рыбалка 10",
+     "do": "Лови на горячих точках (квест Hattie) до Fishing 10.",
+     "why": "Рыбалка 10 нужна для лавовой рыбалки на Crimson Isle.",
+     "how": [
+      "Удочка от Enid и детали от Roddy заметно ускоряют."
+     ],
+     "check": {
+      "skill": "FISHING",
+      "lvl": 10
+     }
+    },
+    {
+     "id": "l_f20",
+     "t": "Foraging 20",
+     "do": "Руби в Park и на Galatea до Foraging 20.",
+     "why": "Цель роли: лес даёт Strength, а она нужна всем бойцам.",
+     "how": [
+      "Treecapitator и Efficiency V на топоре."
+     ],
+     "check": {
+      "skill": "FORAGING",
+      "lvl": 20
+     }
+    }
+   ]
+  },
+  {
+   "id": "c5",
+   "n": 5,
+   "title": "Вместе в бой",
+   "goal": "Catacombs Floor 1 всей командой",
+   "why": "Данжи — главный путь к сильному снаряжению и деньгам. Вчетвером проходить проще и веселее.",
+   "reward": "Данжевые предметы и опыт Catacombs",
+   "steps": [
+    {
+     "id": "b_c12",
+     "t": "Бой 12",
+     "do": "Каждому Бой 12: Glacite Walkers киркой или Crypt Ghouls в Hub.",
+     "why": "Без Боя 12 нет The End, а без 15 не пустят в данжи.",
+     "how": [
+      "Боец может провести остальных по безопасным местам."
+     ],
+     "check": {
+      "skill": "COMBAT",
+      "lvl": 12
+     }
+    },
+    {
+     "id": "b_c15",
+     "t": "Бой 15",
+     "do": "Добейте Бой 15 — откроется вход в Catacombs.",
+     "why": "Это требование входа в данжи.",
+     "how": [
+      "Endermen в The End дают хороший опыт."
+     ],
+     "check": {
+      "skill": "COMBAT",
+      "lvl": 15
+     }
+    },
+    {
+     "id": "b_entr",
+     "t": "Entrance",
+     "do": "Соберитесь вчетвером и пройдите Entrance. Выберите классы: Berserk, Mage, Archer и Healer или Tank.",
+     "why": "Entrance учит механикам: секреты, ключи, кровавая комната.",
+     "how": [
+      "Вход — Dungeon Hub, через /warp dungeon_hub.",
+      "Wand of Healing у хилера очень помогает."
+     ],
+     "check": {
+      "floor": 0
+     }
+    },
+    {
+     "id": "b_f1",
+     "t": "Floor 1",
+     "do": "Дойдите до Catacombs 1 и пройдите Floor 1 с боссом Bonzo.",
+     "why": "Первые данжевые награды и Bonzo's Staff.",
+     "how": [
+      "Floor 1 требует Catacombs 1."
+     ],
+     "check": {
+      "floor": 1
+     }
+    },
+    {
+     "id": "b_c5",
+     "t": "Catacombs 5",
+     "do": "Гоняйте Floor 1–2 до Catacombs 5 — откроется Floor 3.",
+     "why": "Каждый уровень Catacombs усиливает данжевые предметы.",
+     "how": [
+      "Floor 2 требует Catacombs 3, Floor 3 — Catacombs 5."
+     ],
+     "check": {
+      "cata": 5
+     }
+    },
+    {
+     "id": "b_wand",
+     "t": "Wand of Healing",
+     "do": "Скрафти Wand of Healing: Revenant Flesh и палка, рецепт открывает Zombie Slayer I.",
+     "why": "Лечилка спасает всю команду: меньше смертей и быстрее забеги.",
+     "how": [
+      "Revenant Flesh падает с Revenant Horror."
+     ],
+     "check": {
+      "any": [
+       {
+        "item": [
+         "WAND_OF_HEALING",
+         "WAND_OF_MENDING",
+         "WAND_OF_RESTORATION"
+        ]
+       },
+       {
+        "manual": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "id": "c6",
+   "n": 6,
+   "title": "Богатый остров",
+   "goal": "SkyBlock 20 и миллион монет на кооп",
+   "why": "Деньги открывают Dragon-броню, оружие для данжей и новые миньоны. Дальше — середина игры.",
+   "reward": "Dragon-броня, Aspect of the Dragons и путь в середину игры",
+   "steps": [
+    {
+     "id": "w_rift",
+     "t": "Rift",
+     "do": "На SkyBlock 12 открывается Rift: Wizard Tower в Hub. Собирай Enigma Souls — они продлевают время в Rift.",
+     "why": "Rift даёт много опыта SkyBlock, Rift Necklace и один из лучших заработков без вложений.",
+     "how": [
+      "Открой Rift Guide в Rift, если не понятно, что дальше."
+     ],
+     "check": {
+      "sb": 12
+     }
+    },
+    {
+     "id": "w_berb",
+     "t": "Rift: Dreadfarm",
+     "do": "Дойди до третьей зоны Rift (Dreadfarm) и фарми berberis.",
+     "why": "На форуме Hypixel это советуют как самый дешёвый старт заработка: по словам игроков, 10–20 млн в час, но цены плавают.",
+     "how": [
+      "Продавай по Sell Offer и следи за ценой на Базаре."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "w_events",
+     "t": "События",
+     "do": "Участвуйте в событиях: Spooky Festival, Season of Jerry и Mythological Ritual, когда мэр Diana.",
+     "why": "События почти не требуют снаряжения, а дропы хорошо продаются.",
+     "how": [
+      "SkyHanni подсказывает, когда начинается событие."
+     ],
+     "check": {
+      "manual": true
+     }
+    },
+    {
+     "id": "w_1m",
+     "t": "1 000 000",
+     "do": "Соберите на кооп миллион монет: фермы, шахты, Rift и события.",
+     "why": "Миллион — это Dragon-броня, хорошие зачарования и новые миньоны.",
+     "how": [
+      "Не держи всё в кошельке: при смерти часть монет теряется."
+     ],
+     "check": {
+      "coins": 1000000
+     }
+    },
+    {
+     "id": "w_mp100",
+     "t": "100 AP",
+     "do": "Докупайте дешёвые аксессуары до 100 Accessory Power.",
+     "why": "Accessory Power — вечная сила: работает в любом занятии.",
+     "how": [
+      "SkyHanni и NEU показывают недостающие аксессуары."
+     ],
+     "check": {
+      "mp": 100
+     }
+    },
+    {
+     "id": "w_sb20",
+     "t": "SkyBlock 20",
+     "do": "Добирайте опыт SkyBlock: меню SkyBlock Leveling показывает, что ещё доступно.",
+     "why": "Цель главы: SkyBlock 20 — новые предметы и команды.",
+     "how": [
+      "Bestiary, коллекции и миньоны дают опыт SkyBlock почти даром."
+     ],
+     "check": {
+      "sb": 20
+     }
+    }
+   ]
+  }
+ ]
+}

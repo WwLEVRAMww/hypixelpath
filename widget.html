@@ -1,0 +1,36 @@
+<style>body{margin:0;font:14px/1.35 system-ui,sans-serif}.h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:9px 12px 7px}.h b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.h span,.f,.c p{font-size:12px;color:var(--tg-theme-hint-color,#8a8a8a)}.h span{white-space:nowrap}.g{padding:0 12px 7px;margin-top:-3px;font-size:12px;color:var(--tg-theme-hint-color,#8a8a8a);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.s{height:150px;margin:0 8px;border-radius:12px;overflow:hidden;background:linear-gradient(#0b1226,#15244a 55%,#22396b)}.s svg{display:block;width:100%;height:100%}.c{margin:8px;padding:9px 12px 10px;border-radius:12px;background:var(--tg-theme-secondary-bg-color,#eef1f4)}.c b{display:block;font-size:15px}.t{display:inline-block;margin:3px 0 1px;padding:1px 8px;border-radius:9px;font-size:12px;font-weight:600;color:#fff;background:#3c8527}.t.k{background:#8a8a8a}.t.n{background:#d38a0c}.c p{margin:3px 0 0;font-size:13px}.f{display:flex;justify-content:space-between;gap:8px;padding:0 12px 9px;font-size:11px}.b{animation:b 1.6s ease-in-out infinite}@keyframes b{50%{transform:translateY(-3px)}}@media (prefers-reduced-motion:reduce){.b{animation:none}}</style>
+<div class="h"><b id="n">Путь коопа</b><span id="d"></span></div><div class="g" id="g"></div><div class="s"><svg id="v" viewBox="0 0 300 150" shape-rendering="crispEdges"></svg></div><div class="c"><b id="q"></b><span class="t" id="t"></span><p id="h"></p></div><div class="f"><span id="u"></span><span>/app — подробнее</span></div><script>
+const T=window.TelegramWidget,$=i=>document.getElementById(i),
+B=["..gggggggggggg..",".gGgggGggggGggg.",".dDddddddDddddd.","..dddDdddddsdd..","...dddddDdddd...",".....dDdddd.....","......dddd......","........d......."],
+D=[["................","......kkkk......",".....k....k.....",".....KKKKKK.....",".....KKKKKK....."],
+[".......fff......",".......ffff.....",".......fff......",".......F........",".......F........"],
+[".......ll.......","......lLll......",".....llllLl.....","......lLll......",".......tt......."]],
+P={g:"#6db653",G:"#4e8f3a",d:"#8b6a48",D:"#6e5236",s:"#8d989f",l:"#4fa03a",L:"#3b7d2b",t:"#6b4f2a",f:"#e8b33a",F:"#d9d9d9",k:"#d9d9d9",K:"#a6a6a6"},
+G={g:"#8c8c8c",G:"#6f6f6f",d:"#5c5c5c",D:"#4a4a4a",s:"#777"},
+TAG=[["Дальше","t k"],["Сейчас","t n"],["Готово","t"]];
+let Q=[],sel=0;
+const R=(x,y,w,h,c)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="${c}"/>`,C=(x,y)=>R(x,y,56,4,"#2a4372")+R(x+10,y-3,30,3,"#2a4372")+R(x+17,y-5,12,2,"#2a4372");
+function isl(st,x,y){let r="";D[st].concat(B).forEach((row,j)=>{for(let a=0;a<16;){const ch=row[a];let e=a;while(e<16&&row[e]==ch)e++;const c=ch!="."&&(!st&&G[ch]||P[ch]);if(c)r+=R(x+a*2.5,y+j*2.5,(e-a)*2.5,2.5,c);a=e}});return r}
+function draw(){
+let s="",k=7,rnd=()=>(k=k*16807%2147483647)/2147483647;
+for(let i=0;i<26;i++)s+=R((rnd()*300|0),(rnd()*95|0),1.5,1.5,rnd()>.75?"#fff":"#8fa6cf");
+s+=R(266,10,12,12,"#e9eef5")+R(269,14,3,3,"#c7d0db")+R(273,18,2,2,"#c7d0db")+C(14,126)+C(168,134);
+const n=Q.length,sp=n>1?Math.min(50,250/(n-1)):0,x0=(300-sp*(n-1))/2-20,pt=Q.map((q,i)=>[x0+i*sp,64+Math.round(18*Math.sin(i*1.1-.6))]);
+for(let i=1;i<n;i++){const[a,b]=pt[i-1],[c,d]=pt[i],w=Q[i][1]>0;s+=`<line x1="${a+20}" y1="${b+16}" x2="${c+20}" y2="${d+16}" stroke="${w?"#e8b33a":"#5e7bb0"}" stroke-width="2.5"${w?"":' stroke-dasharray="3 3"'}/>`}
+pt.forEach(([x,y],i)=>{const st=Q[i][1];s+=`<g id="i${i}"${st==1?' class="b"':""}>${isl(st,x,y)}</g>`;if(i==sel)s+=`<path d="M${x+14} ${y-9}h12l-6 7z" fill="#fff"/>`});
+$("v").innerHTML=s;
+Q.forEach((q,i)=>$("i"+i).addEventListener("click",()=>{sel=i;T&&T.HapticFeedback&&T.HapticFeedback.selectionChanged();draw()}));
+const q=Q[sel];
+$("q").textContent=q?q[0]:"Нет данных";
+$("t").textContent=q?TAG[q[1]][0]:"";$("t").className=q?TAG[q[1]][1]:"";
+$("h").textContent=q?q[2]||"":"Напиши боту /path, и здесь появится твой путь."
+}
+function load(){
+let j=null;try{j=JSON.parse(T&&T.publicData||"null")}catch(e){}
+if(j&&j.q&&j.q.length){Q=j.q;$("n").textContent=j.ch||j.n;$("d").textContent=j.d+" из "+j.t;$("g").textContent=(j.g?j.g+" · ":"")+j.n;$("u").textContent="обновлено "+j.u;sel=Math.max(0,Q.findIndex(q=>q[1]==1));if(Q[sel][1]!=1)sel=Q.length-1}
+draw()
+}
+T&&T.onEvent&&T.onEvent("publicDataChanged",load);
+load();
+T&&T.ready&&T.ready();
+</script>

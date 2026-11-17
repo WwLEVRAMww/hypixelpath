@@ -1,0 +1,809 @@
+<title>Квесты коопа SkyBlock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiny5&family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: game-launcher shell, one deliberate dark look (the user's request). Full-height sidebar (brand, section nav) beside the main column: pixel-art banner with an overlapping text card on the first section, co-op panel, search and filters, then the section's cards. On phones the sidebar turns into a sticky tab strip. */
+:root{
+  --bg:#262626;--side:#2F2F2F;--side-hi:#464646;--sep:#1A1A1A;--card:#1E1E1E;--card-2:#2C2C2C;--line:#3A3A3A;--line-2:#505050;
+  --ink:#FFFFFF;--ink-2:#C4C4C4;--ink-3:#909090;
+  --green:#3C8527;--green-hi:#4A9D32;--green-lo:#1D4D13;--green-ink:#FFFFFF;--done:#76CB52;--done-bg:#233620;
+  --warn:#E8A317;--warn-bg:#3A2C0F;
+  --p0:#6DB653;--p1:#4F9BD8;--p2:#E3B53C;--p3:#A77FE0;--p4:#E0604B;--on-p:#111111;
+  --font-pixel:"Tiny5","Noto Sans",system-ui,sans-serif;
+  --font-ui:"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --font-data:"JetBrains Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --sw:248px;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{font-synthesis-weight:none}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:15px/1.55 var(--font-ui)}
+h1,h2,h3{margin:0;text-wrap:balance}
+p{margin:0}
+a{color:var(--done)}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer;border-radius:0}
+:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
+.eyebrow{font:500 14px/1.2 var(--font-pixel);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.muted{color:var(--ink-2)}
+.px{image-rendering:pixelated;image-rendering:crisp-edges}
+
+/* shell */
+.app{min-height:100%;display:grid;grid-template-columns:var(--sw) minmax(0,1fr);background:linear-gradient(to right,var(--side) var(--sw),var(--bg) var(--sw))}
+.side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;display:flex;flex-direction:column;background:var(--side)}
+.brand{display:flex;align-items:center;gap:12px;padding:18px 16px 18px max(16px,env(safe-area-inset-left,0px));border-bottom:2px solid var(--sep)}
+.brand canvas{width:36px;height:36px;flex:none}
+.brand b{display:block;font:700 19px/1.1 var(--font-pixel);letter-spacing:.02em}
+.brand span{font-size:13px;color:var(--ink-3)}
+.nav{display:flex;flex-direction:column}
+.nav button{display:flex;align-items:center;gap:12px;min-height:58px;padding:0 16px 0 max(18px,env(safe-area-inset-left,0px));border-bottom:2px solid var(--sep);background:var(--side);text-align:left;font:700 17px/1.2 var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+.nav button:hover{background:#383838;color:var(--ink)}
+.nav button[aria-selected="true"]{background:var(--side-hi);color:var(--ink);box-shadow:inset 4px 0 0 #FFFFFF}
+.nav .ico{width:20px;height:20px;flex:none;color:var(--done)}
+.nav .ico svg{width:20px;height:20px;display:block;shape-rendering:crispEdges}
+.nav em{margin-left:auto;font:500 12px var(--font-data);font-style:normal;color:var(--ink-3)}
+.side-foot{padding:14px 16px 14px max(16px,env(safe-area-inset-left,0px));font-size:12px;color:var(--ink-3)}
+.main{min-width:0;padding:24px max(16px,env(safe-area-inset-right,0px)) 56px 28px;display:flex;flex-direction:column;gap:22px}
+.main>*{max-width:1100px;width:100%}
+
+/* banner */
+.hero{position:relative;background:#0B1226}
+.hero canvas{display:block;width:100%;aspect-ratio:96/36;max-height:340px;object-fit:cover}
+.hero-card{position:absolute;left:0;bottom:0;width:min(480px,62%);background:var(--card);padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;clip-path:polygon(0 0,calc(100% - 24px) 0,calc(100% - 24px) 8px,calc(100% - 16px) 8px,calc(100% - 16px) 16px,calc(100% - 8px) 16px,calc(100% - 8px) 24px,100% 24px,100% 100%,0 100%)}
+.hero-card h1{font:700 clamp(30px,4.4vw,42px)/1.05 var(--font-pixel);letter-spacing:.01em}
+.hero-card p{color:var(--ink-2)}
+.hero-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:4px}
+.counts{font:500 14px/1.3 var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.counts b{color:var(--ink)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:8px 20px 12px;background:var(--green);color:var(--green-ink);border:2px solid var(--green-lo);box-shadow:inset 0 -4px 0 var(--green-lo),inset 0 3px 0 rgba(255,255,255,.2);font:700 18px/1 var(--font-pixel);letter-spacing:.04em;text-transform:uppercase}
+.btn:hover{background:var(--green-hi)}
+.btn:active{box-shadow:inset 0 -1px 0 var(--green-lo);padding-block:10px}
+.btn:disabled{opacity:.5;cursor:default}
+.btn-2{display:inline-flex;align-items:center;min-height:32px;padding:4px 12px 7px;background:#3C3C3C;border:2px solid var(--sep);box-shadow:inset 0 -3px 0 #262626;font:700 13px/1 var(--font-pixel);letter-spacing:.04em;text-transform:uppercase;color:var(--ink)}
+.btn-2:hover{background:#4A4A4A}
+.btn-warn{background:#8E2B1F;box-shadow:inset 0 -3px 0 #4E140C}
+
+/* co-op panel */
+.panel{background:var(--card);border:2px solid var(--sep);padding:20px;display:flex;flex-direction:column;gap:16px}
+.panel-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px}
+.panel-h h2{font:700 22px/1.1 var(--font-pixel);letter-spacing:.05em;text-transform:uppercase}
+.state{font:500 12px/1 var(--font-pixel);letter-spacing:.08em;text-transform:uppercase;padding:6px 8px;background:var(--card-2);color:var(--ink-2)}
+.state.ok{background:var(--done-bg);color:var(--done)}
+.players{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
+.pl{background:var(--card-2);border:2px solid var(--sep);padding:12px;display:flex;flex-direction:column;gap:9px;min-width:0}
+.pl-h{display:flex;align-items:center;gap:10px;min-width:0}
+.av{width:38px;height:38px;flex:none;display:grid;place-items:center;background:var(--pc);color:var(--on-p);font:700 17px/1 var(--font-pixel);box-shadow:inset 0 7px 0 rgba(255,255,255,.28),inset 0 -5px 0 rgba(0,0,0,.25)}
+.pl-n{flex:1;min-width:0;font-weight:700;overflow-wrap:anywhere}
+.confirm{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.bar{display:grid;grid-template-columns:5.4em minmax(0,1fr) auto;align-items:center;gap:8px;font-size:13px}
+.bar .lbl{color:var(--ink-2);overflow-wrap:anywhere}
+.xp{display:grid;grid-template-columns:repeat(20,1fr);gap:2px;height:10px;padding:2px;background:#111111}
+.xp i{background:#333333}
+.xp i.on{background:var(--pc)}
+.bar .v{font:12px var(--font-data);font-variant-numeric:tabular-nums;color:var(--ink-3)}
+.add{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.add label{flex-basis:100%}
+.field{flex:1 1 200px;min-width:0;height:44px;padding:0 12px;border:2px solid var(--green);background:#141414;color:var(--ink)}
+.field::placeholder{color:var(--ink-3)}
+.empty{padding:14px;border:2px dashed var(--line-2);color:var(--ink-2);font-size:14px}
+.agg{font-size:14px;color:var(--ink-2)}
+.agg b{color:var(--ink)}
+.stats{border-top:2px solid var(--sep);padding-top:14px;display:flex;flex-direction:column;gap:10px}
+.stats h3{font:700 15px/1.2 var(--font-pixel);letter-spacing:.05em;text-transform:uppercase}
+.stats dl{margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,170px),1fr));gap:8px}
+.stats dl div{background:var(--card-2);padding:8px 10px;min-width:0}
+.stats dt{font-size:12px;color:var(--ink-3)}
+.stats dd{margin:0;font:600 15px/1.3 var(--font-data);overflow-wrap:anywhere}
+
+/* search + filters */
+.tools{display:flex;flex-direction:column;gap:12px}
+.search{display:flex;align-items:center;gap:10px;height:46px;padding:0 12px;border:2px solid var(--green);background:var(--card)}
+.search svg{width:18px;height:18px;flex:none;color:var(--ink-3)}
+.search input{flex:1;min-width:0;height:100%;border:0;background:transparent;outline:none}
+.search input::placeholder{color:var(--ink-3)}
+.search:focus-within{outline:2px solid #FFFFFF;outline-offset:2px}
+.frow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.frow .eyebrow{margin-right:6px}
+.chip{height:34px;padding:0 12px;background:var(--card-2);border:2px solid var(--sep);font:600 13.5px var(--font-ui);color:var(--ink-2)}
+.chip:hover{background:#363636;color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green-lo);color:#FFFFFF}
+.chip .n{margin-left:6px;font:500 12px var(--font-data);opacity:.8}
+.sel{height:34px;padding:0 10px;background:var(--card-2);border:2px solid var(--sep);color:var(--ink);max-width:100%}
+
+/* quests */
+.list{display:flex;flex-direction:column;gap:26px}
+.stage{display:flex;flex-direction:column;gap:12px;scroll-margin-top:72px}
+.stage-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.stage-h h2{font:700 27px/1.1 var(--font-pixel);letter-spacing:.04em;text-transform:uppercase}
+.stage-h .num{font:500 14px var(--font-pixel);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.stage-h p{flex-basis:100%;color:var(--ink-2);font-size:14px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,330px),1fr));gap:12px;align-items:start}
+.q{background:var(--card);border:2px solid var(--sep);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.q.done-all{border-color:var(--green)}
+.q-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.q-h h3{font:700 20px/1.15 var(--font-pixel);letter-spacing:.01em;overflow-wrap:anywhere}
+.tag{flex:none;font:500 13px/1 var(--font-pixel);letter-spacing:.07em;text-transform:uppercase;padding:5px 7px;background:var(--card-2);color:var(--ink-2)}
+.tag.br{background:var(--warn-bg);color:var(--warn)}
+.meta{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:3px 12px;font-size:13.5px}
+.meta dt{color:var(--ink-3)}
+.meta dd{margin:0;overflow-wrap:anywhere;color:var(--ink-2)}
+.steps{margin:0;padding-left:1.5em;display:flex;flex-direction:column;gap:6px;font-size:14.5px}
+.steps li::marker{font:600 13px var(--font-pixel);color:var(--done)}
+.note{font-size:13.5px;background:var(--card-2);padding:9px 11px;color:var(--ink-2)}
+.rw{font-size:13.5px;color:var(--ink-2)}
+.rw span{font:500 13px var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.marks{display:flex;flex-wrap:wrap;gap:6px;align-items:center;border-top:2px solid var(--sep);padding-top:10px}
+.marks .lb{font:500 13px var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);margin-right:2px}
+.pm{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:2px 10px 2px 8px;background:var(--card-2);border:2px solid var(--line);font:600 13px var(--font-ui);color:var(--ink-2);max-width:100%;overflow-wrap:anywhere;text-align:left}
+.pm::before{content:"";width:10px;height:10px;flex:none;background:var(--pc);box-shadow:inset 0 3px 0 rgba(255,255,255,.3)}
+.pm:hover{border-color:var(--line-2);color:var(--ink)}
+.pm.on{border-color:var(--pc);color:#FFFFFF;background:color-mix(in srgb,var(--pc) 22%,var(--card-2))}
+.pm svg{width:13px;height:13px;flex:none;color:#FFFFFF}
+.pm.ro{cursor:default}
+.sm .pm{min-height:26px;font-size:12.5px}
+
+/* chapters, rift */
+.head-card{background:var(--card);border:2px solid var(--sep);padding:18px;display:flex;flex-direction:column;gap:10px}
+.head-card h2{font:700 27px/1.1 var(--font-pixel);letter-spacing:.03em}
+.head-card p{color:var(--ink-2);max-width:72ch}
+.head-card dl{margin:0;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13.5px}
+.head-card dt{display:inline;color:var(--ink-3)}
+.head-card dd{display:inline;margin:0 0 0 6px;font-weight:600}
+.chap{background:var(--card);border:2px solid var(--sep)}
+.chap-h{padding:12px 16px;background:var(--card-2);display:flex;flex-direction:column;gap:2px}
+.chap-h h3{font:700 17px/1.2 var(--font-pixel);letter-spacing:.06em;text-transform:uppercase}
+.chap-h p{font-size:14px;color:var(--ink-2)}
+.tasks{list-style:none;margin:0;padding:0}
+.task{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 14px;padding:12px 16px;border-top:2px solid var(--sep)}
+.task b{display:block;font-weight:600}
+.task .h{display:block;font-size:13.5px;color:var(--ink-2);margin-top:2px}
+.task .r{font:12px/1.4 var(--font-data);color:var(--ink-3);text-align:right;max-width:14em}
+.task .marks{grid-column:1/-1;border-top:0;padding-top:4px}
+.badge{display:inline-block;margin-left:8px;font:500 11.5px/1 var(--font-pixel);letter-spacing:.06em;text-transform:uppercase;padding:4px 6px;background:var(--done-bg);color:var(--done);vertical-align:2px}
+.chap-f{padding:10px 16px;font-size:13.5px;border-top:2px solid var(--sep);background:var(--card-2);color:var(--ink-2)}
+.chap-f span{font:500 13px var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.prose{background:var(--card);border:2px solid var(--sep);padding:20px;display:flex;flex-direction:column;gap:12px;max-width:860px}
+.prose h2{font:700 20px/1.2 var(--font-pixel);letter-spacing:.03em}
+.prose ul,.prose ol{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:6px;color:var(--ink-2)}
+.prose b{color:var(--ink)}
+.tbl{overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;min-width:460px;font-size:14px}
+.tbl th,.tbl td{text-align:left;padding:9px 10px;border-bottom:2px solid var(--sep)}
+.tbl th{font:500 13px var(--font-pixel);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);background:var(--card-2)}
+.tbl td.n{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+.none{padding:28px 16px;text-align:center;color:var(--ink-2);background:var(--card);border:2px dashed var(--line-2)}
+.src{font-size:13px;color:var(--ink-3);max-width:80ch}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:#111111;border:2px solid var(--green);color:#FFFFFF;padding:10px 14px;font-size:14px;max-width:calc(100% - 32px);z-index:20}
+
+[hidden]{display:none!important}
+html,body{margin:0}
+/* path tab: a left-to-right island path in a night sky, one player at a time */
+.pathbox{background:var(--card);border:2px solid var(--sep);display:flex;flex-direction:column;min-width:0}
+.path-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;padding:14px 16px;border-bottom:2px solid var(--sep)}
+.path-top h2{font:700 22px/1.15 var(--font-pixel);letter-spacing:.03em;margin-right:auto}
+.who{display:flex;flex-wrap:wrap;gap:6px}
+.sky{overflow-x:auto;overflow-y:hidden;background:linear-gradient(#0B1226,#15244A 58%,#22396B);overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#3A5A8C transparent}
+.sky svg{display:block;height:215px;shape-rendering:crispEdges}
+.sky .lbl{font:500 11px var(--font-ui);fill:#C7D0DB}
+.sky .lbl.on{fill:#FFFFFF;font-weight:700}
+.sky .stg{font:400 13px var(--font-pixel);fill:#E8B33A;letter-spacing:.08em}
+.node{cursor:pointer;outline:none}
+.node .ring{fill:none;stroke:transparent;stroke-width:2}
+.node:hover .ring{stroke:#8FA6CF}
+.node.sel .ring,.node:focus-visible .ring{stroke:#FFFFFF}
+.bob{animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@media (prefers-reduced-motion:reduce){.bob{animation:none}}
+.psum{display:flex;flex-wrap:wrap;gap:6px 18px;padding:12px 16px;border-top:2px solid var(--sep);font-size:14px;color:var(--ink-2)}
+.psum b{color:var(--ink);font-family:var(--font-data);font-weight:600}
+.pstate{display:inline-block;font:500 13px/1 var(--font-pixel);letter-spacing:.07em;text-transform:uppercase;padding:5px 7px;background:var(--card-2);color:var(--ink-2)}
+.pstate.done{background:var(--done-bg);color:var(--done)}
+.pstate.now{background:var(--warn-bg);color:var(--warn)}
+.pcard{display:flex;flex-direction:column;gap:8px}
+.pcard>.eyebrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+/* roadmap cards: the chapter's goal and meaning, the step's what / why / how */
+.rcard{background:var(--card);border:2px solid var(--sep);padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.rcard h2{font:700 21px/1.15 var(--font-pixel);letter-spacing:.03em}
+.rcard h3{font:700 19px/1.2 var(--font-ui)}
+.rcard .lead{color:var(--ink-2)}
+.rcard dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px}
+.rcard dt{font:500 13px/1.5 var(--font-pixel);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.rcard dd{margin:0;color:var(--ink-2)}
+.rcard ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px;color:var(--ink-2)}
+.role{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline;font-size:14px;color:var(--ink-2)}
+.role b{font:400 15px/1 var(--font-pixel);letter-spacing:.05em;text-transform:uppercase;color:var(--warn)}
+.meter{--pc:var(--done);display:flex;align-items:center;gap:10px;font:14px/1.3 var(--font-data);color:var(--ink-2)}
+.meter.col{flex-direction:column;align-items:stretch;gap:6px;font:14px/1.45 var(--font-ui)}
+.meter.col .xp{flex:none}
+.meter .xp{flex:1}
+.mark{align-self:flex-start}
+.note{font-size:13.5px;color:var(--ink-3)}
+.who-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:10px}
+.who-card{background:var(--card-2);border:2px solid var(--sep);padding:12px;display:flex;flex-direction:column;gap:6px;border-left:6px solid var(--pc)}
+.who-card b{font:400 16px/1.1 var(--font-pixel);letter-spacing:.04em}
+.who-card span{font-size:13.5px;color:var(--ink-2)}
+.donelist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.donelist li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:2px solid var(--sep)}
+.donelist time{font:13px var(--font-data);color:var(--ink-3);white-space:nowrap}
+
+/* OBS overlay (?obs=1): only the path and one line about the current quest */
+.obsline{display:none}
+body.obs,body.obs .app{background:#0B1226}
+.obs .side,.obs #coop,.obs #filt,.obs .src,.obs #hero,.obs .path-top,.obs .psum,.obs .pcard,.obs .rcard{display:none!important}
+.obs .app{display:block}
+.obs .main{padding:0!important;gap:0}
+.obs .list{gap:0}
+.obs .pathbox{border:0}
+.obs .sky{scrollbar-width:none}
+.obs .sky::-webkit-scrollbar{display:none}
+.obs .obsline{display:block;padding:8px 14px 10px;color:#E9EEF5;font:15px/1.35 var(--font-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.obs .obsline b{font:400 16px/1 var(--font-pixel);letter-spacing:.05em;color:#E8B33A}
+
+/* phones and narrow windows */
+@media (max-width:900px){
+  .app{display:block;background:var(--bg)}
+  .side{display:contents}
+  .brand{background:var(--side);padding:14px max(16px,env(safe-area-inset-right,0px)) 14px max(16px,env(safe-area-inset-left,0px))}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:11;background:var(--side)}
+  .nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;flex-direction:row;overflow-x:auto;scrollbar-width:none;background:var(--side);border-bottom:2px solid var(--sep);padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{flex:none;min-height:48px;padding:0 12px;border-bottom:0;font-size:14px;gap:8px}
+  .nav button[aria-selected="true"]{box-shadow:inset 0 -4px 0 #FFFFFF}
+  .nav .ico,.nav .ico svg{width:16px;height:16px}
+  .nav em{display:none}
+  .side-foot{display:none}
+  .main{padding:18px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+  .hero-card{position:static;width:auto;clip-path:none;padding:18px}
+  .stage{scroll-margin-top:64px}
+}
+@media (prefers-reduced-motion:no-preference){.chip,.pm,.nav button,.btn,.btn-2{transition:background-color .12s,border-color .12s,color .12s}}
+</style>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand"><canvas id="logo" class="px" width="16" height="16" aria-hidden="true"></canvas><div><b>Квесты коопа</b><span>Hypixel SkyBlock</span></div></div>
+    <nav class="nav" role="tablist" aria-label="Разделы">
+      <button role="tab" data-tab="path" aria-selected="false"><i class="ico" data-ico="path"></i><span>Путь</span></button>
+      <button role="tab" data-tab="coop" aria-selected="false"><i class="ico" data-ico="coop"></i><span>Кооп</span></button>
+      <button role="tab" data-tab="done" aria-selected="false"><i class="ico" data-ico="done"></i><span>Пройдено</span></button>
+      <button role="tab" data-tab="quests" aria-selected="true"><i class="ico" data-ico="quests"></i><span>Квесты</span><em>73</em></button>
+      <button role="tab" data-tab="chapters" aria-selected="false"><i class="ico" data-ico="chapters"></i><span>Главы</span><em>219</em></button>
+      <button role="tab" data-tab="rift" aria-selected="false"><i class="ico" data-ico="rift"></i><span>Rift</span><em>63</em></button>
+      <button role="tab" data-tab="factions" aria-selected="false"><i class="ico" data-ico="factions"></i><span>Фракции</span></button>
+      <button role="tab" data-tab="more" aria-selected="false"><i class="ico" data-ico="more"></i><span>Ещё</span></button>
+    </nav>
+    <p class="side-foot">Прогресс: Hypixel API через таблицу коопа. Подсказки: вики сообщества, 05.11.2026</p>
+  </aside>
+
+  <main class="main">
+    <section class="hero" id="hero" aria-labelledby="hero-h">
+      <canvas id="sky" class="px" width="96" height="36" aria-hidden="true"></canvas>
+      <div class="hero-card">
+        <span class="eyebrow">Hypixel SkyBlock · кооп</span>
+        <h1 id="hero-h">Квесты коопа</h1>
+        <p>Все квесты журнала, Главы четырёх островов, задания Rift и фракции. Для каждого есть шаги прохождения на русском, а названия NPC, мест и предметов оставлены как в игре.</p>
+        <div class="hero-act"><button class="btn" data-go="stage-1">К первому этапу</button><span class="counts"><b>73</b> квестов · <b>219</b> Глав · <b>63</b> Rift</span></div>
+      </div>
+    </section>
+
+    <section class="panel" id="coop" aria-labelledby="coop-h">
+      <div class="panel-h"><h2 id="coop-h">Кооп</h2><span class="state" id="coop-state">Загружаю</span></div>
+      <div id="coop-body"><p class="muted">Загружаю отметки коопа…</p></div>
+    </section>
+
+    <div class="tools" id="filt"></div>
+    <div id="view" role="tabpanel" tabindex="-1"></div>
+    <p class="src">Данные с вики <a href="https://hypixelskyblock.minecraft.wiki/w/Quests" target="_blank" rel="noopener">hypixelskyblock.minecraft.wiki</a> на 5 ноября 2026 года. Игра часто обновляется: если что-то не сходится, проверяйте страницу квеста на вики.</p>
+  </main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script type="application/json" id="data">{"meta":{"source":"hypixelskyblock.minecraft.wiki","asOf":"2026-11-05","wiki":"https://hypixelskyblock.minecraft.wiki/w/"},"quests":[{"id":"fairy-souls","st":0,"c":"g","n":"Find all Fairy Souls","loc":"Все острова","npc":"Tia the Fairy","need":"Доступен сразу","steps":["Собирай Fairy Souls: радужные шары, спрятанные по всем островам. Всего их 289, каждую можно взять один раз.","Отдавай души Tia the Fairy в Wilderness (Hub) по 5 штук. За каждый обмен дают SkyBlock XP, а на обменах №1, 2, 4, 6, 8, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40 и 44 открываются слоты рюкзаков.","Часть душ добывается не на карте: 5 с рыбалки (2-й, 9-й и 24-й улов-сокровище гарантированно души, ещё 2 с шансом 0,5% в Fairy Grotto), до 8 в комнатах данжей, по одной за первый заказ гостей Tia и Bruuh в Garden, одна у Vanguard Corpse в Fairy Mineshaft и одна от Placeable Fairy Soul."],"rw":"SkyBlock XP, слоты рюкзаков","note":"Удобнее всего с модами SkyHanni или Skyblocker: у них есть метки и маршруты по душам. Для труднодоступных мест пригодятся Aspect of the End/Void, Ender Pearl или Grappling Hook. Сколько душ собрано на каждом острове, видно в Quest Log.","en":"Find all Fairy Souls"},{"id":"getting-started","st":1,"c":"g","n":"Getting Started","loc":"Private Island","npc":"Jerry","need":"Доступен сразу","steps":["Сломай Oak Log.","Скрафти Crafting Table.","Скрафти Wooden Pickaxe. Квест засчитается без сообщения в чате.","После этого появится задача поговорить с Jerry, но в квест она уже не входит."],"rw":"—","en":"Getting Started"},{"id":"auctioneer","st":1,"c":"g","n":"Auctioneer","loc":"Auction House (Hub)","npc":"Auction Master","need":"Побывать в Hub","steps":["Поговори с Auction Master в Auction House."],"rw":"—","note":"Квест необязательный: аукционом можно пользоваться и без него.","en":"Auctioneer"},{"id":"saving-up","st":1,"c":"g","n":"Saving Up","loc":"Bank, Village (Hub)","npc":"Banker","need":"Побывать в Hub","steps":["Поговори с Banker в Village: +5 SkyBlock XP.","Положи в банк любые монеты. Квест завершится и даст ещё 10 монет."],"rw":"10 монет, +5 SkyBlock XP","en":"Saving Up"},{"id":"library-card","st":1,"c":"g","n":"Library Card","loc":"Library (Hub)","npc":"Librarian","need":"Побывать в Hub","steps":["Поговори с Librarian в Library: +5 SkyBlock XP и +100 Enchanting XP.","Зачаруй любой предмет. Квест завершится и даст ещё +10 Enchanting XP."],"rw":"110 Enchanting XP, +5 SkyBlock XP","en":"Library Card"},{"id":"marco","st":1,"c":"g","n":"Marco the Artist","loc":"Flower House (Hub)","npc":"Marco","need":"Побывать в Hub","steps":["Поговори с Marco в Flower House.","Сорви 5× Rose Red с цветов у дома и отдай ему.","Он отдаст Spray Can и откроет Canvas Room."],"rw":"Spray Can (предмет и рецепт), доступ в Canvas Room","en":"Marco the Artist"},{"id":"carpentry","st":1,"c":"g","n":"Carpentry","loc":"Foraging Camp (Hub)","npc":"Carpenter","need":"Побывать в Hub","steps":["Поговори с Carpenter в Foraging Camp.","Принеси ему 64× White Wool."],"rw":"Рецепт Carpentry Table, навык Carpentry","en":"Carpentry"},{"id":"hub-explorer","st":1,"c":"g","n":"Hub Explorer","loc":"Весь Hub","npc":"—","need":"Побывать в Hub","steps":["Обойди 13 мест Hub: Auction House, Bank, Library, Village, Colosseum, Coal Mine, Forest, Farm, Graveyard, Wilderness, Mountain, Ruins и Unincorporated."],"rw":"50 монет, +5 SkyBlock XP","en":"Hub Explorer"},{"id":"safety-first","st":2,"c":"g","n":"Safety First","loc":"Community Center, Security Hall (Hub)","npc":"Susan, Brigette, Jimmy, Security Clerk, Elizabeth","need":"SkyBlock Level 10","steps":["Дойди до SkyBlock Level 10.","Поговори с Susan: она откроет вход в Security Hall.","Выполни квест безопасности у Brigette.","Забери Safety Badge у Security Clerk и Booster Cookie у Elizabeth."],"rw":"Safety Badge, Booster Cookie","en":"Safety First"},{"id":"chicken-racing","st":0,"c":"g","n":"Chicken Racing","loc":"Jerry's Workshop","npc":"Gulliver","need":"Побывать в Jerry's Workshop","steps":["Поговори с Gulliver и начни Chicken Race.","Награды за скорость: 1-й чекпоинт быстрее 33 с даёт Red Gift, 2-й быстрее 52 с — Gift Compass, 3-й быстрее 68 с — Frozen Chicken.","Все 4 чекпоинта быстрее 104 с дают Jingle Bells и +5 SkyBlock XP."],"rw":"Red Gift, Gift Compass, Frozen Chicken, Jingle Bells, +5 SkyBlock XP","en":"Chicken Racing"},{"id":"dungeon-hub-racing","st":0,"c":"g","n":"Dungeon Hub Racing","loc":"Dungeon Hub","npc":"Guildford","need":"Побывать в Dungeon Hub","steps":["Поговори с Guildford в Dungeon Hub.","Есть 3 трассы (Crystal Core, Giant Mushrooms, Precursor Ruins), у каждой 4 режима (Anything, No Pearls, No Abilities, Nothing at all) и 4 норматива времени. Всего 96 заездов.","Все нормативы на одной трассе дают Cat Talisman, на двух — Lynx Talisman, на трёх — Cheetah Talisman.","Каждый пройденный норматив даёт Wither Essence, всего до 432."],"rw":"Cat, Lynx и Cheetah Talisman, до 432 Wither Essence","en":"Dungeon Hub Racing"},{"id":"time-to-mine","st":1,"c":"m","n":"Time to Mine","loc":"Mining District, Coal Mine, Gold Mine","npc":"Blacksmith","need":"Побывать в Hub","steps":["Поговори с Blacksmith в Mining District.","Накопай 10× Coal: +100 Mining XP и +5 SkyBlock XP.","Снова поговори с Blacksmith: откроется перековка (Reforge).","Дойди до Gold Mine: +10 Mining XP, квест готов."],"rw":"110 Mining XP, +5 SkyBlock XP","en":"Time to Mine"},{"id":"reforger","st":1,"c":"m","n":"Reforger","loc":"Mining District","npc":"Blacksmith","need":"Показать Blacksmith 10× Coal (квест Time to Mine)","steps":["Перекуй (Reforge) любой предмет у Blacksmith за 10× Coal."],"rw":"150 Mining XP","en":"Reforger"},{"id":"lost-and-found","st":2,"c":"m","n":"Lost and Found","loc":"Gold Mine","npc":"Lazy Miner, Rusty","need":"Побывать в Gold Mine","steps":["Поговори с Lazy Miner в Gold Mine (+5 SkyBlock XP, +150 Mining XP). Он потерял Iron Pickaxe с Efficiency 1 и Smelting Touch 1.","Кирка лежит на координатах −18, 24, −305. Забери её (+10 Mining XP).","Добудь 1× Iron Ingot и 1× Gold Ingot и поговори с Rusty."],"rw":"Iron Pickaxe, 160 Mining XP, +5 SkyBlock XP","en":"Lost and Found"},{"id":"going-deeper","st":2,"c":"m","n":"Going Deeper","loc":"Deep Caverns","npc":"Lift Operator","need":"Побывать в Gold Mine","steps":["Прокачай Mining до 5.","Спустись в Deep Caverns (+15 Mining XP).","Поговори с Lift Operator."],"rw":"15 Mining XP","en":"Going Deeper"},{"id":"helpful-miner","st":2,"c":"m","n":"Helpful Miner","loc":"Lapis Quarry (Deep Caverns)","npc":"Lapis Miner","need":"Побывать в Lapis Quarry","steps":["Поговори с Lapis Miner.","Прокачай коллекцию Lapis Lazuli до III: откроется рецепт Lapis Pickaxe.","Скрафти Lapis Pickaxe и отдай ему. Кирка исчезнет, квест завершится."],"rw":"Compactor, 2 000 монет, 1 000 Mining XP, +5 SkyBlock XP","en":"Helpful Miner"},{"id":"redstone-maniac","st":2,"c":"m","n":"The Redstone Maniac","loc":"Pigmen's Den (Deep Caverns)","npc":"Redstone Miner","need":"Пройти Helpful Miner и вернуться в Lapis Quarry","steps":["Поговори с Redstone Miner.","Прокачай коллекцию Redstone Dust до II.","Отдавай ему 128, 256, 512 и 1 024 Redstone Dust. За каждую партию +1 слот Accessory Bag.","После последней партии квест завершится (+5 SkyBlock XP)."],"rw":"Слоты Accessory Bag, +5 SkyBlock XP","note":"Всего понадобится 1 920 Redstone Dust. Удобно копить заранее: миньон или поход в шахту вдвоём.","en":"The Redstone Maniac"},{"id":"there-are-dwarves","st":3,"c":"m","n":"There are Dwarves?","loc":"Obsidian Sanctuary (Deep Caverns)","npc":"Rhys","need":"Поговорить с Rhys или Mining 12","steps":["Найди Rhys в Obsidian Sanctuary.","Отдай ему 15 зачарованных шахтёрских предметов в любом сочетании: Enchanted Redstone Dust, Enchanted Iron Ingot, Enchanted Coal, Enchanted Emerald, Enchanted Lapis Lazuli, Enchanted Diamond, Enchanted Gold Ingot.","Откроются Dwarven Mines и Heart of the Mountain."],"rw":"Доступ в Dwarven Mines и к Heart of the Mountain","en":"There are Dwarves?"},{"id":"need-to-go-deeper","st":3,"c":"m","n":"We Need to Go Deeper","loc":"Dwarven Mines, Crystal Hollows","npc":"Gwendolyn, Emissary Braum","need":"Heart of the Mountain 4","steps":["Прокачай Heart of the Mountain до 4.","Поговори с Gwendolyn и спустись в Crystal Hollows.","Добудь 10 Ruby Gemstone.","Поговори с Emissary Braum."],"rw":"Доступ в Crystal Hollows","en":"We Need to Go Deeper"},{"id":"trial-of-the-jungle","st":3,"c":"m","n":"Trial of the Jungle","loc":"Jungle, Jungle Temple (Crystal Hollows)","npc":"Kalhuiki Door Guardian","need":"Побывать в Crystal Hollows","steps":["Добудь Jungle Key: он падает с Key Guardian в зоне Jungle, а ещё его продаёт Odawa за 100× Sludge Juice.","Отдай ключ Kalhuiki Door Guardian, войди в Jungle Temple и пройди паркур до Amethyst Crystal.","Добудь 100 Amethyst Gemstone."],"rw":"Amethyst Crystal для Crystal Nucleus","note":"Crystal Nucleus в центре Crystal Hollows (512, Y, 512) открывает сундук с добычей, когда в него вставлены все 5 кристаллов: Jade, Amber, Amethyst, Sapphire и Topaz. Wishing Compass указывает, где искать кристаллы.","en":"Trial of the Jungle"},{"id":"robots","st":3,"c":"m","n":"Now there's Robots?","loc":"Precursor Remnants, Lost Precursor City (Crystal Hollows)","npc":"Professor Robot","need":"Побывать в Crystal Hollows","steps":["Убей 100 Automaton в Precursor Remnants. С них падают Automaton Parts.","Отдай Professor Robot в Lost Precursor City 6 разных деталей: Electron Transmitter, FTX 3070, Robotron Reflector, Superlite Motor, Control Switch и Synthetic Heart. Вместо них подойдёт один Precursor Apparatus.","Добудь 100 Sapphire Gemstone."],"rw":"Sapphire Crystal для Crystal Nucleus","en":"Now there's Robots?"},{"id":"royal-goblins","st":3,"c":"m","n":"Royal Goblins","loc":"Goblin Holdout, Goblin Queen's Den (Crystal Hollows)","npc":"King Yolkar","need":"Побывать в Crystal Hollows","steps":["Отдай King Yolkar в Goblin Holdout 1× Goblin Egg. Он даст эффект King's Scent на 20 минут.","Пока эффект действует, проберись мимо стражи в Goblin Queen's Den и забери Amber Crystal.","Добудь 100 Amber Gemstone."],"rw":"Amber Crystal для Crystal Nucleus","en":"Royal Goblins"},{"id":"divans-quest","st":3,"c":"m","n":"Divan's Quest","loc":"Mines of Divan (Mithril Deposits, Crystal Hollows)","npc":"Keepers of Divan","need":"Побывать в Crystal Hollows","steps":["Войди в Mines of Divan. Первый Keeper выдаст Metal Detector.","Найди детектором 4 Scavenged Items и раздай их хранителям: Lapis Sword — Keeper of Lapis, Golden Hammer — Keeper of Gold, Diamond Axe — Keeper of Diamond, Emerald Hammer — Keeper of Emerald.","Забери Jade Crystal и добудь 100 Jade Gemstone."],"rw":"Jade Crystal для Crystal Nucleus","note":"Пятый кристалл, Topaz, квеста не требует: он появляется после победы над боссом Bal в Khazad-dûm (Magma Fields). Забрать его могут только те, кто участвовал в бою, так что идите всем коопом.","en":"Divan's Quest"},{"id":"beyond-the-wall","st":4,"c":"m","n":"Beyond the Wall","loc":"Hanging Court, The Forge, Dwarven Base Camp","npc":"Dulin, Forger, Ticket Master","need":"Heart of the Mountain 7","steps":["Прокачай Heart of the Mountain до 7.","Поговори с Dulin в Hanging Court: в The Forge откроется рецепт Secret Railroad Pass.","Скуй Secret Railroad Pass и отдай Ticket Master.","Доедь на вагонетке до Dwarven Base Camp."],"rw":"25 000 Mining XP, +5 SkyBlock XP, доступ в Dwarven Base Camp","en":"Beyond the Wall"},{"id":"first-harvest","st":1,"c":"f","n":"First Harvest","loc":"Farm (Hub), The Barn","npc":"Farmer Rigby","need":"Побывать в Hub","steps":["Поговори с Farmer Rigby на Farm.","Собери рядом 10× Wheat и отдай ему: получишь Rookie Hoe, 100 Farming XP и +5 SkyBlock XP.","Дойди до The Barn: ещё 10 Farming XP."],"rw":"Rookie Hoe, 110 Farming XP, +5 SkyBlock XP","en":"First Harvest"},{"id":"barnyard","st":2,"c":"f","n":"Back at the Barnyard","loc":"The Barn","npc":"Farmhand","need":"Побывать в The Barn","steps":["Поговори с Farmhand (+5 SkyBlock XP, +100 Farming XP).","Покажи ему Wheat Minion: получишь Chicken Pet. Экипируй питомца.","Собери Carrot, Potato, Pumpkin и Melon (+10 Farming XP).","Добудь Raw Porkchop, Raw Chicken и Leather (+10 Farming XP)."],"rw":"Chicken Pet, 120 Farming XP, +5 SkyBlock XP","note":"Wheat Minion I крафтится из Wooden Hoe и 8 Wheat.","en":"Back at the Barnyard"},{"id":"intermediate-farmer","st":2,"c":"f","n":"Intermediate Farmer","loc":"The Barn, Mushroom Desert, Oasis","npc":"—","need":"Побывать в The Barn","steps":["Прокачай Farming до 5 (+5 SkyBlock XP, 300 Farming XP).","Дойди до Mushroom Desert (+15 Farming XP).","Собери Sugar Cane, Cocoa Beans и Cactus (+15 Farming XP).","Добудь Raw Mutton и Raw Rabbit (+15 Farming XP)."],"rw":"345 Farming XP, +5 SkyBlock XP","en":"Intermediate Farmer"},{"id":"helpful-farmer","st":2,"c":"f","n":"Helpful Farmer","loc":"The Garden","npc":"Sam","need":"SkyBlock Level 5","steps":["Открой The Garden и зайди туда.","Поговори с Sam и отдай ей 25× Wheat."],"rw":"+5 SkyBlock XP","en":"Helpful Farmer"},{"id":"learning-to-compost","st":2,"c":"f","n":"Learning to Compost","loc":"The Garden","npc":"Sam","need":"Пройти Helpful Farmer","steps":["Поговори с Sam у Composter.","Купи Fuel в SkyMart и заправь им Composter.","Забери готовый Compost."],"rw":"+5 SkyBlock XP","en":"Learning to Compost"},{"id":"prepping-the-plot","st":2,"c":"f","n":"Prepping the Plot","loc":"The Garden","npc":"Sam","need":"Пройти Learning to Compost","steps":["Купи участок (Plot) у Desk.","Расчисть его, ломая блоки, до 100%. Sam заговорит сама, и квест завершится."],"rw":"+5 SkyBlock XP","en":"Prepping the Plot"},{"id":"crop-n-profit","st":2,"c":"f","n":"Crop 'n Profit","loc":"The Garden","npc":"Sam, Jerry","need":"Пройти Prepping the Plot","steps":["Поговори с Sam: она предложит поставить прилавок для гостей (visitor stand).","Принеси ей 100× Wheat. Она вернёт 5× Wheat и откроет прилавок.","Вскоре придёт первый гость, Jerry, и попросит 5× Bread. Выполни заказ."],"rw":"Награды гостя, 50 монет, +5 SkyBlock XP","en":"Crop 'n Profit"},{"id":"gearing-up","st":3,"c":"f","n":"Gearing Up","loc":"The Garden","npc":"Jeff","need":"Пройти Crop 'n Profit и прокачать Garden до 4","steps":["Прокачай Garden до 4 уровня.","Поговори с Jeff и покажи ему Specialized Farming Tool: инструмент под конкретную культуру.","Получишь Cropshot Chip. Используй его, чтобы открыть систему Chips."],"rw":"Cropshot Chip, доступ к Chips, 5 000 Farming XP, +5 SkyBlock XP","en":"Gearing Up"},{"id":"rooting-for-you","st":4,"c":"f","n":"Rooting for You","loc":"The Garden","npc":"Carpenter, Sam","need":"Garden 7","steps":["На Garden 7 к тебе станет приходить гость Carpenter. Выполни его заказ и получи Greenhouse Blueprint.","Отдай чертёж Sam: откроется Greenhouse.","Переделай первый участок в теплицу. Нужно 64× Enchanted Oak Log и 128× Enchanted Sand.","Sam даст Carrot и HydroCan™ 1000. Посади морковь и полей её, она быстро вырастет.","Посади рядом ещё 2× Carrot от Sam, получится мутация Dustgrain. Изучи её с помощью Plant Diagnostics Tool.","Вырасти ещё один Dustgrain из 2× Seeds, собери его и поговори с Sam."],"rw":"Greenhouse и его улучшения, 5 000 монет, 5 000 Farming XP, +5 SkyBlock XP","en":"Rooting for You"},{"id":"shady-jake","st":4,"c":"f","n":"Shady Jake","loc":"The Garden, Glowing Mushroom Cave (Underground Lab)","npc":"Beth, Jake","need":"В Garden приходит гостья Beth","steps":["Принимай заказы Beth в Garden. Первые три раза она рассказывает, что расследует Jake.","После третьего визита копай по координатам 175, 42, −470 в Glowing Mushroom Cave.","После следующего визита встреться там с Beth, туда же придёт Jake.","Дослушай разговор и получи Jake's Plushie."],"rw":"Jake's Plushie, +5 SkyBlock XP","en":"Shady Jake"},{"id":"further-investigate-jake","st":4,"c":"f","n":"Further Investigate Jake","loc":"The Garden, Underground Lab","npc":"Beth, Jake","need":"Пройти Shady Jake, открыть Greenhouse и выполнить 5-й заказ Beth","steps":["Прими новый заказ Beth в Garden.","Встреться с ней в Underground Lab и потяни рычаг на стене.","В новой комнате Jake расскажет про Crop Analyzer. Дослушай его."],"rw":"Доступ к Crop Analyzer, +5 SkyBlock XP","en":"Further Investigate Jake"},{"id":"crop-analyzer","st":4,"c":"f","n":"Introduction to the Crop Analyzer","loc":"Underground Lab","npc":"Jake","need":"Пройти Further Investigate Jake","steps":["Попробуй воспользоваться Crop Analyzer, Jake тебя остановит.","Принеси ему Dustgrain.","Проанализируй Dustgrain в Crop Analyzer."],"rw":"—","en":"Introduction to the Crop Analyzer"},{"id":"fishing-tutorial","st":1,"c":"fi","n":"Fishing Tutorial","loc":"Village (Hub)","npc":"Fisherwoman Enid","need":"Побывать в Hub","steps":["Поговори с Fisherwoman Enid в Village. Она даст Fishing Rod.","Поймай любую рыбу и снова поговори с ней."],"rw":"1 000 монет, 10 Fishing XP, +5 SkyBlock XP","en":"Fishing Tutorial"},{"id":"finding-the-engine","st":2,"c":"fi","n":"Finding the Engine","loc":"Fishing Outpost (Fisherman's Hut)","npc":"Fisherman Gerald, Captain Baha","need":"Пройти Fishing Tutorial, Fishing 5","steps":["Прокачай Fishing до 5 и поговори с Fisherman Gerald.","Вылови Rusty Ship Engine.","Покажи двигатель Gerald и Captain Baha: откроется Ship Navigator.","Поставь двигатель на корабль."],"rw":"64× Fish Bait, 250 Fishing XP, +5 SkyBlock XP, Ship Navigator, доступ в Backwater Bayou","en":"Finding the Engine"},{"id":"one-mans-trash","st":2,"c":"fi","n":"One Man's Trash","loc":"Backwater Bayou","npc":"Junker Joel, Roddy","need":"Пройти Finding the Engine","steps":["Доплыви до Backwater Bayou через Ship Navigator.","Поговори с Junker Joel, он даст Junk Sinker.","Поговори с Roddy и поставь Junk Sinker на удочку."],"rw":"50 Fishing XP, +5 SkyBlock XP, ещё 200 Fishing XP за попутные задания Глав","en":"One Man's Trash"},{"id":"hotspotting","st":2,"c":"fi","n":"Hotspotting","loc":"Backwater Bayou","npc":"Hattie","need":"Побывать на Backwater Bayou","steps":["Поговори с Hattie: она расскажет про Fishing Hotspots.","Порыбачь в хотспоте, который появится у неё за спиной, и снова поговори с ней."],"rw":"1 000 монет, 100 Fishing XP, +5 SkyBlock XP, ещё 100 Fishing XP за задание Главы","en":"Hotspotting"},{"id":"foraging-tutorial","st":1,"c":"fo","n":"Foraging Tutorial","loc":"Foraging Camp (Hub)","npc":"Lumber Jack","need":"Побывать в Hub","steps":["Поговори с Lumber Jack. Он даст 50 Foraging XP, чтобы открыть Foraging 1.","Наруби 20× Oak Log и принеси ему."],"rw":"Promising Axe, 1 000 монет, 150 Foraging XP, +5 SkyBlock XP, доступ в The Park","en":"Foraging Tutorial"},{"id":"into-the-woods","st":2,"c":"fo","n":"Into the Woods","loc":"Birch Park (The Park)","npc":"Charlie","need":"Пройти Foraging Tutorial","steps":["Поговори с Charlie и принеси ему 64× Birch Log. Получишь Charlie's Trousers.","Поговори с ним ещё раз, и квест завершится."],"rw":"Charlie's Trousers, Travel Scroll to The Park, 1 000 монет, 250 Foraging XP, +5 SkyBlock XP, доступ в Spruce Woods","en":"Into the Woods"},{"id":"helping-hand","st":2,"c":"fo","n":"A Helping Hand","loc":"Spruce Woods (The Park)","npc":"Kelly","need":"Пройти Into the Woods","steps":["Поговори с Kelly и принеси ей 128× Spruce Log."],"rw":"Kelly's T-Shirt, 1 500 монет, 500 Foraging XP, +5 SkyBlock XP, доступ в Dark Thicket","en":"A Helping Hand"},{"id":"campfire-cult","st":2,"c":"fo","n":"The Campfire Cult","loc":"Dark Thicket, Trials of Fire (The Park)","npc":"Ryan","need":"Пройти A Helping Hand","steps":["Подойди к Ryan крадучись (с зажатым Shift).","Пройди Trial of Fire I: простой в костре 10 секунд.","Поговори с Ryan и принеси 256× Dark Oak Log."],"rw":"Campfire Initiate Badge, 2 000 монет, 1 000 Foraging XP, +5 SkyBlock XP, доступ в Savanna Woodland","en":"The Campfire Cult"},{"id":"campfire-trials","st":0,"c":"fo","n":"The Campfire Trials","loc":"Trials of Fire (The Park)","npc":"Ryan","need":"Пройти The Campfire Cult","steps":["Проходи всё более сложные Trials of Fire, чтобы улучшать Campfire Badge."],"rw":"Улучшения Campfire Badge","en":"The Campfire Trials"},{"id":"the-rebuild","st":2,"c":"fo","n":"The Rebuild","loc":"Savanna Woodland, Melody's Plateau (The Park)","npc":"Worker Xavier, Melody","need":"Пройти The Campfire Cult","steps":["Приди в Savanna Woodland. Worker Xavier заговорит сам и попросит проведать Melody.","Принеси Melody 512× Acacia Log на ремонт арфы."],"rw":"Melody's Shoes, 2 000 монет, 1 500 Foraging XP, +5 SkyBlock XP, доступ к Harp и Jungle Island","en":"The Rebuild"},{"id":"woods-racing","st":0,"c":"fo","n":"Woods Racing","loc":"Spruce Woods, Jungle Island (The Park)","npc":"Gustave","need":"Пройти The Rebuild","steps":["Открой Jungle Island и поговори с Gustave в Spruce Woods.","Гонка начинается рядом с ним и заканчивается на вершине Jungle Island.","Награды за время: быстрее 2 мин — Polished Pebble, 1 мин — Hunter Knife, 32 с — Wolf Paw, 18 с — Silky Lichen и +5 SkyBlock XP."],"rw":"Polished Pebble, Hunter Knife, Wolf Paw, Silky Lichen, +5 SkyBlock XP","en":"Woods Racing"},{"id":"mole-problems","st":2,"c":"fo","n":"Mole Problems","loc":"Jungle Island (The Park)","npc":"Molbert","need":"Пройти The Rebuild","steps":["Поговори с Molbert и принеси ему 512× Jungle Log.","Уйди из зоны и вернись: он попросит поставить три ловушки.","Поговори с ним, снова уйди и вернись. Он застрянет в одной из ловушек, освободи его."],"rw":"Mole Hat, 1 500 монет, 500 Foraging XP, +5 SkyBlock XP, доступ в Moonglade Marsh (с Foraging 12)","en":"Mole Problems"},{"id":"heart-of-the-forest","st":3,"c":"fo","n":"Heart of the Forest","loc":"Tangleburg's Path (Moonglade Marsh)","npc":"Hina","need":"Попасть в Moonglade Marsh (Foraging 12)","steps":["Поговори с Hina на Tangleburg's Path: откроется Heart of the Forest."],"rw":"Доступ к Heart of the Forest","en":"Heart of the Forest"},{"id":"swoops-instructions","st":3,"c":"fo","n":"Swoop's Instructions","loc":"Tangleburg (Moonglade Marsh)","npc":"Swoop","need":"Пройти Heart of the Forest","steps":["Поговори с Swoop в Tangleburg.","Сломай ягоду под ним и сруби Fig Tree.","Он объяснит, как работают Sweep и Tree Gifts."],"rw":"10 000 монет, 5 000 Foraging XP, +5 SkyBlock XP","en":"Swoop's Instructions"},{"id":"davids-hunting","st":3,"c":"fo","n":"David's Hunting Lessons","loc":"Tangleburg, Evergreen Plateau, Fusion House, Murkwater Loch","npc":"David Hunterborough, Auryon, Kysha, Agatha","need":"Пройти Swoop's Instructions","steps":["Поговори с David Hunterborough: он научит основам охоты (Hunting).","Получи и опробуй охотничьи предметы у Auryon, Kysha и Agatha."],"rw":"Знакомство с Hunting","en":"David's Hunting Lessons"},{"id":"time-to-strike","st":1,"c":"c","n":"Time to Strike","loc":"Combat Settlement, Graveyard (Hub), Spider's Den","npc":"Bartender, Haymitch","need":"Побывать в Hub","steps":["Поговори с Bartender в Combat Settlement. Получишь Undead Sword.","Убей 10 Graveyard Zombie или Zombie Villager (+5 SkyBlock XP, 100 Combat XP).","Снова поговори с Bartender (+100 монет) и отправляйся в Spider's Den (+10 Combat XP).","Поговори с Haymitch, зайди в Spider Mound и добудь с мобов 1× String и 1× Spider Eye (+15 Combat XP)."],"rw":"Undead Sword, 100 монет, 125 Combat XP, +5 SkyBlock XP","en":"Time to Strike"},{"id":"flint-bros","st":2,"c":"c","n":"The Flint Bros","loc":"Spider's Den","npc":"Rick","need":"Побывать в Spider's Den","steps":["Поговори с Rick и отдай ему 2× Iron Ingot."],"rw":"Promising Shovel (предмет и рецепт)","en":"The Flint Bros"},{"id":"shaggys-quest","st":2,"c":"c","n":"Shaggy's Quest","loc":"Grandma's House, Arachne's Sanctuary (Spider's Den)","npc":"Shaggy","need":"Побывать в Spider's Den","steps":["Поговори с Shaggy в Grandma's House.","Призови Arachne с помощью 4× Arachne's Calling или Arachne Crystal.","Снова поговори с Shaggy: откроется магазин Arachne Crystal."],"rw":"Магазин Arachne Crystal","note":"Делайте вместе с Arachne's Web: Spider Tamer засчитывает помощь в бою с Arachne.","en":"Shaggy's Quest"},{"id":"arachnes-web","st":2,"c":"c","n":"Arachne's Web","loc":"Arachne's Sanctuary (Spider's Den)","npc":"Spider Tamer","need":"Побывать в Spider's Den","steps":["Поговори с Spider Tamer в Arachne's Sanctuary.","Помоги убить Arachne и снова поговори с ним."],"rw":"10× Spider Essence, доступ в Spider Essence Shop","en":"Arachne's Web"},{"id":"relic-hunting","st":0,"c":"c","n":"Relic Hunting","loc":"Archaeologist's Camp (Spider's Den)","npc":"Archaeologist","need":"Побывать в Spider's Den","steps":["Поговори с Archaeologist. Он даст Archaeologist's Compass, который указывает на ещё не найденные реликвии.","Найди все 28 реликвий, каждая даёт 10 000 монет.","Вернись к Archaeologist за последними 30 000 монет."],"rw":"310 000 монет всего","en":"Relic Hunting"},{"id":"beginning-of-the-end","st":3,"c":"c","n":"Beginning of The End","loc":"The End, Dragon's Nest","npc":"Pearl Dealer","need":"Побывать в The End","steps":["Поговори с Pearl Dealer и добудь 1× End Stone.","Иди в Dragon's Nest и будь там, когда появится Ender Dragon."],"rw":"100 Combat XP","en":"Beginning of The End"},{"id":"end-race","st":0,"c":"c","n":"The End Race","loc":"The End","npc":"Guber","need":"Побывать в The End","steps":["Поговори с Guber и встань на нажимную плиту рядом с ним.","Добеги до плиты на другом конце острова и вернись обратно.","Награды за время: быстрее 3 мин — 8× Silent Pearl, 2 мин — Enderman Mask, 80 с — Nope the Fish, 48 с — Pig's Foot и +5 SkyBlock XP."],"rw":"8× Silent Pearl, Enderman Mask, Nope the Fish, Pig's Foot, +5 SkyBlock XP","en":"The End Race"},{"id":"lone-adventurer","st":3,"c":"c","n":"Talk to Lone Adventurer","loc":"The End","npc":"Lone Adventurer, Pearl Dealer","need":"Побывать в The End; для финала Combat 18","steps":["Поговори с Lone Adventurer и убей 5 Enderman.","Он предложит Void Sword за 200 000 монет. Если откажешься, тот же меч продаёт Rusty.","Он перейдёт к воротам Dragon's Nest. Надень все 8 частей Ender Armor.","Убивай Seer, пока не выпадет Dragon Shortbow, и отнеси лук ему. Потом забери такой же у Pearl Dealer.","На Combat 18 поговори с ним снова: откроется меню статистики Ender Dragon."],"rw":"Возможность купить Void Sword, Dragon Shortbow","en":"Talk to Lone Adventurer"},{"id":"warriors-quest","st":3,"c":"c","n":"Warrior's Quest","loc":"Crimson Isle","npc":"—","need":"Побывать в Spider's Den","steps":["Прокачай Combat до 22 и отправляйся на Crimson Isle."],"rw":"Доступ на Crimson Isle","en":"Warrior's Quest"},{"id":"select-a-faction","st":3,"c":"c","n":"Select a Faction","loc":"Stronghold, Dragontail, Scarleton (Crimson Isle)","npc":"Elle и NPC фракций","need":"Побывать на Crimson Isle","steps":["Поговори с Elle и помоги убить 3 Blaze, которые на неё напали.","В центре Stronghold принеси ей 4× Magma Chunk, 3× Blaze Ashes и 2× Spectre Dust.","Elle появится у Chief's Hut в Dragontail и у Community Center в Scarleton. Поговори с четырьмя NPC каждой фракции.","Выбери фракцию. Дальше квест идёт по ветке магов (Mage) или варваров (Barbarian)."],"rw":"Доступ к фракциям","note":"Фракцию выбирают один раз, и дальше открыта только её ветка квестов. Договоритесь в коопе заранее, кто куда идёт.","en":"Select a Faction"},{"id":"join-mage","st":3,"c":"c","br":"mage","n":"Join the Mage Faction","loc":"Scarleton, Cathedral, Mage Council","npc":"Elle, Dean, Queen Nyx","need":"Пройти Select a Faction и выбрать магов","steps":["Скажи Elle, что вступаешь к магам. Она даст временный Maddox Batphone.","Отдай телефон Dean, он даст Letter of Recommendation.","Отнеси письмо Queen Nyx."],"rw":"Вступление во фракцию Mage","en":"Join the Mage Faction"},{"id":"purchase-abiphone","st":3,"c":"c","br":"mage","n":"Purchase an Abiphone","loc":"Scarleton Bank","npc":"Udel, Dean","need":"Пройти Join the Mage Faction","steps":["Поговори с Udel и купи Abiphone.","Позвони Dean по Abiphone."],"rw":"Контакт Dean в Abiphone","en":"Purchase an Abiphone"},{"id":"recover-lost-research","st":3,"c":"c","br":"mage","n":"Recover Lost Research","loc":"Stronghold, The Bastion, Mage Council","npc":"Elle, Dean, Queen Nyx, Captain Ahone, Counsellor","need":"Пройти Purchase an Abiphone","steps":["Поговори с Elle в Stronghold, она добавит свой контакт в Abiphone.","Проберись в The Bastion и верни украденные исследования.","Позвони Dean и приходи на Mage Council (+100 репутации)."],"rw":"Контакт Elle, +100 репутации","en":"Recover Lost Research"},{"id":"deans-apprentice","st":3,"c":"c","br":"mage","n":"Find the Dean's Apprentice","loc":"Cathedral, Burning Desert","npc":"Dean, Captain Ahone","need":"Пройти Recover Lost Research","steps":["Поговори с Dean в Cathedral: он попросит найти своего Apprentice.","В Burning Desert встретишь Captain Ahone и получишь его контакт.","Найди Apprentice и позвони ему: он прибежит и подлечит тебя зельями.","Вернись к Dean."],"rw":"Контакт Captain Ahone","en":"Find the Dean's Apprentice"},{"id":"help-dean","st":3,"c":"c","br":"mage","n":"Help Dean","loc":"Cathedral, Igrupan's Chicken Coop, Scarleton, Odger's Hut","npc":"Dean, Igrupan, Odexar, Odger","need":"Пройти Find the Dean's Apprentice","steps":["Принеси Dean 10× Magma Chunk и 5× Burning Eye (+150 репутации).","Найди 5 потерявшихся кур Igrupan (+50 репутации).","Возьми у Odexar Volcanic Stonefish для Odger. Тот забракует рыбу, поэтому вылови новый Volcanic Stonefish и отнеси ему.","Отдай Framed Volcanic Stonefish Odexar (+100 репутации, 80 монет).","Принеси Dean Hallowed Skull, Lumino Fiber и Leather Cloth."],"rw":"+300 репутации, 80 монет","en":"Help Dean"},{"id":"recover-sulphur-mage","st":4,"c":"c","br":"mage","n":"Recover Sulphur (маги)","loc":"Forgotten Skull, Kuudra's Hollow","npc":"Captain Ahone, Elle, Ugo, Crag","need":"Пройти Help Dean","steps":["Поговори с Captain Ahone про украденную серу (Sulphur). Начнётся встреча у Forgotten Skull.","Победи Kuudra (+200 репутации).","Поговори с Dean. На этом ветка магов заканчивается."],"rw":"+200 репутации, доступ к боям с Kuudra","en":"Recover Sulphur"},{"id":"join-barbarian","st":3,"c":"c","br":"barb","n":"Join the Barbarian Faction","loc":"Burning Desert, Chief's Hut (Crimson Isle)","npc":"Elle, Ugo, Chief Scorn","need":"Пройти Select a Faction и выбрать варваров","steps":["Скажи Elle, что вступаешь к варварам, и убей Corrupted Flaming Spider в Burning Desert.","Используй выпавшую Sulphur на Ugo.","Проводи их до Chief's Hut, отбиваясь от мобов.","Поговори с Chief Scorn, он примет тебя во фракцию."],"rw":"Вступление во фракцию Barbarian","en":"Join the Barbarian Faction"},{"id":"recover-deans-research","st":3,"c":"c","br":"barb","n":"Recover the Dean's Research","loc":"Dragontail, Cathedral","npc":"Ugo, Elle, Chief Scorn","need":"Пройти Join the Barbarian Faction","steps":["Поговори с Ugo и Elle: нужно украсть исследования у магов.","Elle приведёт тебя в Cathedral. Укради исследования из кабинета Dean.","Поговори с Elle, Ugo и Chief Scorn (+100 репутации)."],"rw":"+100 репутации","en":"Recover the Dean's Research"},{"id":"barbarian-training","st":3,"c":"c","br":"barb","n":"Barbarian Training","loc":"Dojo, Magma Chamber, Dragontail, Burning Desert","npc":"Ugo, Lasea, Odger, Gris","need":"Пройти Recover the Dean's Research","steps":["Выполни для Ugo задания Dojo и победи Magma Boss (+150 репутации).","Помоги Lasea: отдай ей Skeleton Fish и Flyfish и поговори с Odger (+100 репутации).","Поговори с Gris."],"rw":"+250 репутации","en":"Barbarian Training"},{"id":"recover-sulphur-barb-1","st":4,"c":"c","br":"barb","n":"Recover Sulphur (варвары, часть 1)","loc":"Matriarch's Lair","npc":"—","need":"Пройти Barbarian Training","steps":["Добудь Heavy Pearl у The Matriarch в Matriarch's Lair."],"rw":"Heavy Pearl","en":"Recover Sulphur"},{"id":"recover-sulphur-barb-2","st":4,"c":"c","br":"barb","n":"Recover Sulphur (варвары, часть 2)","loc":"Dragontail","npc":"Gris","need":"Пройти часть 1","steps":["Отнеси Heavy Pearl Gris."],"rw":"+150 репутации, 200 000 монет","en":"Recover Sulphur"},{"id":"recover-sulphur-barb-3","st":4,"c":"c","br":"barb","n":"Recover Sulphur (варвары, часть 3)","loc":"Chief's Hut, Forgotten Skull, Kuudra's Hollow","npc":"Chief Scorn, Captain Ahone, Elle, Ugo, Crag","need":"Пройти часть 2","steps":["Поговори с Chief Scorn про украденную серу. Начнётся встреча у Forgotten Skull.","Победи Kuudra (+200 репутации).","Поговори с Chief Scorn (+200 репутации). На этом ветка варваров заканчивается."],"rw":"+400 репутации, доступ к боям с Kuudra","en":"Recover Sulphur"}],"chapters":{"Backwater Bayou":{"key":"bayou","npc":"Jonesy","about":"Рыболовный остров. Открывается квестом Finding the Engine, плыть туда через Ship Navigator.","final":"Pearl of the Swamp: навсегда +1 treasure chance","ch":[{"n":"I","i":"Начало пути по Seven Seas.","done":"Открывает главу II; 4× Treasure Bait; +5 SkyBlock XP","tasks":[{"t":"Узнай про Junk","h":"Junker Joel расскажет, как вылавливать хлам (Junk).","rw":"100 Fishing XP","en":"Learn About Junk"},{"t":"Поставь Rod Part","h":"Roddy ставит на удочки детали (Rod Parts) для настройки.","rw":"100 Fishing XP","en":"Apply a Rod Part"},{"t":"Узнай про хотспоты","h":"Fishing Hotspots дают бонус к статам, и только в них ловятся Hotspot Sea Creatures. Хотспоты есть на многих островах.","rw":"100 Fishing XP","en":"Learn About Hotspots"}]},{"n":"II","i":"Бери удочку и помогай с уборкой: лови хлам!","done":"Открывает главу III; 1 Rusty Coin, 8 Treasure Bait; +10 SkyBlock XP","tasks":[{"t":"Коллекция Lily Pad I","h":"Lily Pad падают с морских существ Bayou. Коллекция открывает новые рецепты.","rw":"250 Fishing XP","en":"Reach Lily Pad Collection I"},{"t":"Поймай Rusty Coin","h":"С Junk Sinker большая часть хлама — Rusty Coin.","rw":"250 Fishing XP","en":"Catch a Rusty Coin"},{"t":"Купи Treasure Bait","h":"Продаёт Junker Joel. Повышает шанс поймать сокровище и хлам.","rw":"250 Fishing XP","en":"Purchase Treasure Bait"},{"t":"Поймай Trash Gobbler","h":"Обычное (Common) морское существо Bayou.","rw":"250 Fishing XP","en":"Catch a Trash Gobbler"},{"t":"Поймай Dumpster Diver","h":"Необычное (Uncommon) существо Bayou, попадается реже Trash Gobbler.","rw":"250 Fishing XP","en":"Catch a Dumpster Diver"}]},{"n":"III","i":"Меняй хлам у Junker Joel на сильные улучшения снаряжения.","done":"Открывает главу IV; 4 Rusty Coin, 16 Treasure Bait; +15 SkyBlock XP","tasks":[{"t":"Коллекция Lily Pad III","h":"Lily Pad падают с морских существ Bayou.","rw":"500 Fishing XP","en":"Reach Lily Pad Collection III"},{"t":"Купи Junk Talisman","h":"Повышает treasure chance на Backwater Bayou. Положи его в Accessory Bag.","rw":"500 Fishing XP","en":"Purchase a Junk Talisman"},{"t":"Купи Challenging Rod","h":"Улучшенная удочка у Junker Joel.","rw":"500 Fishing XP","en":"Purchase a Challenging Rod"},{"t":"Купи часть Backwater Armor","h":"Улучшай Angler Armor из Fishing Outpost до Backwater Armor.","rw":"500 Fishing XP","en":"Purchase a Piece of Backwater Armor"},{"t":"Купи питомца Hermit Crab","h":"Питомцы начинают с Common. Kat в Hub повышает их редкость, а с ней усиливаются и открываются перки.","rw":"500 Fishing XP","en":"Purchase a Hermit Crab Pet"},{"t":"Поймай Hotspot Sea Creature","h":"Ловится только в хотспоте.","rw":"500 Fishing XP","en":"Catch a Hotspot Sea Creature"}]},{"n":"IV","i":"Ты уже местный, но впереди задачи сложнее.","done":"Открывает главу V; 1 Busted Belt Buckle, 8 Rusty Coin, 32 Treasure Bait; +20 SkyBlock XP","tasks":[{"t":"Коллекция Lily Pad V","h":"Lily Pad падают с морских существ Bayou.","rw":"1,000 Fishing XP","en":"Reach Lily Pad Collection V"},{"t":"Поймай Busted Belt Buckle","h":"Иногда попадается среди хлама.","rw":"1,000 Fishing XP","en":"Catch a Busted Belt Buckle"},{"t":"Поймай Banshee","h":"Редкое (Rare) существо Bayou.","rw":"1,000 Fishing XP","en":"Catch a Banshee"},{"t":"Hermit Crab до Uncommon у Kat","h":"Улучшение питомца у Kat в Hub.","rw":"1,000 Fishing XP","en":"Upgrade Hermit Crab Pet to Uncommon at Kat"},{"t":"Поставь Stingy Sinker","h":"Иногда не тратит наживку.","rw":"1,000 Fishing XP","en":"Apply a Stingy Sinker to Your Rod"},{"t":"Купи Junk Ring","h":"Улучшение Junk Talisman у Junker Joel.","rw":"1,000 Fishing XP","en":"Purchase a Junk Ring"}]},{"n":"V","i":"Пора улучшить главный кусок хлама — твой корабль!","done":"Открывает главу VI; 2 Busted Belt Buckle, 16 Rusty Coin, 64 Treasure Bait; +25 SkyBlock XP","tasks":[{"t":"Коллекция Lily Pad VII","h":"Lily Pad падают с морских существ Bayou.","rw":"2,500 Fishing XP","en":"Reach Lily Pad Collection VII"},{"t":"Поймай Bayou Sludge","h":"Эпическое (Epic) существо Bayou.","rw":"2,500 Fishing XP","en":"Catch a Bayou Sludge"},{"t":"Поставь Bronze Ship Helm","h":"Крафтится из Bronze Bowl, которые изредка падают с Dumpster Diver.","rw":"2,500 Fishing XP","en":"Apply a Bronze Ship Helm"},{"t":"Поставь Bronze Ship Engine","h":"Купи у Junker Joel и поставь на корабль: откроются дальние рыболовные острова.","rw":"2,500 Fishing XP","en":"Apply a Bronze Ship Engine"},{"t":"Hermit Crab до Rare у Kat","h":"Улучшение питомца у Kat в Hub.","rw":"2,500 Fishing XP","en":"Upgrade Hermit Crab Pet to Rare at Kat"},{"t":"Поставь Speedy Line","h":"Даёт Fishing Speed, клюёт быстрее. Полезна для любой рыбалки.","rw":"2,500 Fishing XP","en":"Apply a Speedy Line to Your Rod"}]},{"n":"VI","i":"Для самых сильных улучшений нужен редкий хлам.","done":"","tasks":[{"t":"Коллекция Lily Pad VIII","h":"Lily Pad падают с морских существ Bayou.","rw":"5,000 Fishing XP","en":"Reach Lily Pad Collection VIII"},{"t":"Поймай Alligator","h":"Легендарное (Legendary) существо Bayou.","rw":"5,000 Fishing XP","en":"Catch an Alligator"},{"t":"Поймай Old Leather Boot","h":"Очень редкий хлам.","rw":"5,000 Fishing XP","en":"Catch an Old Leather Boot"},{"t":"Поставь Bronze Ship Hull","h":"Крафтится из Bronze Bowl и Torn Cloth, они падают с Dumpster Diver и Banshee.","rw":"5,000 Fishing XP","en":"Apply a Bronze Ship Hull"},{"t":"Hermit Crab до Epic у Kat","h":"Улучшение питомца у Kat в Hub.","rw":"5,000 Fishing XP","en":"Upgrade Hermit Crab Pet to Epic at Kat"},{"t":"Купи Junk Artifact","h":"Лучший из Junk-аксессуаров, продаёт Junker Joel.","rw":"5,000 Fishing XP","en":"Purchase a Junk Artifact"}]},{"n":"VII","i":"Закончи с Backwater Bayou и получи Pearl of the Swamp!","done":"","tasks":[{"t":"Коллекция Lily Pad IX","h":"Lily Pad падают с морских существ Bayou.","rw":"10,000 Fishing XP","en":"Reach Lily Pad Collection IX"},{"t":"Поймай Titanoboa","h":"Мифическое (Mythic) существо, самое редкое и опасное на Bayou.","rw":"10,000 Fishing XP","en":"Catch a Titanoboa"},{"t":"Скрафти Bayou Water Orb","h":"Нужен для дорогих крафтов и покупок.","rw":"10,000 Fishing XP","en":"Craft a Bayou Water Orb"},{"t":"Поставь Treasure Hook","h":"Продаёт Junker Joel. Лучшая деталь для ловли сокровищ.","rw":"10,000 Fishing XP","en":"Apply a Treasure Hook to Your Rod"},{"t":"Купи Gold Bottle Cap","h":"Поднимает Luck of the Sea на любой удочке до максимума.","rw":"10,000 Fishing XP","en":"Purchase a Gold Bottle Cap"},{"t":"Hermit Crab до Legendary у Kat","h":"Улучшение питомца у Kat в Hub.","rw":"10,000 Fishing XP","en":"Upgrade Hermit Crab Pet to Legendary at Kat"}]}]},"Lotus Atoll":{"key":"lotus","npc":"Researcher Betty","about":"Остров трофейных лягушек. Ловишь Trophy Frog и меняешь их у Researcher Ribery на Lotus.","final":"Pearl of the Lotus: навсегда +2,5 trophy chance","ch":[{"n":"I","i":"Начало пути исследователя лягушек.","done":"","tasks":[{"t":"Поговори с Researcher Ribery","h":"Главный в экспедиции. В его Research Journal видны все виды Trophy Frog.","rw":"250 Fishing XP","en":"Talk to Researcher Ribery"},{"t":"Поймай BRONZE Trophy Frog","h":"Trophy Frog меняются у Researcher Ribery на Lotus.","rw":"250 Fishing XP","en":"Catch a BRONZE Trophy Frog"},{"t":"Поймай Atoll Croaker","h":"Обычное (Common) существо Lotus.","rw":"250 Fishing XP","en":"Catch an Atoll Croaker"}]},{"n":"II","i":"Познакомься с Lotus Atoll поближе.","done":"","tasks":[{"t":"Поговори с Researcher Lily","h":"Изучает странное явление на острове и знает, как поймать редкую лягушку Reality Hopper.","rw":"500 Fishing XP","en":"Talk to Researcher Lily"},{"t":"Поговори с Researcher Tina","h":"По её данным, стат trophy chance повышает шанс поймать Trophy Frog.","rw":"500 Fishing XP","en":"Talk to Researcher Tina"},{"t":"Поймай SILVER Trophy Frog","h":"Меняй у Researcher Ribery на Lotus.","rw":"500 Fishing XP","en":"Catch a SILVER Trophy Frog"},{"t":"Поймай Bullfrog","h":"Клюёт, только если на тебе Red Sweater.","rw":"500 Fishing XP","en":"Catch a Bullfrog"},{"t":"Добудь Lotusfish","h":"Ловится сетью (Fishing Net). Про Attribute Shards расскажет David Hunterborough в Moonglade Marsh.","rw":"500 Fishing XP","en":"Hunt a Lotusfish"},{"t":"Добудь Lotum","h":"Прыгают по лотосам. Догони, чтобы получить Lotum Shard.","rw":"500 Fishing XP","en":"Hunt a Lotum"},{"t":"Поймай Lotus Guardian","h":"Необычное (Uncommon) существо Lotus.","rw":"500 Fishing XP","en":"Catch a Lotus Guardian"},{"t":"Поймай gorF","h":"Редкое (Rare) существо Lotus.","rw":"500 Fishing XP","en":"Catch a gorF"},{"t":"Скрафти Froggles","h":"Открываются на коллекции Lotus I. В них видно Wormholes.","rw":"500 Fishing XP","en":"Craft Froggles"},{"t":"Коллекция Lotus II","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"500 Fishing XP","en":"Reach Lotus Collection II"}]},{"n":"III","i":"Качай коллекцию Lotus и лови новые виды Trophy Frog.","done":"","tasks":[{"t":"Поговори с Researcher Kay","h":"Чудаковатая исследовательница, работает сама по себе.","rw":"1,000 Fishing XP","en":"Talk to Researcher Kay"},{"t":"Скрафти Silver Froggles","h":"Улучшение Froggles, нужна коллекция Lotus IV.","rw":"1,000 Fishing XP","en":"Craft Silver Froggles"},{"t":"Поймай Reality Hopper","h":"Если не получается, спроси Researcher Lily.","rw":"1,000 Fishing XP","en":"Catch a Reality Hopper"},{"t":"Взорви Lily Pad","h":"Кувшинки на Lotus Atoll можно толкать и соединять. Большая взрывается и даёт Exploding Trophy Frog и другие награды.","rw":"1,000 Fishing XP","en":"Explode a Lily Pad"},{"t":"Поймай Drowned Captain","h":"Эпическое (Epic) существо Lotus.","rw":"1,000 Fishing XP","en":"Catch a Drowned Captain"},{"t":"Добудь Tewtil","h":"Корми Tewtil, пока он не взорвётся, и получишь Tewtil Shard.","rw":"1,000 Fishing XP","en":"Hunt a Tewtil"},{"t":"Коллекция Lotus IV","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"1,000 Fishing XP","en":"Reach Lotus Collection IV"}]},{"n":"IV","i":"Собери все BRONZE Trophy Frog.","done":"","tasks":[{"t":"Поговори с Researcher Timmy","h":"Заметил кое-что о погоде на Lotus Atoll.","rw":"2,500 Fishing XP","en":"Talk to Researcher Timmy"},{"t":"Поймай Wetlands Frog","h":"Только во время дождя. Когда будет дождь, подскажет Researcher Timmy.","rw":"2,500 Fishing XP","en":"Catch a Wetlands Frog"},{"t":"Поймай Sea Frog","h":"Только под водой.","rw":"2,500 Fishing XP","en":"Catch a Sea Frog"},{"t":"Поймай Tree Frog","h":"Лови, стоя на листве.","rw":"2,500 Fishing XP","en":"Catch a Tree Frog"},{"t":"Поймай Cave Frog","h":"Только в Lotus Eater's Cave.","rw":"2,500 Fishing XP","en":"Catch a Cave Frog"},{"t":"Поймай Highlands Frog","h":"Только в Lotus Highlands.","rw":"2,500 Fishing XP","en":"Catch a Highlands Frog"},{"t":"Добудь Flipflopper","h":"Иногда появляется из взорванной Lily Pad, ловится сетью. Первую сеть даёт David Hunterborough в Moonglade Marsh.","rw":"2,500 Fishing XP","en":"Hunt a Flipflopper"},{"t":"Все 12 видов BRONZE Trophy Frog","h":"Не забудь забрать награды у Researcher Ribery.","rw":"2,500 Fishing XP","en":"Catch all 12 unique BRONZE Trophy Frogs"},{"t":"Поймай Puddle Jumper","h":"Легендарное (Legendary) существо, поймать сложнее обычного.","rw":"2,500 Fishing XP","en":"Catch a Puddle Jumper"},{"t":"Пожертвуй Frogcoin","h":"Брось монету в воды Lotus Eater's Cave и получишь благословение. Пока оно действует, ловятся Blessed Frogs.","rw":"2,500 Fishing XP","en":"Donate a Frogcoin"},{"t":"Коллекция Lotus VI","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"2,500 Fishing XP","en":"Reach Lotus Collection VI"}]},{"n":"V","i":"Собери все SILVER Trophy Frog.","done":"","tasks":[{"t":"Скрафти Gold Froggles","h":"Улучшение Silver Froggles, нужна коллекция Lotus VII.","rw":"5,000 Fishing XP","en":"Craft Gold Froggles"},{"t":"Поймай GOLD Trophy Frog","h":"Меняй у Researcher Ribery на Lotus.","rw":"5,000 Fishing XP","en":"Catch a GOLD Trophy Frog"},{"t":"Все 12 видов SILVER Trophy Frog","h":"Забери награды у Researcher Ribery.","rw":"5,000 Fishing XP","en":"Catch all 12 unique SILVER Trophy Frogs"},{"t":"Добудь Seashine","h":"Редко появляется из взорванной Lily Pad. Нужна Medium Fishing Net.","rw":"5,000 Fishing XP","en":"Hunt a Seashine"},{"t":"Коллекция Lotus VII","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"5,000 Fishing XP","en":"Reach Lotus Collection VII"}]},{"n":"VI","i":"Собери все GOLD Trophy Frog.","done":"","tasks":[{"t":"Поставь Puddle Jumper Hook","h":"Крафтится на коллекции Lotus VIII, повышает шанс поймать Puddle Jumper.","rw":"10,000 Fishing XP","en":"Apply a Puddle Jumper Hook to Your Rod"},{"t":"Поставь Trophy Line","h":"Полезна на всех островах с трофеями. Ставит Roddy на Backwater Bayou.","rw":"10,000 Fishing XP","en":"Apply a Trophy Line to Your Rod"},{"t":"Поймай DIAMOND Trophy Frog","h":"Меняй у Researcher Ribery на Lotus.","rw":"10,000 Fishing XP","en":"Catch a DIAMOND Trophy Frog"},{"t":"Поймай Frog Prince","h":"Мифическое (Mythic) существо Lotus.","rw":"10,000 Fishing XP","en":"Catch a Frog Prince"},{"t":"Все 12 видов GOLD Trophy Frog","h":"Забери награды у Researcher Ribery.","rw":"10,000 Fishing XP","en":"Catch all 12 unique GOLD Trophy Frogs"},{"t":"Коллекция Lotus IX","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"10,000 Fishing XP","en":"Reach Lotus Collection IX"}]},{"n":"VII","i":"Закончи с Lotus Atoll и получи Pearl of the Lotus!","done":"","tasks":[{"t":"Скрафти Diamond Lotus","h":"Нужен для дорогих крафтов и обменов.","rw":"25,000 Fishing XP","en":"Craft a Diamond Lotus"},{"t":"Скрафти Diamond Froggles","h":"Повышают шанс поймать GOLD и DIAMOND лягушек. Нужна коллекция Lotus XI.","rw":"25,000 Fishing XP","en":"Craft Diamond Froggles"},{"t":"Добудь Lily Pad Minion XI Upgrade Stone","h":"Его продаёт кто-то на Lotus Atoll, но продавца ещё надо найти. Ищи рядом с Lotus Eater's Cave.","rw":"25,000 Fishing XP","en":"Obtain a Lily Pad Minion XI Upgrade Stone"},{"t":"Все 12 видов DIAMOND Trophy Frog","h":"Забери награды у Researcher Ribery.","rw":"25,000 Fishing XP","en":"Catch all 12 unique DIAMOND Trophy Frogs"},{"t":"Коллекция Lotus XI","h":"Растёт за обмен Trophy Frog у Researcher Ribery.","rw":"25,000 Fishing XP","en":"Reach Lotus Collection XI"}]}]},"Moonglade Marsh":{"key":"moonglade","npc":"Hina (Tangleburg's Path)","about":"Лесной остров Galatea: Foraging, Heart of the Forest и охота (Hunting). Открывается квестом Mole Problems при Foraging 12.","final":"","ch":[{"n":"I","i":"Начало пути через лес.","done":"Открывает главу II; +200 Heart Of The Forest XP; 1500 Foraging XP; +5 SkyBlock XP; 1× Phanpyre Shard; 1× Cod Shard; 1× Lapis Zombie Shard","tasks":[{"t":"Поговори с Swoop","h":"Научит основам Foraging на Galatea.","rw":"100 Foraging XP","en":"Talk to Swoop"},{"t":"Воспользуйся Fusion Machine","h":"Пригодится для охоты (Hunting).","rw":"100 Hunting XP","en":"Use the Fusion Machine"},{"t":"Поговори с David и его охотниками","h":"Квест David учит основам охоты.","rw":"100 Hunting XP","en":"Talk to David and his Hunters"}]},{"n":"II","i":"Пора исследовать остров и встретить новых существ.","done":"Открывает главу III; +500 Heart Of The Forest XP; 5000 Foraging XP; +10 SkyBlock XP; 1× Prime Lushlilac Bonbon; +200 Forest Whispers","tasks":[{"t":"10 Fig Tree Gifts","h":"Руби дерево, начиная со ствола.","rw":"+200 Forest Whispers","en":"Obtain 10 Fig Tree Gifts"},{"t":"Поучаствуй в ежедневном конкурсе Agatha","h":"Agatha каждый день награждает за участие.","rw":"+100 Heart Of The Forest XP","en":"Participate in a Daily Agatha Contest"},{"t":"Убей Chillshot","h":"Chillshot и Chillblade живут в скрытой пещере под деревней.","rw":"1000 Combat XP","en":"Kill Chillshots"},{"t":"Добудь Verdant Shards","h":"Verdant — зелёные тропические рыбки в озёрах и реках.","rw":"500 Hunting XP","en":"Catch Verdant Shards"},{"t":"Добудь Azure Shards","h":"Azure — более редкие синие тропические рыбки.","rw":"500 Hunting XP","en":"Catch Azure Shards"}]},{"n":"III","i":"Galatea награждает внимательных.","done":"Открывает главу IV; +1,000 Heart Of The Forest XP; 10000 Foraging XP; +15 SkyBlock XP; 3× Mossybit Shard; +1,000 Forest Whispers","tasks":[{"t":"100 Fig Tree Gifts","h":"Лучше рубить вдвоём.","rw":"+2,000 Forest Whispers","en":"Obtain 100 Fig Tree Gifts"},{"t":"Uncommon в конкурсе Agatha","h":"Очки дают многие занятия на Galatea.","rw":"2000 Foraging XP","en":"Reach Uncommon in Agatha's Contest"},{"t":"Возьми в руку Fig Hew","h":"Рецепт открывается в коллекции Fig.","rw":"2000 Foraging XP","en":"Hold a Fig Hew"},{"t":"Собери ягоды с кустов","h":"Во время сбора могут появиться существа.","rw":"+500 Heart Of The Forest XP","en":"Collect Berries from Bushes"},{"t":"Добудь шард с помощью Lushlilac Bonbon","h":"Пока действует Salt, убитые монстры могут дать свой шард.","rw":"750 Hunting XP","en":"Obtain a Shard using a Lushlilac Bonbon."},{"t":"Добудь Mossybit Shards","h":"Лягушки прыгают вокруг центрального озера.","rw":"750 Hunting XP","en":"Catch Mossybit Shards"},{"t":"Найди что-то на земле","h":"Если на земле что-то блестит, кликни по нему.","rw":"1000 Foraging XP","en":"Find something on the ground..."}]},{"n":"IV","i":"Половина пути.","done":"Открывает главу V; +2,500 Heart Of The Forest XP; 25000 Foraging XP; 5000 Hunting XP; +20 SkyBlock XP; 3× Salmon Shard; 3× Cod Shard; +2,000 Forest Whispers","tasks":[{"t":"250 Fig Tree Gifts","h":"С очень высоким Sweep можно срубить больше 30 брёвен подряд.","rw":"+6,000 Forest Whispers","en":"Obtain 250 Fig Tree Gifts"},{"t":"Rare в конкурсе Agatha","h":"Набирай Sweep и Foraging Fortune, чтобы деревья давали больше очков.","rw":"3000 Foraging XP","en":"Reach Rare in Agatha's Contest"},{"t":"Собери Sea Lumies","h":"Растут под водой.","rw":"+500 Heart Of The Forest XP","en":"Collect Sea Lumies"},{"t":"Вылови Wetwing","h":"Ловится удочкой.","rw":"2000 Fishing XP","en":"Fish up a Wetwing"},{"t":"Купи шард у Kiara","h":"Kiara продаёт шарды амфибий и рептилий для слияний (Fusion).","rw":"1000 Hunting XP","en":"Buy a Shard from Kiara"},{"t":"Добудь Cod Shards","h":"Треска теряет сознание, если её как следует закрутить.","rw":"1000 Hunting XP","en":"Catch Cod Shards"},{"t":"Добудь Salmon Shards","h":"Лосось водится в озере.","rw":"1000 Hunting XP","en":"Catch Salmon Shards"},{"t":"Настрой маяк","h":"Маяк стоит у старой башни.","rw":"+200 Heart Of The Forest XP","en":"Tune a beacon"},{"t":"Прокачай перк в магазине Rosemary","h":"Rosemary сидит высоко, откуда виден весь остров.","rw":"+6,000 Forest Whispers","en":"Level up a perk in Rosemary's Shop"}]},{"n":"V","i":"Ты готов к сложной охоте и скрытым приключениям.","done":"Открывает главу VI; +5,000 Heart Of The Forest XP; 50000 Foraging XP; 7500 Hunting XP; +20 Forest Essence; +25 SkyBlock XP; 3× Hideonleaf Shard; 3× Coralot Shard; 1× Sparrow Shard; +3,000 Forest Whispers","tasks":[{"t":"10 Mangrove Tree Gifts","h":"Мангровые деревья всегда руби, начиная с веток.","rw":"+6,000 Forest Whispers","en":"Obtain 10 Mangrove Tree Gifts"},{"t":"Epic в конкурсе Agatha","h":"Очки дают многие занятия на Galatea.","rw":"4000 Foraging XP","en":"Reach Epic in Agatha's Contest"},{"t":"Набери 50 Sweep","h":"С таким Sweep уже можно рубить Mangrove Tree.","rw":"4000 Foraging XP","en":"Reach 50 Sweep"},{"t":"Возьми в руку Figstone Splitter","h":"Улучшение Fig Hew.","rw":"4000 Foraging XP","en":"Hold a Figstone Splitter"},{"t":"Вылови Flexbone в Tomb Floodway","h":"В Tomb Floodway повышен шанс сокровищ.","rw":"3000 Fishing XP","en":"Fish a Flexbone in the Tomb Floodway"},{"t":"Добудь Hideonleaf Shards","h":"Шалкеры злятся, если встать им на панцирь.","rw":"1250 Hunting XP","en":"Catch Hideonleaf Shards"},{"t":"Добудь Coralot Shards","h":"Аксолотли пугаются, когда ты двигаешься.","rw":"1250 Hunting XP","en":"Catch Coralot Shards"},{"t":"Добудь Dreadwing Shards","h":"Это фантомы, и даже не самые крупные.","rw":"1250 Hunting XP","en":"Catch Dreadwing Shards"},{"t":"Найди Mudworm","h":"Многие существа живут под землёй.","rw":"1250 Hunting XP","en":"Find a Mudworm"},{"t":"Добудь шард с помощью Huntrap","h":"Ловушки крафтятся из Tender Wood.","rw":"1250 Hunting XP","en":"Obtain a Shard using a Huntrap."},{"t":"Добудь шард, который даёт только Fusion","h":"Некоторые шарды получаются только слиянием.","rw":"1250 Hunting XP","en":"Obtain a Shard only obtainable from a Fusion"},{"t":"Поставь Booster","h":"Бустеры ставятся на любое снаряжение для Foraging.","rw":"4000 Foraging XP","en":"Apply a Booster"}]},{"n":"VI","i":"Пора глубже: старый лес продолжается под водой.","done":"Открывает главу VII; +10,000 Heart Of The Forest XP; 75000 Foraging XP; 12500 Hunting XP; +50 Forest Essence; +30 SkyBlock XP; 3× Drowned Shard; 1× Piranha Shard; 1× Seagull Shard; 1× Beaconmite Shard; +5,000 Forest Whispers","tasks":[{"t":"100 Mangrove Tree Gifts","h":"Мангровые деревья выгодно рубить примерно от 70 Sweep.","rw":"+20,000 Forest Whispers","en":"Obtain 100 Mangrove Tree Gifts"},{"t":"Legendary в конкурсе Agatha","h":"Теперь ты мастер Moonglade Marsh.","rw":"5000 Foraging XP","en":"Reach Legendary in Agatha's Contest"},{"t":"Стань благотворителем Starborn Temple","h":"По легенде, Starborn Temple спрятан в секретной подводной комнате.","rw":"+10,000 Forest Whispers","en":"Become a Starborn Temple Benefactor"},{"t":"Набери 100 Pressure Resistance","h":"Озеро многоуровневое, глубоко внизу есть комнаты.","rw":"1000 Foraging XP","en":"Get at least 100 Pressure Resistance"},{"t":"Убей Drowned Creatures","h":"Прячутся на дне озера.","rw":"5000 Combat XP","en":"Kill Drowned Creatures"},{"t":"Найди Piranha","h":"Иногда клюёт на поплавок в Moonglade Marsh.","rw":"1500 Hunting XP","en":"Find a Piranha"},{"t":"Добудь Stridersurfer Shards","h":"Эти лавовые существа прячутся в одном из углов острова.","rw":"1500 Hunting XP","en":"Catch Stridersurfer Shards"},{"t":"Слей шарды в Elemental Shards","h":"Elemental Shards — самые чистые формы существ.","rw":"1500 Hunting XP","en":"Fuse into Elemental Shards"},{"t":"Добудь 5 шардов через Huntrap","h":"Huntrap можно поставить до 5 штук в любом месте мира.","rw":"1500 Hunting XP","en":"Obtain 5 Shards using a Huntrap"},{"t":"Добудь 25 шардов с Lushlilac Bonbon","h":"Перед долгим боем съешь Salt.","rw":"1500 Hunting XP","en":"Obtain 25 Shards using a Lushlilac Bonbon"},{"t":"Поставь 3 разных бустера на один предмет","h":"Ставь бустеры на всё снаряжение для Foraging.","rw":"5000 Foraging XP","en":"Apply 3 different boosters on the same item"},{"t":"Улучши маяк","h":"Beaconmite помогают найти Signal Enhancer, но сначала надо найти самого Beaconmite.","rw":"+10,000 Forest Whispers","en":"Upgrade a Beacon"},{"t":"Agatha Level 4","h":"Повышай уровень дружбы с Agatha.","rw":"5000 Foraging XP","en":"Reach Agatha Level 4"},{"t":"Пройди Tier X испытания Brian","h":"Испытание у Brian, который гораздо круче Ryan.","rw":"+10,000 Forest Whispers","en":"Complete the Tier X of Brian's challenge"},{"t":"Heart of the Forest Tier 4","h":"Почти у цели.","rw":"5000 Foraging XP","en":"Reach HOTF Tier 4"}]},{"n":"VII","i":"Впереди мастерство: глава проверяет всё, чему ты научился.","done":"+20,000 Heart Of The Forest XP; 150000 Foraging XP; 20000 Hunting XP; +100 Forest Essence; +35 SkyBlock XP; 1× Invisibug Shard; 1× Lumisquid Shard; 1× Joydive Shard; 1× Spike Shard; 1× Chameleon Shard; 1× Bambloom Shard; +10,000 Forest Whispers","tasks":[{"t":"500 Mangrove Tree Gifts","h":"Не переживай, деревья отрастают.","rw":"+30,000 Forest Whispers","en":"Obtain 500 Mangrove Tree Gifts"},{"t":"Надень полный Fig Armor","h":"Лучший билд для Foraging, по крайней мере пока.","rw":"25000 Foraging XP","en":"Wear a full set of the Fig Armor"},{"t":"Набери 200 Sweep","h":"Truffle Tree и Pinerise Tree требуют тысячи Sweep.","rw":"25000 Foraging XP","en":"Reach 200 swp"},{"t":"Найди Beaconmite","h":"Изредка встречаются внутри маяков.","rw":"2000 Hunting XP","en":"Find a Beaconmite"},{"t":"Поймай Invisibug","h":"Подсказки нет даже в игре.","rw":"2000 Hunting XP","en":"Catch an Invisibug"},{"t":"Добудь Lumisquid Shards","h":"Нужно много Pressure Resistance. Или просто Huntrap.","rw":"2000 Hunting XP","en":"Catch Lumisquid Shards"},{"t":"Добудь Shellwise Shards","h":"Мудрые и живучие.","rw":"2000 Hunting XP","en":"Catch Shellwise Shards"},{"t":"Добудь Joydive Shards","h":"При опасности прячутся в нору.","rw":"2000 Hunting XP","en":"Catch Joydive Shards"},{"t":"Добудь Spike Shards","h":"Близко к ним лучше не подходить.","rw":"2000 Hunting XP","en":"Catch Spike Shards"},{"t":"Добудь 25 шардов через Huntrap","h":"Главная сила охотника — терпение.","rw":"2000 Hunting XP","en":"Obtain 25 Shards using a Huntrap"},{"t":"Прокачай атрибут Foraging до максимума","h":"Подсказки нет.","rw":"2000 Hunting XP","en":"Max out a Foraging Attribute"},{"t":"Сделай слияние с Chameleon","h":"Самое странное из существ.","rw":"2000 Hunting XP","en":"Fuse with a Chameleon"},{"t":"Добудь Bambuleaf, Mochibear и Bambloom","h":"Разные панды появляются в разные сезоны, а некоторые только из слияний.","rw":"2000 Hunting XP","en":"Obtain a Bambuleaf, Mochibear, and Bambloom"},{"t":"Купи Shiniest","h":"Любимец Jade Dragon.","rw":"+40,000 Forest Whispers","en":"Purchase a Shiniest"},{"t":"Найди Tree the Fish","h":"Изредка выпадает из Tree Gifts.","rw":"10000 Foraging XP","en":"Find a Tree the Fish"},{"t":"Найди Swamp the Fish","h":"Изредка ловится на рыбалке на Galatea.","rw":"10000 Fishing XP","en":"Find a Swamp the Fish"},{"t":"Найди Mob the Fish","h":"Изредка падает с монстров на Galatea.","rw":"10000 Combat XP","en":"Find a Mob the Fish"},{"t":"Покажи Coral 15 разных рыб","h":"Coral тоже рыба.","rw":"+40,000 Forest Whispers","en":"Show 15 Different Fish to Coral"}]}]},"Torrhus Canyon":{"key":"torrhus","npc":"Helia","about":"Каньон с деревьями Helix, ульями, охотой и Critter Safari. Награды за вехи Helix Tree выдаёт Swoop в Moonglade Marsh.","final":"","ch":[{"n":"I","i":"Начало путешествия по Torrhus Canyon.","done":"Открывает главу II; 1× Honeybuzz Shard; +250 Heart Of The Forest XP; 2500 Foraging XP; +5 SkyBlock XP","tasks":[{"t":"Поговори с Miria","h":"Одна из сестёр Starlyn. Каждый день проводит Miria's Contests по всему каньону.","rw":"+250 Desert Whispers","en":"Talk to Miria"},{"t":"Открой Helix Tree Gift","h":"Helix Tree прочнее Fig и Mangrove. Сначала полностью сруби бежевую спираль и только потом красную, иначе получишь штраф к Sweep.","rw":"64× Helix Log","en":"Open a Helix Tree Gift"},{"t":"Обыщи Honeyhive","h":"Ульи есть по всему каньону, один прямо у входа. В них лут: шарды и Honeycomb. Ульи со временем пополняются, это главный источник коллекции Honeycomb.","rw":"16× Honeycomb","en":"Loot a Honeyhive"}]},{"n":"II","i":"Освойся и проведи первые охоты.","done":"Открывает главу III; 1 Bunbun Shard, 1 Firefox Shard, 1 Groundhog Shard; +500 Heart Of The Forest XP; +1,000 Desert Whispers; 5000 Foraging XP; +10 SkyBlock XP","tasks":[{"t":"10 Helix Tree Gifts","h":"Чем больше Sweep, тем быстрее рубка. Сначала бежевая спираль, потом красная.","rw":"1× Enchanted Helix Log","en":"Obtain 10 Helix Tree Gifts"},{"t":"Поучаствуй в конкурсе Miria","h":"Ежедневные Starlyn Contests в Torrhus Canyon.","rw":"+500 Desert Whispers","en":"Participate in Miria's Contest"},{"t":"Добудь Bunbun","h":"Скачут по всему каньону. Лови с помощью Lasso.","rw":"500 Hunting XP","en":"Hunt a Bunbun"},{"t":"Добудь Firefox","h":"Часто появляются из Helix Tree Gifts. Лови с помощью Lasso.","rw":"1000 Hunting XP","en":"Hunt a Firefox"},{"t":"Добудь Groundhog","h":"Часто появляются из Helix Tree Gifts. Лови с помощью Lasso.","rw":"1000 Hunting XP","en":"Hunt a Groundhog"},{"t":"Купи подсказку у Freddy","h":"Freddy знает, где водится почти каждое существо каньона, но берёт плату.","rw":"+1000 Desert Whispers","en":"Purchase a Hint from Freddy"}]},{"n":"III","i":"Первые шаги в Critter Safari!","done":"Открывает главу IV; 25 Safari Essence, 1 Travel Scroll to Critter Safari Entrance, 1 Drybark Shard, 1 Puck Shard, 1 Dung Beetle Shard; +1,000 Heart Of The Forest XP; +2,500 Desert Whispers; 10000 Foraging XP; +15 SkyBlock XP","tasks":[{"t":"25 Helix Tree Gifts","h":"Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.","rw":"2× Enchanted Helix Log","en":"Obtain 25 Helix Tree Gifts"},{"t":"Uncommon в конкурсе Miria","h":"Даёт Basic Safari Ticket для входа в Critter Safari.","rw":"1× Basic Safari Ticket","en":"Reach Uncommon in Miria's Contest"},{"t":"Добудь Drybark","h":"Иногда появляется из Helix Tree Gifts. Лови с помощью Lasso.","rw":"2500 Hunting XP","en":"Hunt a Drybark"},{"t":"Добудь Puck","h":"Иногда появляется из Helix Tree Gifts. Лови с помощью Lasso.","rw":"2500 Hunting XP","en":"Hunt a Puck"},{"t":"Подбери Floor Drop","h":"В каньоне свои находки на земле, в том числе Dung Beetle Shards.","rw":"+2500 Desert Whispers","en":"Pick up a Floor Drop"},{"t":"Скрафти Fun-Sized Pot of Honeycomb","h":"Открывается на коллекции Honeycomb I. Намажь им дерево и подожди: придёт редкое существо, какое именно, зависит от дерева.","rw":"Fun-Sized Pot of Honeycomb","en":"Craft a Fun-Sized Pot of Honeycomb"},{"t":"Получи Safari Belt у Andrea","h":"Andrea стоит у входа в Critter Safari. Пояс улучшается по мере Safari Milestones.","rw":"10× Safari Essence","en":"Obtain a Safari Belt from Andrea"},{"t":"Войди в Critter Safari","h":"Поговори с Safari Manager у входа. Нужен любой Safari Ticket, их дают за высокие места в конкурсах Miria.","rw":"10× Safari Essence","en":"Enter the Critter Safari"},{"t":"Поймай 5 уникальных существ в Critter Safari","h":"В сафари 4 биома, и у каждого свои существа.","rw":"10× Safari Essence","en":"Catch 5 Unique Critters in the Critter Safari"}]},{"n":"IV","i":"Спустись по Spring Path и осмотрись.","done":"Открывает главу V; 50 Safari Essence, 1 Mountain Goat Shard, 1 Sprawl Shard, 1 Hideonsun Shard; +1,500 Heart Of The Forest XP; +5,000 Desert Whispers; 20000 Foraging XP; +20 SkyBlock XP","tasks":[{"t":"100 Helix Tree Gifts","h":"Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.","rw":"8× Enchanted Helix Log","en":"Obtain 100 Helix Tree Gifts"},{"t":"Rare в конкурсе Miria","h":"Даёт Economy Safari Ticket с бонусами получше обычного.","rw":"1× Economy Safari Ticket","en":"Reach Rare in Miria's Contest"},{"t":"Добудь Hideonsun","h":"Прячутся по каньону, оранжевый цвет сливается с местностью.","rw":"2500 Hunting XP","en":"Hunt a Hideonsun"},{"t":"Добудь Grizzly Bear","h":"Очень редко появляется из Helix Tree Gifts. Лови с помощью Lasso, а если лассо порвётся, будет драка.","rw":"10000 Hunting XP","en":"Hunt a Grizzly Bear"},{"t":"Добудь Dustybit","h":"Живут у Spring Path, их надо догнать.","rw":"2500 Hunting XP","en":"Hunt a Dustybit"},{"t":"Добудь Mountain Goat","h":"Живут на Spring Path и бодаются. С Lasso держи дистанцию.","rw":"5000 Hunting XP","en":"Hunt a Mountain Goat"},{"t":"Добудь Sepialot","h":"У Spring Path и Torrhus Springs. Подкрадись с Fishing Net.","rw":"2500 Hunting XP","en":"Hunt a Sepialot"},{"t":"Добудь Solar","h":"У поверхности Torrhus Springs, ловится Fishing Net.","rw":"2500 Hunting XP","en":"Hunt a Solar"},{"t":"Вылови Haggard","h":"Обычное (Common) морское существо каньона.","rw":"500 Fishing XP","en":"Catch a Haggard while Fishing"},{"t":"Вылови Brineling","h":"Необычное (Uncommon) морское существо каньона.","rw":"1000 Fishing XP","en":"Catch a Brineling while Fishing"},{"t":"Вылови Sprawl","h":"Редкое (Rare) морское существо каньона.","rw":"1500 Fishing XP","en":"Catch a Sprawl while Fishing"},{"t":"Собери Ruby Veilshroom","h":"Растут по каньону и падают с морских существ Torrhus.","rw":"32× Ruby Veilshroom","en":"Obtain Ruby Veilshrooms"},{"t":"Купи перк в Safari Essence Shop","h":"Safari Essence из сафари трать у Archie.","rw":"+2500 Desert Whispers","en":"Purchase a Perk from the Safari Essence Shop"},{"t":"Поймай 10 уникальных существ в Critter Safari","h":"В сафари 4 биома, и у каждого свои существа.","rw":"25× Safari Essence","en":"Catch 10 Unique Critters in the Critter Safari"}]},{"n":"V","i":"Ныряй глубже и узнай, что скрывает Torrhus Springs.","done":"Открывает главу VI; 75 Safari Essence, 1 Giant Water Bug Shard, 1 Queen Ant Shard, 1 Blue Jay Shard; +2,000 Heart Of The Forest XP; +10,000 Desert Whispers; 30000 Foraging XP; +25 SkyBlock XP","tasks":[{"t":"250 Helix Tree Gifts","h":"Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.","rw":"16× Enchanted Helix Log","en":"Obtain 250 Helix Tree Gifts"},{"t":"Epic в конкурсе Miria","h":"Даёт Premium Safari Ticket.","rw":"1× Premium Safari Ticket","en":"Reach Epic in Miria's Contest"},{"t":"Приманка: Pot of Honey на дереве","h":"Некоторые существа приходят только к деревьям, намазанным Honeycomb. У каждого вида деревьев свои существа, в том числе в Moonglade Marsh.","rw":"1× Family-Sized Pot of Honeycomb","en":"Use a Pot of Honey to attract a Critter to a Tree"},{"t":"Добудь Blue Jay","h":"Живут на самых высоких пиках Torrhus Heights. Подкрадись с Lasso.","rw":"2500 Hunting XP","en":"Hunt a Blue Jay"},{"t":"Добудь Goldolot","h":"Редкая мутация Sepialot. Подкрадись с Fishing Net.","rw":"5000 Hunting XP","en":"Hunt a Goldolot"},{"t":"Добудь Ember","h":"Глубже в Torrhus Springs, ловится Fishing Net.","rw":"2500 Hunting XP","en":"Hunt an Ember"},{"t":"Убей Ant","h":"Живут в Ant's Cave, вход через Torrhus Springs. Это вредители (Pests), нужен Vacuum. Иногда падает Ant Shard.","rw":"2500 Hunting XP","en":"Kill an Ant"},{"t":"Убей Queen Ant","h":"Встречаются реже, чаще появляются из разрушенных муравейников. Всегда дают Queen Ant Shard.","rw":"10000 Hunting XP","en":"Kill a Queen Ant"},{"t":"Добудь Stingray Shard","h":"Ловится как сокровище на рыбалке в любой точке каньона.","rw":"2500 Fishing XP","en":"Catch a Stingray Shard"},{"t":"Добудь Giant Water Bug","h":"Только в хотспоте глубоко в Torrhus Springs.","rw":"2500 Fishing XP","en":"Catch a Giant Water Bug"},{"t":"Купи шард у Sanger","h":"Продаёт шарды семейства Evasive, но каждый день меняет место.","rw":"+5,000 Desert Whispers","en":"Purchase a Shard from Sanger"},{"t":"Забери Safari Milestone у Andrea","h":"Охота в сафари двигает вехи и улучшает Safari Belt.","rw":"25× Safari Essence","en":"Claim a Safari Milestone from Andrea"},{"t":"Поймай 20 уникальных существ в Critter Safari","h":"В сафари 4 биома, и у каждого свои существа.","rw":"50× Safari Essence","en":"Catch 20 Unique Critters in the Critter Safari"},{"t":"Купи Booster Upgrade у Maxim","h":"Превращает Common Booster на снаряжении Foraging в Uncommon.","rw":"+5,000 Desert Whispers","en":"Purchase a Booster Upgrade from Maxim"}]},{"n":"VI","i":"Ищи самых редких существ!","done":"Открывает главу VII; 100 Safari Essence, 1 Beeheemoth Shard, 1 Torrid Shard, 1 Water Snake Shard; +3,000 Heart Of The Forest XP; +15,000 Desert Whispers; 45000 Foraging XP; +30 SkyBlock XP","tasks":[{"t":"500 Helix Tree Gifts","h":"Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.","rw":"32× Enchanted Helix Log","en":"Obtain 500 Helix Tree Gifts"},{"t":"Legendary в конкурсе Miria","h":"Даёт First-Class Safari Ticket, лучший из билетов.","rw":"1× First-Class Safari Ticket","en":"Reach Legendary in Miria's Contest"},{"t":"Возьми в руку Helix Chopper","h":"Улучшение Figstone Splitter, крафтится на коллекции Helix VI.","rw":"+10,000 Desert Whispers","en":"Hold a Helix Chopper"},{"t":"Добудь Water Snake","h":"Глубоко в Torrhus Springs. Нужна Turbo Fishing Net или лучше.","rw":"5000 Hunting XP","en":"Hunt a Water Snake"},{"t":"Добудь Sneaky, Shrieky или Cheeky Tiki","h":"Живут высоко в Torrhus Heights. Реши их головоломку и лови с помощью Pocket Black Hole.","rw":"5000 Hunting XP","en":"Hunt a Sneaky Tiki, Shrieky Tiki, or Cheeky Tiki"},{"t":"Добудь Beeheemoth","h":"Огромная пчела, появляется в случайном месте. Нужна целая группа с Lasso, так что зовите весь кооп.","rw":"5000 Hunting XP","en":"Hunt a Beeheemoth"},{"t":"Вылови Torrid","h":"Эпическое (Epic) морское существо каньона.","rw":"2000 Fishing XP","en":"Catch a Torrid while Fishing"},{"t":"Вылови Silkbreeze","h":"Легендарное (Legendary) морское существо каньона.","rw":"3500 Fishing XP","en":"Catch a Silkbreeze while Fishing"},{"t":"Поймай 30 уникальных существ в Critter Safari","h":"В сафари 4 биома, и у каждого свои существа.","rw":"75× Safari Essence","en":"Catch 30 Unique Critters in the Critter Safari"}]},{"n":"VII","i":"Активируй Starborn Temple и готовься к следующему испытанию.","done":"150 Safari Essence, 4 First-Class Safari Ticket; +4,000 Heart Of The Forest XP; +20,000 Desert Whispers; 60000 Foraging XP; +35 SkyBlock XP","tasks":[{"t":"1000 Helix Tree Gifts","h":"Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.","rw":"64× Enchanted Helix Log","en":"Obtain 1000 Helix Tree Gifts"},{"t":"Скрытая категория в конкурсе Miria","h":"Ходят слухи о категориях выше Legendary.","rw":"2× First-Class Safari Ticket","en":"Reach a Hidden Bracket in Miria's Contest"},{"t":"Надень полный Helix Armor","h":"Улучшение Fig Armor, крафтится на коллекции Helix VIII.","rw":"+10,000 Desert Whispers","en":"Wear a Full Set of Helix Armor"},{"t":"Возьми в руку Honeycomb Necklace","h":"Улучшение Mangrove Locket, нужна коллекция Honeycomb IX.","rw":"+10,000 Desert Whispers","en":"Hold a Honeycomb Necklace"},{"t":"Возьми в руку Veilshroom Bracelet","h":"Улучшение Mangrove Grippers, нужна коллекция Ruby Veilshroom IX.","rw":"+10,000 Desert Whispers","en":"Hold a Veilshroom Bracelet"},{"t":"Вылови Giant Isopod","h":"Мифическое (Mythic) морское существо каньона.","rw":"5000 Fishing XP","en":"Catch a Giant Isopod while Fishing"},{"t":"Купи Tier XII Upgrade Stone у Ant","h":"Ant продаёт камни XII тира для миньонов Foraging.","rw":"+10,000 Desert Whispers","en":"Purchase a Tier XII Upgrade Stone from Ant"},{"t":"Активируй Starborn Temple","h":"Говорят, он скрыт на дне Torrhus Springs.","rw":"+10,000 Desert Whispers","en":"Activate the Starborn Temple"},{"t":"Safari Belt до Mythic","h":"Закрой все Safari Milestones у Andrea.","rw":"100× Safari Essence","en":"Upgrade your Safari Belt to Mythic"},{"t":"Заверши Critterdex","h":"Поймай все виды существ.","rw":"100× Safari Essence","en":"Complete the Critterdex"}]}]}},"rift":{"about":"Rift Guide открывает Wizard but Weird на вершине Wizard Tower в Rift. Потом гайд доступен в SkyBlock Menu или по команде /riftguide внутри Rift. Задания, отмеченные «ведёт к Timecharm», дают Timecharm: это главная цель каждой зоны.","areas":[{"id":"wyld","n":"Wyld Woods","i":"Дом Argofay. Они любят гостей.","t":[["Скрафти Crux Talisman","Убивай Shy и собирай Shy Crux."],["Лодка Reed: Larva Silk","Отдай Reed 16× Larva Silk. В игре задание подписано «Powerful Glue», но нужен именно Larva Silk."],["Помоги Bughunter","Отдай Argofay Bughunter 8× Bottled Odonata."],["Montezuma: фрагмент 1","Лежит под деревом в Wyld Woods."],["Montezuma: фрагмент 2","В доме в Rift Gallery. Дверь открывается каменной кнопкой."],["Глаз: The Intruder","Найди и успокой первый глаз Porhtal в Wizard Tower. Откроется быстрое перемещение туда."],["Помоги Inverted Sirius","Он «стоит» за своей лачугой. Поговори с посетителями Shifted Tavern, добудь Stability Elixir у Argofay Serialbather и отдай Sirius. Откроются предметы Rift-Transferable."],["Поговори с Sad Jacquelle","Ищет кошку и сидит на ветке у своего дома. Даст питомца Montezuma, который растёт за найденные Montezuma Soul Fragments."],["Поговори с Porhtal","Научит быстрым перемещениям. Его глаза есть в Wizard Tower, Lagoon Hut, Dreadfarm, Village Plaza, Colosseum, Stillgore Château и на The Mountaintop."],["Надень Enigma's Cloak","Поговори с Enigma у подножия Wizard Tower."],["Поговори с Threebrothers","Поговори со всеми тремя Argofay Threebrothers и купи Wyld Sword."],["Надень Wyld Armor","Купи полный комплект у Argofay Traffickers в домиках на деревьях."]]},{"id":"lagoon","n":"Black Lagoon","i":"Узкая и опасная полоска земли: грибы выскакивают от вибраций.","t":[["Montezuma: фрагмент 3","За водопадом у входа в Leeches Lair."],["Убей Deadgehog","Скрафти Not-Dead-Gehog Mask из Wyld Helmet и Deadgehog Spines."],["Победи Leech Supreme","Босс в Leeches Lair. Ведёт к Timecharm."],["Глаз: The Gill-Man","Второй глаз Porhtal, в Lagoon Hut."],["Поговори с Reed","Застрял на Lagoon Hut. Соберёт Rift Boat, если принести материалы."]]},{"id":"west","n":"West Village","i":"Здесь реальность искажена сильнее всего.","t":[["Скрафти Crux Ring","Убивай Shadow и собирай Shadow Crux."],["Пройди Mirrorverse","Все 7 комнат с головоломками Dr. Emmett. Ведёт к Timecharm."],["Защити дом от огненного шара","Помоги Sorcerer Okron: собери глифы по West Village и Dreadfarm и колдуй защиту через Warding Diamathame."],["Montezuma: фрагмент 4","На крыше здания, где сидит Plumber Joe."],["Очисти Infested House","Заполни Vermin Bin и получи Disinfestor Gloves."],["Hacking for dummies","Взломай терминалы по West Village и получи Defective Monitor у Unhinged Kloon."],["Гонка Gunther","Пройди Gunther's Rift Race и скрафти Gunther's Sneakers."]]},{"id":"dreadfarm","n":"Dreadfarm","i":"Ферма, где растут культуры, которых нет нигде, кроме Rift.","t":[["Скрафти Crux Artifact","Убивай Volt и собирай Volt Crux."],["Лодка Reed: Wilted Berberis","Отдай Reed 64× Wilted Berberis."],["Montezuma: фрагмент 5","За хрупкой стеной в Dreadfarm. Взорви её из Horsezooka."],["Глаз: The Baba Yaga","Третий глаз Porhtal, в Dreadfarm."],["Урожай для Shania","Собери всё, что просит Shania, скрафти и надень Chicken Leggs. Ведёт к Timecharm."]]},{"id":"plaza","n":"Village Plaza","i":"Центр деревни. Обходи бродящих эндерменов.","t":[["Скрафти Crux Relic","Убивай Scribe и собирай Scribe Crux."],["Barry, Premier Leader of SkyBlock","Помоги Barry разобраться с протестующими. Ведёт к Timecharm."],["Аукцион Shen","Damia проводит аукционы Shen на Barrier Street. Сделай ставку."],["Лодка Reed: Half-Eaten Carrot","Отдай Reed 128× Half-Eaten Carrot."],["Кролики Cowboy Nick","Собери Half-Eaten Carrot в Half-Eaten Cave и скрафти для Cowboy Nick 7× Nearly-Whole Carrot."],["Montezuma: фрагмент 6","В книге Book in a Book: кликни книжную полку в Marcia's Flower House."],["Montezuma: фрагмент 7","На летающем островке у Déjà Vu Alley."],["Reverse-Murder Investigation","Помоги Detective Amog раскрыть будущее убийство Ramero, в котором убийца — ты сам."],["Глаз: The Bankster","Четвёртый глаз Porhtal, в Village Plaza."],["Лицо Seraphine","Добудь Anti-Morph Potion для Detransfigured Seraphine и получи Used Detransfigured Face."],["Удобные кроссовки","Купи Exceedingly Comfy Sneakers у Seymour в доме портного."]]},{"id":"cave","n":"Living Cave","i":"Здесь даже стены живые.","t":[["Скрафти Crux Heirloom","Убивай Frozille и собирай Frosty Crux."],["Лодка Reed: Living Metal Anchor","Скрафти Living Metal Anchor и отдай Reed."],["Скрафти Self-Recursive Pickaxe","Убивай Autonull и с помощью Nullified Metal улучши меч до кирки."],["Прокачай костюм до максимума","Убивай Autocap, Autochest, Autopants и Autoboots, пока на всех частях брони не будет бонуса Living Metal Suit. Потом спускайся в Living Stillness."],["Скрафти Living Timecharm","Спрыгни в Living Stillness, убивай Frozille и скрафти Timecharm из Frosty Crux и Living Metal."],["Добудь Living Metal Heart","Расспроси каменных жителей Living Stillness и успокой Living Metal Snakes с помощью Frozen Water Pungi."],["Montezuma: фрагмент 8","В Living Stillness, под ломаемым блоком снега."]]},{"id":"colosseum","n":"Colosseum","i":"Колизей захватила ядовитая слизь.","t":[["Лодка Reed: Bacte Fragments","Отдай Reed 8× Bacte Fragments."],["Победи Bacte","Собери друзей и убей Bacte в Colosseum, с него падают Bacte Fragments. Ведёт к Timecharm."],["Глаз: The Gooey","Пятый глаз Porhtal, в Colosseum."]]},{"id":"chateau","n":"Stillgore Château","i":"В замке поселились вампиры. Берегись их тюрьмы.","t":[["Скрафти Crux Chronomicon","Убивай Splatter и собирай Splatter Crux."],["Montezuma: фрагмент 9","На втором этаже дома рядом с Deer."],["Глаз: The Prince","Шестой глаз Porhtal, у Stillgore Château."],["Добудь Healing Melon","В замке монстры бьют по сердцам. Скрафти Healing Melon из Vampiric Melon, их роняют вампиры."]]},{"id":"mountain","n":"The Mountaintop","i":"Вершина измерения, где когда-то раскололся мир SkyBlock.","t":[["Скрафти Celestial Starstone","Убивай Puff и собирай Puff Crux."],["Глаз: The Seventh Sin","Седьмой глаз Porhtal, на The Mountaintop. Даёт быстрый переход к площадке у Breach."],["The Richest Man in the Multiverse","Найди Shen: пройди Walk of Fame и последовательности hivemind в Cerebral Citadel. Ведёт к Timecharm."],["Закрой Breach","Накопи достаточно Rift Time, закрой Breach и заверши путешествие по Rift."],["Открой коллекцию Timite","Начни добывать Timite."],["Испытания Wizardman","Пройди испытания в Wizardman Bureau и собери полный Wizardman Armor."],["Третье обратное убийство","Убей Detective Amog и забери его Wallet."],["Второе обратное убийство","Снова помоги Amog: убей своё прошлое «я», пока оно не убило Ramero."],["Eleanor","Докажи свою личность всем Eleanor на горе (I, V, VII, IX и X). Ведёт к Timecharm."]]}]},"factions":{"about":"Если ты вступил к магам (Mage) или варварам (Barbarian), каждый день можно выполнять до 5 квестов своей фракции. За них дают репутацию, Combat XP и Bits.","how":["Список квестов висит на доске в Community Center твоей фракции. Нажми на значок карты, чтобы открыть квест.","Когда квест выполнен, забери награду на той же доске."],"types":[["Fishing","Поймать определённую Trophy Fish."],["Fetch","Принести на доску нужные материалы."],["Miniboss","Убить определённого мини-босса."],["Rescue","Найти заложника: варвары ищут его в Cathedral, маги — в The Bastion."],["Dojo","Пройти испытание Dojo не ниже нужного ранга."],["Kuudra","Победить Kuudra нужного тира."]],"tiers":[["Ⓢ","Legendary","20 000","125","60"],["Ⓐ","Epic","15 000","100","50"],["Ⓑ","Rare","10 000","75","40"],["Ⓒ","Uncommon","5 000","50","30"],["Ⓓ","Common","2 000","30","20"]],"note":"Кроме гарантированной награды выпадают случайные предметы: Compact Ooze, Corrupted Fragment, Hallowed Skull, Leather Cloth, Lumino Fiber, Spell Powder и другие. У рыбацких квестов свой список наград."},"other":[["Slayer","Боссы-слейеры. Квесты берутся у Maddox the Slayer.","https://hypixelskyblock.minecraft.wiki/w/Slayer"],["Kat","Повышает редкость питомцев.","https://hypixelskyblock.minecraft.wiki/w/Kat"],["Abiphone","Контакты для Abiphone, многие появляются после диалогов с NPC.","https://hypixelskyblock.minecraft.wiki/w/Abiphone"],["Rusty","Предметы, которые Rusty продаёт после выполнения условий.","https://hypixelskyblock.minecraft.wiki/w/Rusty"],["Kuudra Follower Armor","NPC, связанные с получением брони Kuudra Follower.","https://hypixelskyblock.minecraft.wiki/w/Kuudra_Follower_Armor"],["Romero and Juliette","","https://hypixelskyblock.minecraft.wiki/w/Romero_and_Juliette"],["Cult of the Fallen Star","","https://hypixelskyblock.minecraft.wiki/w/Cult_of_the_Fallen_Star"],["Bednom","","https://hypixelskyblock.minecraft.wiki/w/Bednom"],["Royal Resident","","https://hypixelskyblock.minecraft.wiki/w/Royal_Resident"],["Lucius","","https://hypixelskyblock.minecraft.wiki/w/Lucius"],["George","","https://hypixelskyblock.minecraft.wiki/w/George"]]}</script>
+<script type="application/json" id="live">__LIVE__</script>
+<script type="application/json" id="road">__ROAD__</script>
+<script>
+(() => {
+const D = JSON.parse(document.getElementById("data").textContent);
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const cssq = s => (window.CSS && CSS.escape) ? CSS.escape(s) : String(s).replace(/["\\]/g, "\\$&");
+function pix(m) { let r = ""; m.forEach((row, y) => [...row].forEach((ch, xx) => { if (ch === "X") r += `<rect x="${xx}" y="${y}" width="1" height="1"/>`; })); return `<svg viewBox="0 0 8 8" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`; }
+const CHECK = pix(["........","......XX",".....XX.","X...XX..","XX.XX...",".XXX....","..X.....","........"]);
+const CAT = {g:"Общие", m:"Шахты", f:"Ферма", fi:"Рыбалка", fo:"Лес", c:"Бой"};
+const STAGES = [
+  [1,"Старт","Private Island и Hub: первые квесты по каждому навыку."],
+  [2,"Ранняя игра","Gold Mine, Deep Caverns, The Barn, The Park, Spider's Den, Garden и Backwater Bayou."],
+  [3,"Середина","Dwarven Mines, Crystal Hollows, The End, Crimson Isle и Moonglade Marsh."],
+  [4,"Поздняя игра","Heart of the Mountain 7, теплица и Jake в Garden, бой с Kuudra."],
+  [0,"В любое время","Души фей, гонки, реликвии и испытания костра: делайте, когда удобно."]
+];
+const ISL = Object.keys(D.chapters);
+const MAXP = 5;
+
+// ---- pixel art: logo, banner, nav icons ----
+const PAL = {g:"#6DB653",G:"#4E8F3A",d:"#8B6A48",D:"#6E5236",s:"#8D989F",S:"#6B757C",t:"#6B4F2A",T:"#523C1F",l:"#4FA03A",L:"#3B7D2B",c:"#B57F33",C:"#7A5420",w:"#E9EEF5",k:"#C7D0DB"};
+const ISLAND = [
+  "..........llll..........",
+  ".........lLllLl.........",
+  "........llllllLl........",
+  "........lLlllLll........",
+  ".........llLlll.........",
+  "...........tT...........",
+  "....cc.....tT...........",
+  "..gggggggggtTggggggggg..",
+  ".gGgggGgggggggGgggggGgg.",
+  ".ddDddddDddsdddddDddddD.",
+  "..dddDddddSsddddddDddd..",
+  "...ddddsSdddddDdddddd...",
+  "....dDddddddsddddDdd....",
+  ".....dddSdddddddddd.....",
+  "......ddddDddsdddd......",
+  "........ddddddDd........",
+  "..........dDdd..........",
+  "...........dd..........."
+];
+const MINI = ["gggggg","dDddsd",".dddd.","..dd.."];
+const LOGO = [
+  "......ll........",".....llLl.......","....llllll......",".....lLll.......","......tT........","......tT........",
+  "..ggggtTgggggg..",".gGgggggggGgggg.",".dddDddddddDddd.","..ddddsddDdddd..","...dDddddddsd...","....dddDdddd....",
+  ".....ddddDd.....","......dddd......",".......dd.......","................"];
+function blit(ctx, map, x0, y0) { map.forEach((row, y) => { [...row].forEach((ch, x) => { if (PAL[ch]) { ctx.fillStyle = PAL[ch]; ctx.fillRect(x0 + x, y0 + y, 1, 1); } }); }); }
+function drawLogo() { const c = $("logo"), x = c.getContext("2d"); if (!x) return; blit(x, LOGO, 0, 0); }
+function drawSky() {
+  const c = $("sky"), x = c.getContext("2d"); if (!x) return;
+  const W = c.width, H = c.height, bands = ["#0B1226","#101B38","#15244A","#1B2F5C","#22396B"];
+  const bayer = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+  for (let y = 0; y < H; y++) for (let i = 0; i < W; i++) {
+    const t = y / (H - 1) * (bands.length - 1), b = Math.floor(t), f = t - b, th = (bayer[y % 4][i % 4] + .5) / 16;
+    x.fillStyle = bands[Math.min(bands.length - 1, b + (f > th ? 1 : 0))]; x.fillRect(i, y, 1, 1);
+  }
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let n = 0; n < 46; n++) { const sx = Math.floor(rnd() * W), sy = Math.floor(rnd() * (H * .7)); x.fillStyle = rnd() > .75 ? "#FFFFFF" : "#8FA6CF"; x.fillRect(sx, sy, 1, 1); }
+  [[20,5],[50,3],[84,4]].forEach(([sx, sy]) => { x.fillStyle = "#FFFFFF"; x.fillRect(sx, sy, 1, 1); x.fillStyle = "#9DB4DB"; x.fillRect(sx - 1, sy, 1, 1); x.fillRect(sx + 1, sy, 1, 1); x.fillRect(sx, sy - 1, 1, 1); x.fillRect(sx, sy + 1, 1, 1); });
+  x.fillStyle = "#E9EEF5"; x.fillRect(10, 5, 6, 6); x.fillStyle = "#C7D0DB"; x.fillRect(12, 7, 2, 1); x.fillRect(11, 9, 1, 1); x.fillRect(14, 9, 1, 1);
+  x.fillStyle = "#2A4372"; [[2,27,14,2],[5,26,7,1],[34,31,16,2],[38,30,7,1],[58,29,8,1]].forEach(r => x.fillRect(...r));
+  blit(x, ISLAND, 64, 9); blit(x, MINI, 44, 21);
+}
+const ICONS = {
+  quests: ["XX.XXXXX","XX......","........","XX.XXXXX","XX......","........","XX.XXXX.","XX......"],
+  chapters: ["...X....","...XXX..","...XXXX.","...X....","XXXXXXXX",".XXXXXX.","..XXXX..","...XX..."],
+  rift: ["..XXXX..",".X....X.","X..XX..X","X.X..X.X","X.X.X..X","X..X...X",".X....X.","..XXXX.."],
+  factions: ["......XX",".....XXX","....XXX.","X..XXX..",".XXXX...","..XX....",".X.XX...","X...X..."],
+  more: ["...XX...","...XX...","........","..XXX...","...XX...","...XX...","...XX...","..XXXX.."],
+  path: ["......XX","....XX.X","..XX..XX","XX......","XX......","..XX....","....XX..","......XX"],
+  coop: [".XX..XX.",".XX..XX.","........","XXXXXXXX","XXXXXXXX","XX.XX.XX","XX.XX.XX","........"],
+  done: ["........","......XX",".....XX.","X...XX..","XX.XX...",".XXX....","..X.....","........"]
+};
+document.querySelectorAll("[data-ico]").forEach(el => el.innerHTML = pix(ICONS[el.dataset.ico]));
+drawLogo(); drawSky();
+
+// ---- keys ----
+const qKey = q => "q:" + q.id;
+const cKey = (isl, ci, ti) => "c:" + D.chapters[isl].key + ":" + (ci + 1) + ":" + (ti + 1);
+const rKey = (a, ti) => "r:" + a.id + ":" + (ti + 1);
+const KEYS = {q: new Set(), c: new Set(), r: new Set()};
+const islKeys = {};
+D.quests.forEach(q => KEYS.q.add(qKey(q)));
+ISL.forEach(isl => { islKeys[isl] = []; D.chapters[isl].ch.forEach((c, ci) => c.tasks.forEach((t, ti) => { const k = cKey(isl, ci, ti); KEYS.c.add(k); islKeys[isl].push(k); })); });
+D.rift.areas.forEach(a => a.t.forEach((t, ti) => KEYS.r.add(rKey(a, ti))));
+const low = s => String(s).toLowerCase();
+D.quests.forEach(q => q._s = low([q.n, q.loc, q.npc, q.need, q.rw, q.note || "", ...q.steps].join(" ")));
+
+// ---- UI state (per viewer) ----
+let ui = {tab: "quests", cat: "all", isl: ISL[0], hide: ""};
+try { const s = JSON.parse(localStorage.getItem("sbq-ui") || "null"); if (s && typeof s === "object") ui = Object.assign(ui, s); } catch (e) {}
+if (!["path","coop","done","quests","chapters","rift","factions","more"].includes(ui.tab)) ui.tab = "quests";
+ui.pp = ""; ui.pq = "";
+if (!ISL.includes(ui.isl)) ui.isl = ISL[0];
+if (ui.cat !== "all" && !CAT[ui.cat]) ui.cat = "all";
+const saveUi = () => { try { localStorage.setItem("sbq-ui", JSON.stringify({tab: ui.tab, cat: ui.cat, isl: ui.isl})); } catch (e) {} };
+let query = "";
+
+// ---- co-op state (db) ----
+let db = null, canWrite = false, dbState = "loading", players = [], marks = {}, stats = null, confirmId = "";
+let LIVE = {auto: false, started: {}, doneAt: {}, branch: {}}, centerPath = true;
+const queues = {};
+const enqueue = (k, fn) => { const run = (queues[k] || Promise.resolve()).then(fn); queues[k] = run.catch(() => {}); return run; };
+const isDone = (pid, k) => !!(marks[pid] && marks[pid][k]);
+function toast(msg) { const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => t.hidden = true, 3200); }
+function counts(pid) { const m = marks[pid] || {}, r = {q: 0, c: 0, r: 0}; for (const k in m) if (m[k]) { const t = k[0]; if (KEYS[t] && KEYS[t].has(k)) r[t]++; } return r; }
+function xp(frac) { const n = Math.round(Math.max(0, Math.min(1, frac)) * 20); return '<div class="xp" aria-hidden="true">' + Array.from({length: 20}, (_, i) => `<i class="${i < n ? "on" : ""}"></i>`).join("") + "</div>"; }
+
+function markChips(key, compact) {
+  if (db == null || !players.length) return "";
+  if (LIVE.auto && key[0] !== "q") return "";
+  const chips = players.map(p => {
+    const on = isDone(p.id, key), st = `--pc:var(--p${p.c})`, label = esc(p.name);
+    if (!canWrite) return `<span class="pm ro${on ? " on" : ""}" style="${st}" title="${label}: ${on ? "сделано" : "не сделано"}">${on ? CHECK : ""}${label}</span>`;
+    return `<button class="pm${on ? " on" : ""}" style="${st}" data-mk="${esc(key)}" data-p="${esc(p.id)}" aria-pressed="${on}" aria-label="${label}: ${on ? "сделано, снять отметку" : "отметить как сделанное"}">${on ? CHECK : ""}${label}</button>`;
+  }).join("");
+  return `<div class="marks${compact ? " sm" : ""}">${compact ? "" : '<span class="lb">Сделали</span>'}${chips}</div>`;
+}
+const hidden = key => ui.hide && players.some(p => p.id === ui.hide) && isDone(ui.hide, key);
+
+// ---- co-op panel ----
+function renderCoop() {
+  const st = $("coop-state"), body = $("coop-body");
+  st.className = "state";
+  if (db == null) {
+    st.textContent = dbState === "loading" ? "Загружаю" : "Без отметок";
+    body.innerHTML = dbState === "loading" ? '<p class="muted">Загружаю отметки коопа…</p>' : '<p class="muted">Прогресс игроков виден, когда приложение открыто из бота коопа. Справочник работает и без него.</p>';
+    return;
+  }
+  st.textContent = dbState === "slow" ? "Нет связи" : canWrite ? "Можно отмечать" : LIVE.auto ? "Из Hypixel API" : "Только просмотр";
+  if (dbState !== "slow" && (canWrite || LIVE.auto)) st.className = "state ok";
+  let h = "";
+  if (dbState === "slow") h += '<p class="empty">Данные коопа пока не загружаются. Справочник работает, а отметки появятся, когда связь восстановится.</p>';
+  if (!players.length) {
+    h += `<p class="empty">${canWrite ? "Добавь игроков коопа по никам из Minecraft. Потом отмечайте квесты прямо в карточках: у каждого игрока свои отметки, и их видят все." : (LIVE.auto ? "Игроков пока нет: таблица коопа ещё не загрузила данные из Hypixel API." : "Игроков коопа пока не добавили. Их добавляет владелец страницы.")}</p>`;
+  } else {
+    const nq = KEYS.q.size, nc = KEYS.c.size, nr = KEYS.r.size;
+    h += '<div class="players">' + players.map(p => {
+      const c = counts(p.id), stl = `--pc:var(--p${p.c})`, asking = confirmId === p.id;
+      const rm = !canWrite ? "" : asking
+        ? `<div class="confirm">Удалить ${esc(p.name)} и все отметки? <button class="btn-2 btn-warn" data-rm-yes="${esc(p.id)}">Удалить</button><button class="btn-2" data-rm-no="1">Отмена</button></div>`
+        : `<button class="btn-2" data-rm="${esc(p.id)}" aria-label="Удалить игрока ${esc(p.name)}">Удалить</button>`;
+      return `<div class="pl" style="${stl}"><div class="pl-h"><span class="av" aria-hidden="true">${esc(p.name.slice(0, 1).toUpperCase())}</span><span class="pl-n">${esc(p.name)}</span>${asking ? "" : rm}</div>${asking ? rm : ""}`
+        + `<div class="bar"><span class="lbl">Квесты</span>${xp(c.q / nq)}<span class="v">${c.q}/${nq}</span></div>`
+        + (LIVE.auto ? "</div>" : `<div class="bar"><span class="lbl">Главы</span>${xp(c.c / nc)}<span class="v">${c.c}/${nc}</span></div>`
+        + `<div class="bar"><span class="lbl">Rift</span>${xp(c.r / nr)}<span class="v">${c.r}/${nr}</span></div></div>`);
+    }).join("") + "</div>";
+    let any = 0, all = 0;
+    KEYS.q.forEach(k => { const n = players.filter(p => isDone(p.id, k)).length; if (n) any++; if (n === players.length) all++; });
+    h += `<p class="agg">Квесты журнала у каждого свои. Хотя бы кто-то из коопа прошёл <b>${any}</b> из ${nq}, все вместе — <b>${all}</b>.</p>`;
+  }
+  if (canWrite && players.length < MAXP) h += '<form class="add" id="addf"><label class="eyebrow" for="addName">Добавить игрока</label><input class="field" id="addName" name="addName" maxlength="24" autocomplete="off" placeholder="Ник в Minecraft"><button class="btn" type="submit">Добавить</button></form>';
+  h += '<div class="stats"><h3>Статистика из игры</h3>' + renderStats() + "</div>";
+  body.innerHTML = h;
+}
+function kv(obj) { return "<dl>" + Object.keys(obj).slice(0, 40).map(k => `<div><dt>${esc(k)}</dt><dd>${esc(typeof obj[k] === "object" ? JSON.stringify(obj[k]) : obj[k])}</dd></div>`).join("") + "</dl>"; }
+function renderStats() {
+  if (!stats || (!stats.island && !stats.players)) return '<p class="muted">Здесь появятся общие данные острова (коллекции с вкладом каждого игрока, общий банк, Garden) и личные навыки, слейеры и данжи каждого. Они появятся после первой синхронизации таблицы с Hypixel API.</p>';
+  let h = stats.updatedAt ? `<p class="muted">Обновлено: ${esc(stats.updatedAt)}</p>` : "";
+  if (stats.island && typeof stats.island === "object") h += '<p class="eyebrow">Остров</p>' + kv(stats.island);
+  if (stats.players && typeof stats.players === "object") Object.keys(stats.players).slice(0, MAXP).forEach(n => { if (stats.players[n] && typeof stats.players[n] === "object") h += `<p class="eyebrow">${esc(n)}</p>` + kv(stats.players[n]); });
+  return h;
+}
+
+// ---- search + filters ----
+const LENS = pix([".XXX....","X...X...","X...X...","X...X...",".XXX....",".....X..","......X.",".......X"]);
+function renderFilters() {
+  const f = $("filt");
+  if (["factions", "more", "path", "coop", "done"].includes(ui.tab)) { f.innerHTML = ""; f.hidden = true; return; }
+  f.hidden = false;
+  let h = `<label class="eyebrow" for="q">Поиск</label><div class="search">${LENS}<input type="search" id="q" placeholder="${ui.tab === "quests" ? "Что ищем? Квест, NPC, место, предмет" : "Что ищем? Задание, существо, предмет"}" value="${esc(query)}"></div>`;
+  let row = "";
+  if (ui.tab === "quests") {
+    const n = c => D.quests.filter(q => c === "all" || q.c === c).length;
+    row += [["all", "Все"], ...Object.entries(CAT)].map(([k, v]) => `<button class="chip" data-cat="${k}" aria-pressed="${ui.cat === k}">${v}<span class="n">${n(k)}</span></button>`).join("");
+  }
+  if (ui.tab === "chapters") row += ISL.map(i => `<button class="chip" data-isl="${esc(i)}" aria-pressed="${ui.isl === i}">${esc(i)}<span class="n">${islKeys[i].length}</span></button>`).join("");
+  if (db != null && players.length) row += `<select class="sel" id="hide" aria-label="Скрыть сделанное"><option value="">Показывать всё</option>${players.map(p => `<option value="${esc(p.id)}"${ui.hide === p.id ? " selected" : ""}>Скрыть сделанное у ${esc(p.name)}</option>`).join("")}</select>`;
+  if (row) h += `<div class="frow" role="group" aria-label="Фильтры"><span class="eyebrow">${ui.tab === "chapters" ? "Остров" : "Фильтры"}</span>${row}</div>`;
+  f.innerHTML = h;
+}
+
+// ---- views ----
+function questCard(q) {
+  const allDone = players.length && db != null && players.every(p => isDone(p.id, qKey(q)));
+  const br = q.br ? `<div><span class="tag br">${q.br === "mage" ? "Ветка магов" : "Ветка варваров"}</span></div>` : "";
+  return `<article class="q${allDone ? " done-all" : ""}" id="q-${esc(q.id)}"><div class="q-h"><h3>${esc(q.n)}</h3><span class="tag">${CAT[q.c]}</span></div>${br}`
+    + `<dl class="meta"><dt>Где</dt><dd>${esc(q.loc)}</dd><dt>NPC</dt><dd>${esc(q.npc)}</dd><dt>Условие</dt><dd>${esc(q.need)}</dd></dl>`
+    + `<ol class="steps">${q.steps.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`
+    + (q.note ? `<p class="note">${esc(q.note)}</p>` : "")
+    + `<p class="rw"><span>Награда · </span>${esc(q.rw)}</p>` + markChips(qKey(q), false) + "</article>";
+}
+function viewQuests() {
+  const ql = low(query.trim());
+  const list = D.quests.filter(q => (ui.cat === "all" || q.c === ui.cat) && (!ql || q._s.includes(ql)) && !hidden(qKey(q)));
+  if (!list.length) return '<p class="none">Ничего не нашлось. Попробуй другой запрос или категорию.</p>';
+  return '<div class="list">' + STAGES.map(([st, name, desc]) => {
+    const qs = list.filter(q => q.st === st); if (!qs.length) return "";
+    return `<section class="stage" id="stage-${st}"><div class="stage-h"><span class="num">${st ? "Этап " + st : "Без этапа"}</span><h2>${name}</h2><span class="num">${qs.length}</span><p>${desc}</p></div><div class="grid">${qs.map(questCard).join("")}</div></section>`;
+  }).join("") + "</div>";
+}
+function taskRow(key, t, h, r, extra) { return `<li class="task"><span><b>${esc(t)}${extra || ""}</b><span class="h">${esc(h)}</span></span>${r ? `<span class="r">${esc(r)}</span>` : "<span></span>"}${markChips(key, true)}</li>`; }
+function viewChapters() {
+  const isl = ui.isl, I = D.chapters[isl], ql = low(query.trim()), total = islKeys[isl].length;
+  let h = `<div class="head-card"><span class="eyebrow">Главы острова</span><h2>${esc(isl)}</h2><p>${esc(I.about)}</p><dl><div><dt>Гид</dt><dd>${esc(I.npc)}</dd></div><div><dt>Заданий</dt><dd>${total}</dd></div>${I.final ? `<div><dt>За все главы</dt><dd>${esc(I.final)}</dd></div>` : ""}</dl>`;
+  if (db != null && players.length && !LIVE.auto) h += '<div class="players">' + players.map(p => { const n = islKeys[isl].filter(k => isDone(p.id, k)).length; return `<div class="bar" style="--pc:var(--p${p.c})"><span class="lbl">${esc(p.name)}</span>${xp(n / total)}<span class="v">${n}/${total}</span></div>`; }).join("") + "</div>";
+  h += "</div>";
+  let shown = 0;
+  I.ch.forEach((c, ci) => {
+    const rows = c.tasks.map((t, ti) => ({t, k: cKey(isl, ci, ti)})).filter(x => (!ql || low(x.t.t + " " + x.t.h + " " + x.t.en).includes(ql)) && !hidden(x.k));
+    if (!rows.length) return; shown += rows.length;
+    h += `<section class="chap"><div class="chap-h"><h3>Глава ${c.n}</h3><p>${esc(c.i)}</p></div><ol class="tasks">${rows.map(x => taskRow(x.k, x.t.t, x.t.h, x.t.rw)).join("")}</ol>${c.done ? `<p class="chap-f"><span>За главу · </span>${esc(c.done)}</p>` : ""}</section>`;
+  });
+  if (!shown) h += '<p class="none">Ничего не нашлось на этом острове.</p>';
+  return '<div class="list">' + h + "</div>";
+}
+function viewRift() {
+  const ql = low(query.trim()), TC = "Ведёт к Timecharm.";
+  let h = `<div class="head-card"><span class="eyebrow">Rift Guide</span><h2>Rift Dimension</h2><p>${esc(D.rift.about)}</p></div>`, shown = 0;
+  D.rift.areas.forEach(a => {
+    const rows = a.t.map((t, ti) => ({t, k: rKey(a, ti)})).filter(x => (!ql || low(x.t[0] + " " + x.t[1]).includes(ql)) && !hidden(x.k));
+    if (!rows.length) return; shown += rows.length;
+    h += `<section class="chap"><div class="chap-h"><h3>${esc(a.n)}</h3><p>${esc(a.i)}</p></div><ol class="tasks">${rows.map(x => { const tc = x.t[1].includes(TC); return taskRow(x.k, x.t[0], x.t[1].replace(" " + TC, "").replace(TC, ""), "", tc ? '<span class="badge">Timecharm</span>' : ""); }).join("")}</ol></section>`;
+  });
+  if (!shown) h += '<p class="none">Ничего не нашлось.</p>';
+  return '<div class="list">' + h + "</div>";
+}
+function viewFactions() {
+  const F = D.factions;
+  return `<div class="list"><section class="prose"><span class="eyebrow">Crimson Isle</span><h2>Ежедневные квесты фракций</h2><p class="muted">${esc(F.about)}</p><ol>${F.how.map(s => `<li>${esc(s)}</li>`).join("")}</ol>`
+    + `<h2>Типы квестов</h2><ul>${F.types.map(([t, d]) => `<li><b>${esc(t)}</b>: ${esc(d)}</li>`).join("")}</ul>`
+    + `<h2>Тиры и гарантированные награды</h2><div class="tbl"><table><thead><tr><th>Тир</th><th>Combat XP</th><th>Репутация</th><th>Bits</th></tr></thead><tbody>${F.tiers.map(r => `<tr><td>${esc(r[0])} ${esc(r[1])}</td><td class="n">+${esc(r[2])}</td><td class="n">+${esc(r[3])}</td><td class="n">+${esc(r[4])}</td></tr>`).join("")}</tbody></table></div>`
+    + `<p class="note">${esc(F.note)}</p><p class="muted">Сюжетные квесты фракций (вступление, исследования, сера и Kuudra) — в разделе «Квесты», категория «Бой».</p></section></div>`;
+}
+function viewMore() {
+  return `<div class="list"><section class="prose"><h2>Как устроены отметки</h2><ul><li>Отметки ставятся сами: таблица коопа раз в 10 минут берёт прогресс из Hypixel API. Квест считается закрытым, когда в игре выполнен его последний шаг.</li><li>Через API видно не всё: Главы, Rift и часть квестов журнала отметить нечем, поэтому у них отметок нет.</li><li>Квесты, навыки, слейеры и данжи в SkyBlock у каждого игрока свои.</li><li>Коллекции в коопе общие: рецепт, открытый одним игроком, открывается всем, а в меню коллекций видно, сколько внёс каждый. Общие и банк коопа, и аукционы. Личный банк у каждого свой.</li><li>Путь на вкладке «Путь» идёт по этапам журнала слева направо: зелёные острова с деревом пройдены, флажок — начатые, серые с замком — впереди.</li></ul></section>`
+    + `<section class="prose"><h2>Квесты, которых нет в журнале</h2><p class="muted">У этих NPC и систем есть свои задания, но журнал квестов их не показывает. Подробности на вики:</p><ul>${D.other.map(([n, d, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(n)}</a>${d ? ": " + esc(d) : ""}</li>`).join("")}</ul></section></div>`;
+}
+// ---- path: the co-op roadmap as floating islands, chapter by chapter ----
+const PB = ["..gggggggggggg..",".gGgggGggggGggg.",".dDddddddDddddd.","..dddDdddddsdd..","...dddddDdddd...",".....dDdddd.....","......dddd......","........d......."];
+const PD = {
+  2: [".......ll.......","......lLll......",".....llllLl.....","......lLll......",".......tt......."],
+  1: [".......fff......",".......ffff.....",".......fff......",".......F........",".......F........"],
+  0: ["................","......kkkk......",".....k....k.....",".....KKKKKK.....",".....KKKKKK....."]
+};
+const PC = {g:"#6DB653",G:"#4E8F3A",d:"#8B6A48",D:"#6E5236",s:"#8D989F",l:"#4FA03A",L:"#3B7D2B",t:"#6B4F2A",f:"#E8B33A",F:"#D9D9D9",k:"#D9D9D9",K:"#A6A6A6"};
+const PG = {g:"#8C8C8C",G:"#6F6F6F",d:"#5C5C5C",D:"#4A4A4A",s:"#777777"};
+function islandSvg(st, x0, y0, k) {
+  let r = "";
+  PD[st].concat(PB).forEach((row, y) => { for (let a = 0; a < 16;) { const ch = row[a]; let e = a; while (e < 16 && row[e] === ch) e++; const c = ch !== "." && ((!st && PG[ch]) || PC[ch]); if (c) r += `<rect x="${x0 + a * k}" y="${y0 + y * k}" width="${(e - a) * k}" height="${k}" fill="${c}"/>`; a = e; } });
+  return r;
+}
+function wrap2(t, n) {
+  const w = String(t).split(" "), lines = [""];
+  w.forEach(x => { const l = lines[lines.length - 1]; if (!l || (l + " " + x).length <= n) lines[lines.length - 1] = l ? l + " " + x : x; else lines.push(x); });
+  if (lines.length > 2) { lines.length = 2; lines[1] = lines[1].slice(0, n - 1) + "…"; }
+  return lines.map(l => l.length > n + 2 ? l.slice(0, n) + "…" : l);
+}
+const ROAD = (() => { try { return JSON.parse($("road").textContent); } catch (e) { return null; } })();
+const RSTEP = {};
+if (ROAD) ROAD.chapters.forEach(ch => ch.steps.forEach(s => { RSTEP[s.id] = {s, ch}; }));
+const chaptersOf = role => ROAD.chapters.filter(c => !c.role || c.role === role);
+const SK_RU = {MINING: "Шахты", COMBAT: "Бой", FARMING: "Ферма", FORAGING: "Лес", FISHING: "Рыбалка", ENCHANTING: "Зачарование", ALCHEMY: "Алхимия", TAMING: "Питомцы", CARPENTRY: "Плотник"};
+const COLL_RU = {WHEAT: "пшеница", LOG: "дуб", REDSTONE: "редстоун", EMERALD: "изумруды"};
+const fmtN = n => Number(n || 0).toLocaleString("ru-RU");
+function firstNum(c) {
+  if (c.all || c.any) { for (const x of (c.all || c.any)) { const r = firstNum(x); if (r) return r; } return null; }
+  return ["skill", "sb", "coll", "mtypes", "minions", "mp", "slayer", "cata", "hotm", "coins"].some(k => c[k] != null) ? c : null;
+}
+function progText(c, cur, need) {
+  if (!c) return "";
+  if (c.skill) return `${SK_RU[c.skill] || c.skill}: ${cur} из ${need}`;
+  if (c.sb != null) return `SkyBlock: ${cur} из ${need}`;
+  if (c.coll) return `Коллекция (${COLL_RU[c.coll] || c.coll}) на кооп: ${fmtN(cur)} из ${fmtN(need)}`;
+  if (c.mtypes) return `Типы миньонов: ${cur} из ${need}`;
+  if (c.minions != null) return `Уникальные крафты миньонов на кооп: ${cur} из ${need}`;
+  if (c.mp != null) return `Accessory Power: ${cur} из ${need}`;
+  if (c.slayer) return `Zombie Slayer: ${cur} из ${need}`;
+  if (c.cata != null) return `Catacombs: ${cur} из ${need}`;
+  if (c.hotm != null) return `Heart of the Mountain: ${cur} из ${need}`;
+  if (c.coins != null) return `Монеты на кооп: ${fmtN(cur)} из ${fmtN(need)}`;
+  return "";
+}
+const hasKind = (c, k) => !!(c && (c[k] != null || (c.all || c.any || []).some(x => hasKind(x, k))));
+function stepsOf(R) { const out = []; chaptersOf(R.role).forEach(ch => ch.steps.forEach(s => out.push({s, ch, st: R.st[s.id] || [0, null, null, 0]}))); return out; }
+function viewPath() {
+  if (!ROAD || db == null || !players.length) return '<p class="none">Путь появится, когда приложение открыто из бота коопа и таблица загрузила данные из Hypixel API.</p>';
+  if (!players.some(p => p.id === ui.pp)) ui.pp = (players.find(p => p.id === LIVE.me) || players[0]).id;
+  const p = players.find(x => x.id === ui.pp), R = LIVE.road && LIVE.road[p.id];
+  const who = players.map(x => `<button class="pm${x.id === p.id ? " on" : ""}" style="--pc:var(--p${x.c})" data-pp="${esc(x.id)}" aria-pressed="${x.id === p.id}">${esc(x.name)}</button>`).join("");
+  if (!R) return `<div class="list"><section class="pathbox"><div class="path-top"><h2 id="path-h">Путь ${esc(p.name)}</h2><div class="who">${who}</div></div><p class="none">Путь появится после следующей синхронизации таблицы.</p></section></div>`;
+  const steps = stepsOf(R), cur = steps.findIndex(x => x.s.id === R.cur), done = steps.filter(x => x.st[0] === 2).length;
+  if (!steps.some(x => x.s.id === ui.pq)) ui.pq = cur >= 0 ? R.cur : steps[steps.length - 1].s.id;
+  const SX = 92, K = 3, W = steps.length * SX + 80, cy = i => 78 + Math.round(26 * Math.sin(i * 0.9));
+  let svg = "", seed = 11; const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  for (let i = 0; i < W / 9; i++) svg += `<rect x="${Math.floor(rnd() * W)}" y="${Math.floor(rnd() * 120)}" width="2" height="2" fill="${rnd() > .75 ? "#FFFFFF" : "#8FA6CF"}"/>`;
+  for (let x = 30; x < W; x += 520) svg += `<rect x="${x}" y="200" width="90" height="5" fill="#2A4372"/><rect x="${x + 16}" y="196" width="48" height="4" fill="#2A4372"/>`;
+  const pos = steps.map((n, i) => [50 + i * SX, cy(i)]);
+  for (let i = 1; i < steps.length; i++) {
+    const [a, b] = pos[i - 1], [c, d] = pos[i], walked = steps[i].st[0] > 0 && steps[i - 1].st[0] === 2;
+    svg += `<line x1="${a + 24}" y1="${b + 20}" x2="${c + 24}" y2="${d + 20}" stroke="${walked ? "#E8B33A" : "#5E7BB0"}" stroke-width="3"${walked ? "" : ' stroke-dasharray="4 5"'}/>`;
+  }
+  let chn = "";
+  steps.forEach((n, i) => {
+    const [x, y] = pos[i];
+    if (n.ch.id !== chn) { chn = n.ch.id; svg += `<line x1="${x - 20}" y1="8" x2="${x - 20}" y2="206" stroke="#3A5A8C" stroke-width="2" stroke-dasharray="2 6"/><text class="stg" x="${x - 12}" y="22">ГЛАВА ${n.ch.n}</text>`; }
+    const sel = n.s.id === ui.pq, label = wrap2(n.s.t, 12), state = n.st[0] === 2 ? "пройден" : i === cur ? "текущий" : "впереди";
+    svg += `<g class="node${sel ? " sel" : ""}${i === cur ? " bob" : ""}" data-pq="${esc(n.s.id)}" tabindex="0" role="button" aria-label="${esc(n.s.t)}: ${state}">`
+      + `<rect class="ring" x="${x - 6}" y="${y - 21}" width="60" height="50"/>` + islandSvg(n.st[0] === 2 ? 2 : i === cur ? 1 : 0, x, y - 15, K)
+      + (i === cur ? `<path d="M${x + 16} ${y - 34}h16l-8 9z" fill="#FFFFFF"/>` : "") + "</g>"
+      + `<text class="lbl${sel ? " on" : ""}" x="${x + 24}" y="${y + 40}" text-anchor="middle">${label.map((l, j) => `<tspan x="${x + 24}" dy="${j ? 13 : 0}">${esc(l)}</tspan>`).join("")}</text>`;
+  });
+  const q = steps.find(x => x.s.id === ui.pq), ch = q.ch, chSt = ch.steps.map(s => (R.st[s.id] || [0])[0]), chDone = chSt.filter(v => v === 2).length;
+  const role = ROAD.roles[R.role] || {name: R.role, why: ""}, api = (LIVE.api || {})[p.id] || {};
+  const qi = steps.indexOf(q), st = q.st, num = firstNum(q.s.check), prog = num && st[2] != null ? progText(num, st[1], st[2]) : "";
+  const chip = st[0] === 2 ? `<span class="pstate done">Готово${st[3] ? " · отмечено вручную" : ""}</span>` : qi === cur ? '<span class="pstate now">Сейчас</span>' : '<span class="pstate">Впереди</span>';
+  let note = "";
+  if (hasKind(q.s.check, "coll")) note = "Коллекции в коопе общие: считается вклад тех, у кого в игре включён Collections API.";
+  if (hasKind(q.s.check, "item") && !api.inv) note = "Предмет видно только с включённым Inventory API. Можно отметить шаг вручную.";
+  if (!num && !hasKind(q.s.check, "item") && hasKind(q.s.check, "manual")) note = "Этого не видно через Hypixel API — отметь шаг сам, когда сделаешь.";
+  const canMark = st[0] !== 2 || st[3];
+  const btn = canMark ? `<button class="btn${st[3] ? "-2" : ""} mark" data-mark="${esc(q.s.id)}" data-p="${esc(p.id)}" data-on="${st[3] ? 0 : 1}">${st[3] ? "Снять отметку" : "Отметить выполненным"}</button>` : "";
+  const obs = LIVE.obs && cur >= 0 ? `<div class="obsline"><b>${esc(p.name)}</b> · Глава ${steps[cur].ch.n} · сейчас: <b>${esc(steps[cur].s.t)}</b> — ${esc(steps[cur].s.do)}</div>` : (LIVE.obs ? `<div class="obsline"><b>${esc(p.name)}</b> · путь пройден!</div>` : "");
+  return `<div class="list"><section class="pathbox" aria-labelledby="path-h"><div class="path-top"><h2 id="path-h">Путь ${esc(p.name)}</h2><div class="who" role="group" aria-label="Игрок">${who}</div></div>`
+    + `<div class="sky" id="sky-path"><svg width="${W}" viewBox="0 0 ${W} 215" role="img" aria-label="Путь коопа по главам">${svg}</svg></div>`
+    + `<div class="psum"><span>Пройдено <b>${done} из ${steps.length}</b></span><span class="role"><b>${esc(role.name)}</b>${esc(role.why)}</span></div>${obs}</section>`
+    + `<section class="rcard" aria-label="Глава"><span class="eyebrow">Глава ${ch.n} из ${ROAD.chapters.reduce((m, c) => Math.max(m, c.n), 0)}</span><h2>${esc(ch.title)}</h2>`
+    + `<dl><dt>Цель</dt><dd>${esc(ch.goal)}</dd><dt>Зачем</dt><dd>${esc(ch.why)}</dd><dt>Награда</dt><dd>${esc(ch.reward)}</dd></dl>`
+    + `<div class="meter">${xp(chDone / ch.steps.length)}<span>${chDone}/${ch.steps.length}</span></div></section>`
+    + `<section class="rcard" aria-label="Шаг"><span class="eyebrow">Шаг ${qi + 1} из ${steps.length} ${chip}</span><h3>${esc(q.s.t)}</h3>`
+    + `<dl><dt>Что</dt><dd>${esc(q.s.do)}</dd><dt>Зачем</dt><dd>${esc(q.s.why)}</dd></dl>`
+    + (q.s.how && q.s.how.length ? `<ul>${q.s.how.map(h => `<li>${esc(h)}</li>`).join("")}</ul>` : "")
+    + (prog ? `<div class="meter col"><span>${esc(prog)}</span>${xp(st[1] / st[2])}</div>` : "")
+    + (note ? `<p class="note">${esc(note)}</p>` : "") + btn + "</section></div>";
+}
+function viewCoopGoals() {
+  if (!ROAD || !LIVE.auto) return "";
+  const cf = LIVE.coop || {coll: {}, minions: 0, coins: 0};
+  const tier = (v, t) => t.find(x => v < x) || t[t.length - 1];
+  const slots = [[5, 6], [15, 7], [30, 8], [50, 9], [75, 10], [100, 11], [125, 12], [150, 13]], ns = slots.find(x => cf.minions < x[0]) || slots[slots.length - 1];
+  const red = cf.coll.REDSTONE || 0, rt = tier(red, [250, 750, 1500, 2500, 5000, 25000, 100000]);
+  const goals = [
+    ["Слоты миньонов", `${cf.minions} из ${ns[0]} уникальных крафтов → ${ns[1]} слотов`, cf.minions / ns[0]],
+    ["Сумка аксессуаров", `редстоун ${fmtN(red)} из ${fmtN(rt)} → ещё +6 слотов каждому`, red / rt],
+    ["Монеты коопа", `${fmtN(cf.coins)} из ${fmtN(cf.coins < 500000 ? 500000 : 1000000)}${cf.bank ? "" : " (банк скрыт в API)"}`, cf.coins / (cf.coins < 500000 ? 500000 : 1000000)]
+  ];
+  const cards = players.map(p => {
+    const R = (LIVE.road || {})[p.id]; if (!R) return "";
+    const steps = stepsOf(R), cur = steps.find(x => x.s.id === R.cur), done = steps.filter(x => x.st[0] === 2).length;
+    return `<div class="who-card" style="--pc:var(--p${p.c})"><b>${esc(p.name)}</b><span>${esc((ROAD.roles[R.role] || {}).name || "")} · пройдено ${done} из ${steps.length}</span>`
+      + (cur ? `<span>Глава ${cur.ch.n}: ${esc(cur.ch.title)}</span><span>Сейчас: <b>${esc(cur.s.t)}</b></span>` : "<span>Путь пройден!</span>") + "</div>";
+  }).join("");
+  return `<div class="list"><section class="rcard"><h2>Общие цели коопа</h2><p class="lead">Коллекции, крафты миньонов и банк в коопе общие: каждый вклад двигает всех.</p>`
+    + goals.map(([t, v, f]) => `<div><span class="eyebrow">${esc(t)}</span><div class="meter col"><span>${esc(v)}</span>${xp(f)}</div></div>`).join("") + "</section>"
+    + `<section class="rcard"><h2>Где каждый</h2><div class="who-grid">${cards}</div></section></div>`;
+}
+function viewDone() {
+  if (db == null || !players.length) return '<p class="none">Здесь появится всё пройденное, когда приложение открыто из бота коопа.</p>';
+  if (!players.some(p => p.id === ui.pp)) ui.pp = (players.find(p => p.id === LIVE.me) || players[0]).id;
+  const p = players.find(x => x.id === ui.pp), at = (LIVE.stepsAt || {})[p.id] || {}, dq = (LIVE.doneAt || {})[p.id] || {};
+  const who = players.map(x => `<button class="pm${x.id === p.id ? " on" : ""}" style="--pc:var(--p${x.c})" data-pp="${esc(x.id)}" aria-pressed="${x.id === p.id}">${esc(x.name)}</button>`).join("");
+  const day = t => t ? new Date(t).toLocaleDateString("ru-RU") : "";
+  const steps = Object.keys(at).filter(id => RSTEP[id]).sort((a, b) => at[b] - at[a]).map(id => `<li><span>${esc(RSTEP[id].s.t)} <span class="muted">· глава ${RSTEP[id].ch.n}</span></span><time>${day(at[id])}</time></li>`).join("");
+  const qs = D.quests.filter(q => dq[q.id] !== undefined).sort((a, b) => (dq[b.id] || 0) - (dq[a.id] || 0)).map(q => `<li><span>${esc(q.n)}</span><time>${day(dq[q.id])}</time></li>`).join("");
+  return `<div class="list"><section class="rcard"><h2>Пройдено: ${esc(p.name)}</h2><div class="who">${who}</div></section>`
+    + `<section class="rcard"><h3>Шаги пути</h3>${steps ? `<ul class="donelist">${steps}</ul>` : '<p class="note">Пока ни одного — первый шаг на вкладке «Путь».</p>'}</section>`
+    + `<section class="rcard"><h3>Квесты журнала</h3>${qs ? `<ul class="donelist">${qs}</ul>` : '<p class="note">Закрытых квестов журнала пока не видно в API.</p>'}</section></div>`;
+}
+function renderView(focusSel) {
+  $("hero").hidden = ui.tab !== "quests";
+  $("coop").hidden = ui.tab !== "coop" && LIVE.auto;
+  const sk = document.getElementById("sky-path"), keepX = sk ? sk.scrollLeft : 0;
+  $("view").innerHTML = ui.tab === "path" ? viewPath() : ui.tab === "coop" ? viewCoopGoals() : ui.tab === "done" ? viewDone() : ui.tab === "quests" ? viewQuests() : ui.tab === "chapters" ? viewChapters() : ui.tab === "rift" ? viewRift() : ui.tab === "factions" ? viewFactions() : viewMore();
+  const sk2 = document.getElementById("sky-path");
+  if (sk2) {
+    const cur = sk2.querySelector(".node.bob") || sk2.querySelector(".node.sel");
+    if (centerPath && cur) { const r = cur.getBBox(); sk2.scrollLeft = Math.max(0, r.x + r.width / 2 - sk2.clientWidth / 2); centerPath = false; }
+    else sk2.scrollLeft = keepX;
+  }
+  if (focusSel) { const el = document.querySelector(focusSel); if (el) el.focus({preventScroll: true}); }
+}
+function renderTabs() { document.querySelectorAll('[role="tab"]').forEach(b => b.setAttribute("aria-selected", b.dataset.tab === ui.tab)); }
+let rq = 0, pendingFocus = "", pendingScroll = "";
+function renderAll(focusSel) {
+  if (focusSel) pendingFocus = focusSel;
+  cancelAnimationFrame(rq);
+  rq = requestAnimationFrame(() => {
+    const a = document.activeElement, keep = a && a.id === "q", pos = keep ? a.selectionStart : 0;
+    renderCoop(); renderTabs(); renderFilters(); renderView(pendingFocus); pendingFocus = "";
+    if (keep) { const q = $("q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (e) {} } }
+    if (pendingScroll) { const el = $(pendingScroll); pendingScroll = ""; if (el) el.scrollIntoView({block: "start"}); }
+  });
+}
+
+// ---- writes ----
+async function toggle(key, pid) {
+  const cur = isDone(pid, key), v = cur ? 0 : 1;
+  marks[pid] = Object.assign({}, marks[pid], {[key]: v});
+  renderAll(`[data-mk="${cssq(key)}"][data-p="${cssq(pid)}"]`);
+  try {
+    await enqueue(pid, async () => {
+      const ref = db.doc("marks/" + pid);
+      try { await ref.update({m: {[key]: v}}); }
+      catch (e) { if (e && e.code === "invalid_argument") await ref.set({m: Object.assign({}, marks[pid])}); else throw e; }
+    });
+  } catch (e) {
+    marks[pid] = Object.assign({}, marks[pid], {[key]: cur ? 1 : 0});
+    if (e && e.code === "invalid_argument") { canWrite = false; toast("У тебя доступ только на просмотр, отметки не сохраняются."); }
+    else if (e && e.code === "quota_exceeded") toast("Хранилище страницы заполнено, отметка не сохранилась.");
+    else toast("Отметка не сохранилась. Попробуй ещё раз чуть позже.");
+    renderAll();
+  }
+}
+async function addPlayer(name) {
+  name = name.replace(/\s+/g, " ").trim().slice(0, 24);
+  if (!name) { toast("Введи ник игрока."); return; }
+  if (players.length >= MAXP) { toast("В кооп Hypixel входит до 5 игроков."); return; }
+  if (players.some(p => p.name.toLowerCase() === name.toLowerCase())) { toast("Такой игрок уже есть."); return; }
+  const used = new Set(players.map(p => p.c)); let c = 0; while (used.has(c)) c++;
+  const id = "p" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  const list = players.concat([{id, name, c}]);
+  try {
+    await enqueue("_players", () => db.doc("coop/players").set({list}));
+    await enqueue(id, () => db.doc("marks/" + id).set({m: {}}));
+    toast(`${name} в коопе.`);
+  } catch (e) {
+    if (e && e.code === "invalid_argument") { canWrite = false; toast("У тебя доступ только на просмотр."); renderAll(); }
+    else toast("Не получилось добавить игрока. Попробуй ещё раз.");
+  }
+}
+async function removePlayer(id) {
+  const p = players.find(x => x.id === id); if (!p) return;
+  confirmId = "";
+  try {
+    await enqueue("_players", () => db.doc("coop/players").set({list: players.filter(x => x.id !== id)}));
+    await enqueue(id, () => db.doc("marks/" + id).delete());
+    if (ui.hide === id) ui.hide = "";
+    toast(`${p.name} удалён из коопа.`);
+  } catch (e) { toast("Не получилось удалить игрока."); renderAll(); }
+}
+
+// ---- events ----
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-tab],[data-cat],[data-isl],[data-mk],[data-rm],[data-rm-yes],[data-rm-no],[data-go],[data-pp],[data-pq],[data-mark]");
+  if (!t) return;
+  if (t.dataset.mark) {
+    const on = t.dataset.on === "1", run = window.google && google.script && google.script.run;
+    if (!run) { toast("Отмечать можно в приложении, открытом из бота."); return; }
+    t.disabled = true;
+    google.script.run.withSuccessHandler(d => { if (d && Array.isArray(d.players)) applyLive(d, false); renderAll(); toast(on ? "Шаг отмечен" : "Отметка снята"); })
+      .withFailureHandler(() => { t.disabled = false; toast("Не получилось сохранить, попробуй ещё раз."); }).markStep(t.dataset.p, t.dataset.mark, on);
+    return;
+  }
+  if (t.dataset.pp) { ui.pp = t.dataset.pp; ui.pq = ""; centerPath = true; renderAll(); return; }
+  if (t.dataset.pq) { ui.pq = t.dataset.pq; renderAll(`[data-pq="${cssq(ui.pq)}"]`); return; }
+  if (t.dataset.go) { ui.tab = "quests"; ui.cat = "all"; query = ""; pendingScroll = t.dataset.go; saveUi(); renderAll(); return; }
+  if (t.dataset.tab) { ui.tab = t.dataset.tab; query = ""; if (ui.tab === "path") centerPath = true; saveUi(); renderAll(); return; }
+  if (t.dataset.cat) { ui.cat = t.dataset.cat; saveUi(); renderAll(`[data-cat="${ui.cat}"]`); return; }
+  if (t.dataset.isl) { ui.isl = t.dataset.isl; saveUi(); renderAll(`[data-isl="${cssq(ui.isl)}"]`); return; }
+  if (t.dataset.mk && canWrite && db) { toggle(t.dataset.mk, t.dataset.p); return; }
+  if (t.dataset.rm) { confirmId = t.dataset.rm; renderAll(`[data-rm-yes="${cssq(confirmId)}"]`); return; }
+  if (t.dataset.rmNo) { const id = confirmId; confirmId = ""; renderAll(`[data-rm="${cssq(id)}"]`); return; }
+  if (t.dataset.rmYes) { removePlayer(t.dataset.rmYes); return; }
+});
+document.addEventListener("keydown", e => { const g = e.target.closest && e.target.closest("[data-pq]"); if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); g.dispatchEvent(new MouseEvent("click", {bubbles: true})); } });
+document.addEventListener("submit", e => { if (e.target.id === "addf") { e.preventDefault(); const i = $("addName"); addPlayer(i.value); i.value = ""; } });
+let qt = 0;
+document.addEventListener("input", e => { if (e.target.id === "q") { query = e.target.value; clearTimeout(qt); qt = setTimeout(() => renderAll(), 120); } });
+document.addEventListener("change", e => { if (e.target.id === "hide") { ui.hide = e.target.value; renderAll("#hide"); } });
+document.querySelector(".nav").addEventListener("keydown", e => {
+  const keys = ["ArrowRight","ArrowLeft","ArrowDown","ArrowUp"]; if (!keys.includes(e.key)) return;
+  e.preventDefault();
+  const bs = [...e.currentTarget.querySelectorAll('[role="tab"]')], i = bs.indexOf(document.activeElement), fwd = e.key === "ArrowRight" || e.key === "ArrowDown";
+  const n = bs[(i + (fwd ? 1 : bs.length - 1)) % bs.length]; n.focus(); n.click();
+});
+
+// ---- boot: live co-op data the Apps Script put into the page (Hypixel API) ----
+function applyLive(L, first) {
+  LIVE = Object.assign({started: {}, doneAt: {}, branch: {}}, L, {auto: true});
+  db = {}; canWrite = false; dbState = "ready";
+  players = L.players.filter(p => p && typeof p.id === "string" && typeof p.name === "string").slice(0, MAXP)
+    .map(p => ({id: p.id, name: p.name.slice(0, 24), c: Number.isInteger(p.c) ? p.c % MAXP : 0}));
+  marks = L.marks && typeof L.marks === "object" ? L.marks : {};
+  stats = L.stats || null;
+  if (first && L.me && players.some(p => p.id === L.me)) { ui.tab = "path"; ui.pp = L.me; }
+  if (L.obs) { document.body.classList.add("obs"); ui.tab = "path"; centerPath = true; }
+}
+(() => {
+  let L = null;
+  try { L = JSON.parse($("live").textContent); } catch (e) { L = null; }
+  if (!L || !Array.isArray(L.players)) { dbState = "off"; renderAll(); return; }
+  applyLive(L, true);
+  renderAll();
+  // a page left open takes fresh data from the script: an OBS overlay every 20 s (and has Hypixel checked), a browser tab every 30 s
+  const run = window.google && google.script && google.script.run;
+  if (run) setInterval(() => {
+    try { google.script.run.withSuccessHandler(d => { if (d && Array.isArray(d.players)) { applyLive(d, false); renderAll(); } }).appLive(LIVE.me || "", !!LIVE.obs); } catch (e) {}
+  }, LIVE.obs ? 20 * 1000 : 30 * 1000);
+})();
+})();
+</script>
