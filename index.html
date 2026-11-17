@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Квесты коопа Cucumber</title>
+<style>html,body{margin:0;background:#262626;color:#fff;font:16px/1.5 system-ui,sans-serif}.l{padding:48px 20px;text-align:center;color:#c4c4c4}</style>
+</head>
+<body>
+<p class="l" id="msg">Загружаю путь коопа…</p>
+<script>
+// Entry of the Mini App on GitHub Pages. ?p=<nick>, &obs=1 for the OBS overlay, &api=<the sheet's Apps Script /exec URL>
+// (remembered in this browser). Takes the page, the roadmap and the co-op's live data, then draws the page.
+(async () => {
+  const q = new URLSearchParams(location.search), msg = t => { document.getElementById('msg').textContent = t; };
+  let api = q.get('api') || '';
+  try { if (api) localStorage.setItem('hp_api', api); else api = localStorage.getItem('hp_api') || ''; } catch (e) {}
+  if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(api)) { msg('Открой приложение из бота коопа: команда /app.'); return; }
+  const p = q.get('p') || '', obs = q.get('obs') === '1';
+  try {
+    const [page, road, live] = await Promise.all([
+      fetch('app.html', {cache: 'no-cache'}).then(r => { if (!r.ok) throw new Error('app'); return r.text(); }),
+      fetch('roadmap.json', {cache: 'no-cache'}).then(r => r.json()),
+      fetch(api + '?api=live&p=' + encodeURIComponent(p) + (obs ? '&obs=1' : '')).then(r => r.json())
+    ]);
+    live.api = api;
+    const safe = v => JSON.stringify(v).replace(/</g, '\\u003c');
+    const html = '<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body>'
+      + page.replace('__ROAD__', () => safe(road)).replace('__LIVE__', () => safe(live)) + '</body></html>';
+    document.open(); document.write(html); document.close();
+  } catch (e) {
+    msg('Не получилось загрузить данные коопа. Обнови страницу через минуту.');
+  }
+})();
+</script>
+</body>
+</html>

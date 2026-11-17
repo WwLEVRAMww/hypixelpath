@@ -753,8 +753,14 @@ document.addEventListener("click", e => {
   if (!t) return;
   if (t.dataset.mark) {
     const on = t.dataset.on === "1", run = window.google && google.script && google.script.run;
-    if (!run) { toast("Отмечать можно в приложении, открытом из бота."); return; }
+    if (!run && !API_URL) { toast("Отмечать можно в приложении, открытом из бота."); return; }
     t.disabled = true;
+    if (API_URL) {
+      callApi(`api=mark&p=${encodeURIComponent(t.dataset.p)}&s=${encodeURIComponent(t.dataset.mark)}&on=${on ? 1 : 0}`,
+        d => { if (d && Array.isArray(d.players)) applyLive(d, false); renderAll(); toast(on ? "Шаг отмечен" : "Отметка снята"); },
+        () => { t.disabled = false; toast("Не получилось сохранить, попробуй ещё раз."); });
+      return;
+    }
     google.script.run.withSuccessHandler(d => { if (d && Array.isArray(d.players)) applyLive(d, false); renderAll(); toast(on ? "Шаг отмечен" : "Отметка снята"); })
       .withFailureHandler(() => { t.disabled = false; toast("Не получилось сохранить, попробуй ещё раз."); }).markStep(t.dataset.p, t.dataset.mark, on);
     return;
@@ -783,6 +789,9 @@ document.querySelector(".nav").addEventListener("keydown", e => {
 });
 
 // ---- boot: live co-op data the Apps Script put into the page (Hypixel API) ----
+// On GitHub Pages the page talks to the Apps Script web app by plain requests (API_URL); inside Apps Script, by google.script.run.
+let API_URL = "";
+const callApi = (q, ok, fail) => fetch(API_URL + (API_URL.includes("?") ? "&" : "?") + q).then(r => r.json()).then(ok, fail || (() => {}));
 function applyLive(L, first) {
   LIVE = Object.assign({started: {}, doneAt: {}, branch: {}}, L, {auto: true});
   db = {}; canWrite = false; dbState = "ready";
@@ -797,12 +806,14 @@ function applyLive(L, first) {
   let L = null;
   try { L = JSON.parse($("live").textContent); } catch (e) { L = null; }
   if (!L || !Array.isArray(L.players)) { dbState = "off"; renderAll(); return; }
+  API_URL = typeof L.api === "string" ? L.api : "";
   applyLive(L, true);
   renderAll();
   // a page left open takes fresh data from the script: an OBS overlay every 20 s (and has Hypixel checked), a browser tab every 30 s
-  const run = window.google && google.script && google.script.run;
-  if (run) setInterval(() => {
-    try { google.script.run.withSuccessHandler(d => { if (d && Array.isArray(d.players)) { applyLive(d, false); renderAll(); } }).appLive(LIVE.me || "", !!LIVE.obs); } catch (e) {}
+  const run = window.google && google.script && google.script.run, take = d => { if (d && Array.isArray(d.players)) { applyLive(d, false); renderAll(); } };
+  if (run || API_URL) setInterval(() => {
+    if (API_URL) { callApi("api=live&p=" + encodeURIComponent(LIVE.me || "") + (LIVE.obs ? "&obs=1" : ""), take); return; }
+    try { google.script.run.withSuccessHandler(take).appLive(LIVE.me || "", !!LIVE.obs); } catch (e) {}
   }, LIVE.obs ? 20 * 1000 : 30 * 1000);
 })();
 })();
