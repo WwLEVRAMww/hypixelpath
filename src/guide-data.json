@@ -1,0 +1,3177 @@
+{
+ "meta": {
+  "source": "hypixelskyblock.minecraft.wiki",
+  "asOf": "2026-11-05",
+  "wiki": "https://hypixelskyblock.minecraft.wiki/w/"
+ },
+ "quests": [
+  {
+   "id": "fairy-souls",
+   "st": 0,
+   "c": "g",
+   "n": "Find all Fairy Souls",
+   "loc": "Все острова",
+   "npc": "Tia the Fairy",
+   "need": "Доступен сразу",
+   "steps": [
+    "Собирай Fairy Souls: радужные шары, спрятанные по всем островам. Всего их 289, каждую можно взять один раз.",
+    "Отдавай души Tia the Fairy в Wilderness (Hub) по 5 штук. За каждый обмен дают SkyBlock XP, а на обменах №1, 2, 4, 6, 8, 10, 13, 16, 19, 22, 25, 28, 31, 34, 37, 40 и 44 открываются слоты рюкзаков.",
+    "Часть душ добывается не на карте: 5 с рыбалки (2-й, 9-й и 24-й улов-сокровище гарантированно души, ещё 2 с шансом 0,5% в Fairy Grotto), до 8 в комнатах данжей, по одной за первый заказ гостей Tia и Bruuh в Garden, одна у Vanguard Corpse в Fairy Mineshaft и одна от Placeable Fairy Soul."
+   ],
+   "rw": "SkyBlock XP, слоты рюкзаков",
+   "note": "Удобнее всего с модами SkyHanni или Skyblocker: у них есть метки и маршруты по душам. Для труднодоступных мест пригодятся Aspect of the End/Void, Ender Pearl или Grappling Hook. Сколько душ собрано на каждом острове, видно в Quest Log.",
+   "en": "Find all Fairy Souls"
+  },
+  {
+   "id": "getting-started",
+   "st": 1,
+   "c": "g",
+   "n": "Getting Started",
+   "loc": "Private Island",
+   "npc": "Jerry",
+   "need": "Доступен сразу",
+   "steps": [
+    "Сломай Oak Log.",
+    "Скрафти Crafting Table.",
+    "Скрафти Wooden Pickaxe. Квест засчитается без сообщения в чате.",
+    "После этого появится задача поговорить с Jerry, но в квест она уже не входит."
+   ],
+   "rw": "—",
+   "en": "Getting Started"
+  },
+  {
+   "id": "auctioneer",
+   "st": 1,
+   "c": "g",
+   "n": "Auctioneer",
+   "loc": "Auction House (Hub)",
+   "npc": "Auction Master",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Auction Master в Auction House."
+   ],
+   "rw": "—",
+   "note": "Квест необязательный: аукционом можно пользоваться и без него.",
+   "en": "Auctioneer"
+  },
+  {
+   "id": "saving-up",
+   "st": 1,
+   "c": "g",
+   "n": "Saving Up",
+   "loc": "Bank, Village (Hub)",
+   "npc": "Banker",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Banker в Village: +5 SkyBlock XP.",
+    "Положи в банк любые монеты. Квест завершится и даст ещё 10 монет."
+   ],
+   "rw": "10 монет, +5 SkyBlock XP",
+   "en": "Saving Up"
+  },
+  {
+   "id": "library-card",
+   "st": 1,
+   "c": "g",
+   "n": "Library Card",
+   "loc": "Library (Hub)",
+   "npc": "Librarian",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Librarian в Library: +5 SkyBlock XP и +100 Enchanting XP.",
+    "Зачаруй любой предмет. Квест завершится и даст ещё +10 Enchanting XP."
+   ],
+   "rw": "110 Enchanting XP, +5 SkyBlock XP",
+   "en": "Library Card"
+  },
+  {
+   "id": "marco",
+   "st": 1,
+   "c": "g",
+   "n": "Marco the Artist",
+   "loc": "Flower House (Hub)",
+   "npc": "Marco",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Marco в Flower House.",
+    "Сорви 5× Rose Red с цветов у дома и отдай ему.",
+    "Он отдаст Spray Can и откроет Canvas Room."
+   ],
+   "rw": "Spray Can (предмет и рецепт), доступ в Canvas Room",
+   "en": "Marco the Artist"
+  },
+  {
+   "id": "carpentry",
+   "st": 1,
+   "c": "g",
+   "n": "Carpentry",
+   "loc": "Foraging Camp (Hub)",
+   "npc": "Carpenter",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Carpenter в Foraging Camp.",
+    "Принеси ему 64× White Wool."
+   ],
+   "rw": "Рецепт Carpentry Table, навык Carpentry",
+   "en": "Carpentry"
+  },
+  {
+   "id": "hub-explorer",
+   "st": 1,
+   "c": "g",
+   "n": "Hub Explorer",
+   "loc": "Весь Hub",
+   "npc": "—",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Обойди 13 мест Hub: Auction House, Bank, Library, Village, Colosseum, Coal Mine, Forest, Farm, Graveyard, Wilderness, Mountain, Ruins и Unincorporated."
+   ],
+   "rw": "50 монет, +5 SkyBlock XP",
+   "en": "Hub Explorer"
+  },
+  {
+   "id": "safety-first",
+   "st": 2,
+   "c": "g",
+   "n": "Safety First",
+   "loc": "Community Center, Security Hall (Hub)",
+   "npc": "Susan, Brigette, Jimmy, Security Clerk, Elizabeth",
+   "need": "SkyBlock Level 10",
+   "steps": [
+    "Дойди до SkyBlock Level 10.",
+    "Поговори с Susan: она откроет вход в Security Hall.",
+    "Выполни квест безопасности у Brigette.",
+    "Забери Safety Badge у Security Clerk и Booster Cookie у Elizabeth."
+   ],
+   "rw": "Safety Badge, Booster Cookie",
+   "en": "Safety First"
+  },
+  {
+   "id": "chicken-racing",
+   "st": 0,
+   "c": "g",
+   "n": "Chicken Racing",
+   "loc": "Jerry's Workshop",
+   "npc": "Gulliver",
+   "need": "Побывать в Jerry's Workshop",
+   "steps": [
+    "Поговори с Gulliver и начни Chicken Race.",
+    "Награды за скорость: 1-й чекпоинт быстрее 33 с даёт Red Gift, 2-й быстрее 52 с — Gift Compass, 3-й быстрее 68 с — Frozen Chicken.",
+    "Все 4 чекпоинта быстрее 104 с дают Jingle Bells и +5 SkyBlock XP."
+   ],
+   "rw": "Red Gift, Gift Compass, Frozen Chicken, Jingle Bells, +5 SkyBlock XP",
+   "en": "Chicken Racing"
+  },
+  {
+   "id": "dungeon-hub-racing",
+   "st": 0,
+   "c": "g",
+   "n": "Dungeon Hub Racing",
+   "loc": "Dungeon Hub",
+   "npc": "Guildford",
+   "need": "Побывать в Dungeon Hub",
+   "steps": [
+    "Поговори с Guildford в Dungeon Hub.",
+    "Есть 3 трассы (Crystal Core, Giant Mushrooms, Precursor Ruins), у каждой 4 режима (Anything, No Pearls, No Abilities, Nothing at all) и 4 норматива времени. Всего 96 заездов.",
+    "Все нормативы на одной трассе дают Cat Talisman, на двух — Lynx Talisman, на трёх — Cheetah Talisman.",
+    "Каждый пройденный норматив даёт Wither Essence, всего до 432."
+   ],
+   "rw": "Cat, Lynx и Cheetah Talisman, до 432 Wither Essence",
+   "en": "Dungeon Hub Racing"
+  },
+  {
+   "id": "time-to-mine",
+   "st": 1,
+   "c": "m",
+   "n": "Time to Mine",
+   "loc": "Mining District, Coal Mine, Gold Mine",
+   "npc": "Blacksmith",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Blacksmith в Mining District.",
+    "Накопай 10× Coal: +100 Mining XP и +5 SkyBlock XP.",
+    "Снова поговори с Blacksmith: откроется перековка (Reforge).",
+    "Дойди до Gold Mine: +10 Mining XP, квест готов."
+   ],
+   "rw": "110 Mining XP, +5 SkyBlock XP",
+   "en": "Time to Mine"
+  },
+  {
+   "id": "reforger",
+   "st": 1,
+   "c": "m",
+   "n": "Reforger",
+   "loc": "Mining District",
+   "npc": "Blacksmith",
+   "need": "Показать Blacksmith 10× Coal (квест Time to Mine)",
+   "steps": [
+    "Перекуй (Reforge) любой предмет у Blacksmith за 10× Coal."
+   ],
+   "rw": "150 Mining XP",
+   "en": "Reforger"
+  },
+  {
+   "id": "lost-and-found",
+   "st": 2,
+   "c": "m",
+   "n": "Lost and Found",
+   "loc": "Gold Mine",
+   "npc": "Lazy Miner, Rusty",
+   "need": "Побывать в Gold Mine",
+   "steps": [
+    "Поговори с Lazy Miner в Gold Mine (+5 SkyBlock XP, +150 Mining XP). Он потерял Iron Pickaxe с Efficiency 1 и Smelting Touch 1.",
+    "Кирка лежит на координатах −18, 24, −305. Забери её (+10 Mining XP).",
+    "Добудь 1× Iron Ingot и 1× Gold Ingot и поговори с Rusty."
+   ],
+   "rw": "Iron Pickaxe, 160 Mining XP, +5 SkyBlock XP",
+   "en": "Lost and Found"
+  },
+  {
+   "id": "going-deeper",
+   "st": 2,
+   "c": "m",
+   "n": "Going Deeper",
+   "loc": "Deep Caverns",
+   "npc": "Lift Operator",
+   "need": "Побывать в Gold Mine",
+   "steps": [
+    "Прокачай Mining до 5.",
+    "Спустись в Deep Caverns (+15 Mining XP).",
+    "Поговори с Lift Operator."
+   ],
+   "rw": "15 Mining XP",
+   "en": "Going Deeper"
+  },
+  {
+   "id": "helpful-miner",
+   "st": 2,
+   "c": "m",
+   "n": "Helpful Miner",
+   "loc": "Lapis Quarry (Deep Caverns)",
+   "npc": "Lapis Miner",
+   "need": "Побывать в Lapis Quarry",
+   "steps": [
+    "Поговори с Lapis Miner.",
+    "Прокачай коллекцию Lapis Lazuli до III: откроется рецепт Lapis Pickaxe.",
+    "Скрафти Lapis Pickaxe и отдай ему. Кирка исчезнет, квест завершится."
+   ],
+   "rw": "Compactor, 2 000 монет, 1 000 Mining XP, +5 SkyBlock XP",
+   "en": "Helpful Miner"
+  },
+  {
+   "id": "redstone-maniac",
+   "st": 2,
+   "c": "m",
+   "n": "The Redstone Maniac",
+   "loc": "Pigmen's Den (Deep Caverns)",
+   "npc": "Redstone Miner",
+   "need": "Пройти Helpful Miner и вернуться в Lapis Quarry",
+   "steps": [
+    "Поговори с Redstone Miner.",
+    "Прокачай коллекцию Redstone Dust до II.",
+    "Отдавай ему 128, 256, 512 и 1 024 Redstone Dust. За каждую партию +1 слот Accessory Bag.",
+    "После последней партии квест завершится (+5 SkyBlock XP)."
+   ],
+   "rw": "Слоты Accessory Bag, +5 SkyBlock XP",
+   "note": "Всего понадобится 1 920 Redstone Dust. Удобно копить заранее: миньон или поход в шахту вдвоём.",
+   "en": "The Redstone Maniac"
+  },
+  {
+   "id": "there-are-dwarves",
+   "st": 3,
+   "c": "m",
+   "n": "There are Dwarves?",
+   "loc": "Obsidian Sanctuary (Deep Caverns)",
+   "npc": "Rhys",
+   "need": "Поговорить с Rhys или Mining 12",
+   "steps": [
+    "Найди Rhys в Obsidian Sanctuary.",
+    "Отдай ему 15 зачарованных шахтёрских предметов в любом сочетании: Enchanted Redstone Dust, Enchanted Iron Ingot, Enchanted Coal, Enchanted Emerald, Enchanted Lapis Lazuli, Enchanted Diamond, Enchanted Gold Ingot.",
+    "Откроются Dwarven Mines и Heart of the Mountain."
+   ],
+   "rw": "Доступ в Dwarven Mines и к Heart of the Mountain",
+   "en": "There are Dwarves?"
+  },
+  {
+   "id": "need-to-go-deeper",
+   "st": 3,
+   "c": "m",
+   "n": "We Need to Go Deeper",
+   "loc": "Dwarven Mines, Crystal Hollows",
+   "npc": "Gwendolyn, Emissary Braum",
+   "need": "Heart of the Mountain 4",
+   "steps": [
+    "Прокачай Heart of the Mountain до 4.",
+    "Поговори с Gwendolyn и спустись в Crystal Hollows.",
+    "Добудь 10 Ruby Gemstone.",
+    "Поговори с Emissary Braum."
+   ],
+   "rw": "Доступ в Crystal Hollows",
+   "en": "We Need to Go Deeper"
+  },
+  {
+   "id": "trial-of-the-jungle",
+   "st": 3,
+   "c": "m",
+   "n": "Trial of the Jungle",
+   "loc": "Jungle, Jungle Temple (Crystal Hollows)",
+   "npc": "Kalhuiki Door Guardian",
+   "need": "Побывать в Crystal Hollows",
+   "steps": [
+    "Добудь Jungle Key: он падает с Key Guardian в зоне Jungle, а ещё его продаёт Odawa за 100× Sludge Juice.",
+    "Отдай ключ Kalhuiki Door Guardian, войди в Jungle Temple и пройди паркур до Amethyst Crystal.",
+    "Добудь 100 Amethyst Gemstone."
+   ],
+   "rw": "Amethyst Crystal для Crystal Nucleus",
+   "note": "Crystal Nucleus в центре Crystal Hollows (512, Y, 512) открывает сундук с добычей, когда в него вставлены все 5 кристаллов: Jade, Amber, Amethyst, Sapphire и Topaz. Wishing Compass указывает, где искать кристаллы.",
+   "en": "Trial of the Jungle"
+  },
+  {
+   "id": "robots",
+   "st": 3,
+   "c": "m",
+   "n": "Now there's Robots?",
+   "loc": "Precursor Remnants, Lost Precursor City (Crystal Hollows)",
+   "npc": "Professor Robot",
+   "need": "Побывать в Crystal Hollows",
+   "steps": [
+    "Убей 100 Automaton в Precursor Remnants. С них падают Automaton Parts.",
+    "Отдай Professor Robot в Lost Precursor City 6 разных деталей: Electron Transmitter, FTX 3070, Robotron Reflector, Superlite Motor, Control Switch и Synthetic Heart. Вместо них подойдёт один Precursor Apparatus.",
+    "Добудь 100 Sapphire Gemstone."
+   ],
+   "rw": "Sapphire Crystal для Crystal Nucleus",
+   "en": "Now there's Robots?"
+  },
+  {
+   "id": "royal-goblins",
+   "st": 3,
+   "c": "m",
+   "n": "Royal Goblins",
+   "loc": "Goblin Holdout, Goblin Queen's Den (Crystal Hollows)",
+   "npc": "King Yolkar",
+   "need": "Побывать в Crystal Hollows",
+   "steps": [
+    "Отдай King Yolkar в Goblin Holdout 1× Goblin Egg. Он даст эффект King's Scent на 20 минут.",
+    "Пока эффект действует, проберись мимо стражи в Goblin Queen's Den и забери Amber Crystal.",
+    "Добудь 100 Amber Gemstone."
+   ],
+   "rw": "Amber Crystal для Crystal Nucleus",
+   "en": "Royal Goblins"
+  },
+  {
+   "id": "divans-quest",
+   "st": 3,
+   "c": "m",
+   "n": "Divan's Quest",
+   "loc": "Mines of Divan (Mithril Deposits, Crystal Hollows)",
+   "npc": "Keepers of Divan",
+   "need": "Побывать в Crystal Hollows",
+   "steps": [
+    "Войди в Mines of Divan. Первый Keeper выдаст Metal Detector.",
+    "Найди детектором 4 Scavenged Items и раздай их хранителям: Lapis Sword — Keeper of Lapis, Golden Hammer — Keeper of Gold, Diamond Axe — Keeper of Diamond, Emerald Hammer — Keeper of Emerald.",
+    "Забери Jade Crystal и добудь 100 Jade Gemstone."
+   ],
+   "rw": "Jade Crystal для Crystal Nucleus",
+   "note": "Пятый кристалл, Topaz, квеста не требует: он появляется после победы над боссом Bal в Khazad-dûm (Magma Fields). Забрать его могут только те, кто участвовал в бою, так что идите всем коопом.",
+   "en": "Divan's Quest"
+  },
+  {
+   "id": "beyond-the-wall",
+   "st": 4,
+   "c": "m",
+   "n": "Beyond the Wall",
+   "loc": "Hanging Court, The Forge, Dwarven Base Camp",
+   "npc": "Dulin, Forger, Ticket Master",
+   "need": "Heart of the Mountain 7",
+   "steps": [
+    "Прокачай Heart of the Mountain до 7.",
+    "Поговори с Dulin в Hanging Court: в The Forge откроется рецепт Secret Railroad Pass.",
+    "Скуй Secret Railroad Pass и отдай Ticket Master.",
+    "Доедь на вагонетке до Dwarven Base Camp."
+   ],
+   "rw": "25 000 Mining XP, +5 SkyBlock XP, доступ в Dwarven Base Camp",
+   "en": "Beyond the Wall"
+  },
+  {
+   "id": "first-harvest",
+   "st": 1,
+   "c": "f",
+   "n": "First Harvest",
+   "loc": "Farm (Hub), The Barn",
+   "npc": "Farmer Rigby",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Farmer Rigby на Farm.",
+    "Собери рядом 10× Wheat и отдай ему: получишь Rookie Hoe, 100 Farming XP и +5 SkyBlock XP.",
+    "Дойди до The Barn: ещё 10 Farming XP."
+   ],
+   "rw": "Rookie Hoe, 110 Farming XP, +5 SkyBlock XP",
+   "en": "First Harvest"
+  },
+  {
+   "id": "barnyard",
+   "st": 2,
+   "c": "f",
+   "n": "Back at the Barnyard",
+   "loc": "The Barn",
+   "npc": "Farmhand",
+   "need": "Побывать в The Barn",
+   "steps": [
+    "Поговори с Farmhand (+5 SkyBlock XP, +100 Farming XP).",
+    "Покажи ему Wheat Minion: получишь Chicken Pet. Экипируй питомца.",
+    "Собери Carrot, Potato, Pumpkin и Melon (+10 Farming XP).",
+    "Добудь Raw Porkchop, Raw Chicken и Leather (+10 Farming XP)."
+   ],
+   "rw": "Chicken Pet, 120 Farming XP, +5 SkyBlock XP",
+   "note": "Wheat Minion I крафтится из Wooden Hoe и 8 Wheat.",
+   "en": "Back at the Barnyard"
+  },
+  {
+   "id": "intermediate-farmer",
+   "st": 2,
+   "c": "f",
+   "n": "Intermediate Farmer",
+   "loc": "The Barn, Mushroom Desert, Oasis",
+   "npc": "—",
+   "need": "Побывать в The Barn",
+   "steps": [
+    "Прокачай Farming до 5 (+5 SkyBlock XP, 300 Farming XP).",
+    "Дойди до Mushroom Desert (+15 Farming XP).",
+    "Собери Sugar Cane, Cocoa Beans и Cactus (+15 Farming XP).",
+    "Добудь Raw Mutton и Raw Rabbit (+15 Farming XP)."
+   ],
+   "rw": "345 Farming XP, +5 SkyBlock XP",
+   "en": "Intermediate Farmer"
+  },
+  {
+   "id": "helpful-farmer",
+   "st": 2,
+   "c": "f",
+   "n": "Helpful Farmer",
+   "loc": "The Garden",
+   "npc": "Sam",
+   "need": "SkyBlock Level 5",
+   "steps": [
+    "Открой The Garden и зайди туда.",
+    "Поговори с Sam и отдай ей 25× Wheat."
+   ],
+   "rw": "+5 SkyBlock XP",
+   "en": "Helpful Farmer"
+  },
+  {
+   "id": "learning-to-compost",
+   "st": 2,
+   "c": "f",
+   "n": "Learning to Compost",
+   "loc": "The Garden",
+   "npc": "Sam",
+   "need": "Пройти Helpful Farmer",
+   "steps": [
+    "Поговори с Sam у Composter.",
+    "Купи Fuel в SkyMart и заправь им Composter.",
+    "Забери готовый Compost."
+   ],
+   "rw": "+5 SkyBlock XP",
+   "en": "Learning to Compost"
+  },
+  {
+   "id": "prepping-the-plot",
+   "st": 2,
+   "c": "f",
+   "n": "Prepping the Plot",
+   "loc": "The Garden",
+   "npc": "Sam",
+   "need": "Пройти Learning to Compost",
+   "steps": [
+    "Купи участок (Plot) у Desk.",
+    "Расчисть его, ломая блоки, до 100%. Sam заговорит сама, и квест завершится."
+   ],
+   "rw": "+5 SkyBlock XP",
+   "en": "Prepping the Plot"
+  },
+  {
+   "id": "crop-n-profit",
+   "st": 2,
+   "c": "f",
+   "n": "Crop 'n Profit",
+   "loc": "The Garden",
+   "npc": "Sam, Jerry",
+   "need": "Пройти Prepping the Plot",
+   "steps": [
+    "Поговори с Sam: она предложит поставить прилавок для гостей (visitor stand).",
+    "Принеси ей 100× Wheat. Она вернёт 5× Wheat и откроет прилавок.",
+    "Вскоре придёт первый гость, Jerry, и попросит 5× Bread. Выполни заказ."
+   ],
+   "rw": "Награды гостя, 50 монет, +5 SkyBlock XP",
+   "en": "Crop 'n Profit"
+  },
+  {
+   "id": "gearing-up",
+   "st": 3,
+   "c": "f",
+   "n": "Gearing Up",
+   "loc": "The Garden",
+   "npc": "Jeff",
+   "need": "Пройти Crop 'n Profit и прокачать Garden до 4",
+   "steps": [
+    "Прокачай Garden до 4 уровня.",
+    "Поговори с Jeff и покажи ему Specialized Farming Tool: инструмент под конкретную культуру.",
+    "Получишь Cropshot Chip. Используй его, чтобы открыть систему Chips."
+   ],
+   "rw": "Cropshot Chip, доступ к Chips, 5 000 Farming XP, +5 SkyBlock XP",
+   "en": "Gearing Up"
+  },
+  {
+   "id": "rooting-for-you",
+   "st": 4,
+   "c": "f",
+   "n": "Rooting for You",
+   "loc": "The Garden",
+   "npc": "Carpenter, Sam",
+   "need": "Garden 7",
+   "steps": [
+    "На Garden 7 к тебе станет приходить гость Carpenter. Выполни его заказ и получи Greenhouse Blueprint.",
+    "Отдай чертёж Sam: откроется Greenhouse.",
+    "Переделай первый участок в теплицу. Нужно 64× Enchanted Oak Log и 128× Enchanted Sand.",
+    "Sam даст Carrot и HydroCan™ 1000. Посади морковь и полей её, она быстро вырастет.",
+    "Посади рядом ещё 2× Carrot от Sam, получится мутация Dustgrain. Изучи её с помощью Plant Diagnostics Tool.",
+    "Вырасти ещё один Dustgrain из 2× Seeds, собери его и поговори с Sam."
+   ],
+   "rw": "Greenhouse и его улучшения, 5 000 монет, 5 000 Farming XP, +5 SkyBlock XP",
+   "en": "Rooting for You"
+  },
+  {
+   "id": "shady-jake",
+   "st": 4,
+   "c": "f",
+   "n": "Shady Jake",
+   "loc": "The Garden, Glowing Mushroom Cave (Underground Lab)",
+   "npc": "Beth, Jake",
+   "need": "В Garden приходит гостья Beth",
+   "steps": [
+    "Принимай заказы Beth в Garden. Первые три раза она рассказывает, что расследует Jake.",
+    "После третьего визита копай по координатам 175, 42, −470 в Glowing Mushroom Cave.",
+    "После следующего визита встреться там с Beth, туда же придёт Jake.",
+    "Дослушай разговор и получи Jake's Plushie."
+   ],
+   "rw": "Jake's Plushie, +5 SkyBlock XP",
+   "en": "Shady Jake"
+  },
+  {
+   "id": "further-investigate-jake",
+   "st": 4,
+   "c": "f",
+   "n": "Further Investigate Jake",
+   "loc": "The Garden, Underground Lab",
+   "npc": "Beth, Jake",
+   "need": "Пройти Shady Jake, открыть Greenhouse и выполнить 5-й заказ Beth",
+   "steps": [
+    "Прими новый заказ Beth в Garden.",
+    "Встреться с ней в Underground Lab и потяни рычаг на стене.",
+    "В новой комнате Jake расскажет про Crop Analyzer. Дослушай его."
+   ],
+   "rw": "Доступ к Crop Analyzer, +5 SkyBlock XP",
+   "en": "Further Investigate Jake"
+  },
+  {
+   "id": "crop-analyzer",
+   "st": 4,
+   "c": "f",
+   "n": "Introduction to the Crop Analyzer",
+   "loc": "Underground Lab",
+   "npc": "Jake",
+   "need": "Пройти Further Investigate Jake",
+   "steps": [
+    "Попробуй воспользоваться Crop Analyzer, Jake тебя остановит.",
+    "Принеси ему Dustgrain.",
+    "Проанализируй Dustgrain в Crop Analyzer."
+   ],
+   "rw": "—",
+   "en": "Introduction to the Crop Analyzer"
+  },
+  {
+   "id": "fishing-tutorial",
+   "st": 1,
+   "c": "fi",
+   "n": "Fishing Tutorial",
+   "loc": "Village (Hub)",
+   "npc": "Fisherwoman Enid",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Fisherwoman Enid в Village. Она даст Fishing Rod.",
+    "Поймай любую рыбу и снова поговори с ней."
+   ],
+   "rw": "1 000 монет, 10 Fishing XP, +5 SkyBlock XP",
+   "en": "Fishing Tutorial"
+  },
+  {
+   "id": "finding-the-engine",
+   "st": 2,
+   "c": "fi",
+   "n": "Finding the Engine",
+   "loc": "Fishing Outpost (Fisherman's Hut)",
+   "npc": "Fisherman Gerald, Captain Baha",
+   "need": "Пройти Fishing Tutorial, Fishing 5",
+   "steps": [
+    "Прокачай Fishing до 5 и поговори с Fisherman Gerald.",
+    "Вылови Rusty Ship Engine.",
+    "Покажи двигатель Gerald и Captain Baha: откроется Ship Navigator.",
+    "Поставь двигатель на корабль."
+   ],
+   "rw": "64× Fish Bait, 250 Fishing XP, +5 SkyBlock XP, Ship Navigator, доступ в Backwater Bayou",
+   "en": "Finding the Engine"
+  },
+  {
+   "id": "one-mans-trash",
+   "st": 2,
+   "c": "fi",
+   "n": "One Man's Trash",
+   "loc": "Backwater Bayou",
+   "npc": "Junker Joel, Roddy",
+   "need": "Пройти Finding the Engine",
+   "steps": [
+    "Доплыви до Backwater Bayou через Ship Navigator.",
+    "Поговори с Junker Joel, он даст Junk Sinker.",
+    "Поговори с Roddy и поставь Junk Sinker на удочку."
+   ],
+   "rw": "50 Fishing XP, +5 SkyBlock XP, ещё 200 Fishing XP за попутные задания Глав",
+   "en": "One Man's Trash"
+  },
+  {
+   "id": "hotspotting",
+   "st": 2,
+   "c": "fi",
+   "n": "Hotspotting",
+   "loc": "Backwater Bayou",
+   "npc": "Hattie",
+   "need": "Побывать на Backwater Bayou",
+   "steps": [
+    "Поговори с Hattie: она расскажет про Fishing Hotspots.",
+    "Порыбачь в хотспоте, который появится у неё за спиной, и снова поговори с ней."
+   ],
+   "rw": "1 000 монет, 100 Fishing XP, +5 SkyBlock XP, ещё 100 Fishing XP за задание Главы",
+   "en": "Hotspotting"
+  },
+  {
+   "id": "foraging-tutorial",
+   "st": 1,
+   "c": "fo",
+   "n": "Foraging Tutorial",
+   "loc": "Foraging Camp (Hub)",
+   "npc": "Lumber Jack",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Lumber Jack. Он даст 50 Foraging XP, чтобы открыть Foraging 1.",
+    "Наруби 20× Oak Log и принеси ему."
+   ],
+   "rw": "Promising Axe, 1 000 монет, 150 Foraging XP, +5 SkyBlock XP, доступ в The Park",
+   "en": "Foraging Tutorial"
+  },
+  {
+   "id": "into-the-woods",
+   "st": 2,
+   "c": "fo",
+   "n": "Into the Woods",
+   "loc": "Birch Park (The Park)",
+   "npc": "Charlie",
+   "need": "Пройти Foraging Tutorial",
+   "steps": [
+    "Поговори с Charlie и принеси ему 64× Birch Log. Получишь Charlie's Trousers.",
+    "Поговори с ним ещё раз, и квест завершится."
+   ],
+   "rw": "Charlie's Trousers, Travel Scroll to The Park, 1 000 монет, 250 Foraging XP, +5 SkyBlock XP, доступ в Spruce Woods",
+   "en": "Into the Woods"
+  },
+  {
+   "id": "helping-hand",
+   "st": 2,
+   "c": "fo",
+   "n": "A Helping Hand",
+   "loc": "Spruce Woods (The Park)",
+   "npc": "Kelly",
+   "need": "Пройти Into the Woods",
+   "steps": [
+    "Поговори с Kelly и принеси ей 128× Spruce Log."
+   ],
+   "rw": "Kelly's T-Shirt, 1 500 монет, 500 Foraging XP, +5 SkyBlock XP, доступ в Dark Thicket",
+   "en": "A Helping Hand"
+  },
+  {
+   "id": "campfire-cult",
+   "st": 2,
+   "c": "fo",
+   "n": "The Campfire Cult",
+   "loc": "Dark Thicket, Trials of Fire (The Park)",
+   "npc": "Ryan",
+   "need": "Пройти A Helping Hand",
+   "steps": [
+    "Подойди к Ryan крадучись (с зажатым Shift).",
+    "Пройди Trial of Fire I: простой в костре 10 секунд.",
+    "Поговори с Ryan и принеси 256× Dark Oak Log."
+   ],
+   "rw": "Campfire Initiate Badge, 2 000 монет, 1 000 Foraging XP, +5 SkyBlock XP, доступ в Savanna Woodland",
+   "en": "The Campfire Cult"
+  },
+  {
+   "id": "campfire-trials",
+   "st": 0,
+   "c": "fo",
+   "n": "The Campfire Trials",
+   "loc": "Trials of Fire (The Park)",
+   "npc": "Ryan",
+   "need": "Пройти The Campfire Cult",
+   "steps": [
+    "Проходи всё более сложные Trials of Fire, чтобы улучшать Campfire Badge."
+   ],
+   "rw": "Улучшения Campfire Badge",
+   "en": "The Campfire Trials"
+  },
+  {
+   "id": "the-rebuild",
+   "st": 2,
+   "c": "fo",
+   "n": "The Rebuild",
+   "loc": "Savanna Woodland, Melody's Plateau (The Park)",
+   "npc": "Worker Xavier, Melody",
+   "need": "Пройти The Campfire Cult",
+   "steps": [
+    "Приди в Savanna Woodland. Worker Xavier заговорит сам и попросит проведать Melody.",
+    "Принеси Melody 512× Acacia Log на ремонт арфы."
+   ],
+   "rw": "Melody's Shoes, 2 000 монет, 1 500 Foraging XP, +5 SkyBlock XP, доступ к Harp и Jungle Island",
+   "en": "The Rebuild"
+  },
+  {
+   "id": "woods-racing",
+   "st": 0,
+   "c": "fo",
+   "n": "Woods Racing",
+   "loc": "Spruce Woods, Jungle Island (The Park)",
+   "npc": "Gustave",
+   "need": "Пройти The Rebuild",
+   "steps": [
+    "Открой Jungle Island и поговори с Gustave в Spruce Woods.",
+    "Гонка начинается рядом с ним и заканчивается на вершине Jungle Island.",
+    "Награды за время: быстрее 2 мин — Polished Pebble, 1 мин — Hunter Knife, 32 с — Wolf Paw, 18 с — Silky Lichen и +5 SkyBlock XP."
+   ],
+   "rw": "Polished Pebble, Hunter Knife, Wolf Paw, Silky Lichen, +5 SkyBlock XP",
+   "en": "Woods Racing"
+  },
+  {
+   "id": "mole-problems",
+   "st": 2,
+   "c": "fo",
+   "n": "Mole Problems",
+   "loc": "Jungle Island (The Park)",
+   "npc": "Molbert",
+   "need": "Пройти The Rebuild",
+   "steps": [
+    "Поговори с Molbert и принеси ему 512× Jungle Log.",
+    "Уйди из зоны и вернись: он попросит поставить три ловушки.",
+    "Поговори с ним, снова уйди и вернись. Он застрянет в одной из ловушек, освободи его."
+   ],
+   "rw": "Mole Hat, 1 500 монет, 500 Foraging XP, +5 SkyBlock XP, доступ в Moonglade Marsh (с Foraging 12)",
+   "en": "Mole Problems"
+  },
+  {
+   "id": "heart-of-the-forest",
+   "st": 3,
+   "c": "fo",
+   "n": "Heart of the Forest",
+   "loc": "Tangleburg's Path (Moonglade Marsh)",
+   "npc": "Hina",
+   "need": "Попасть в Moonglade Marsh (Foraging 12)",
+   "steps": [
+    "Поговори с Hina на Tangleburg's Path: откроется Heart of the Forest."
+   ],
+   "rw": "Доступ к Heart of the Forest",
+   "en": "Heart of the Forest"
+  },
+  {
+   "id": "swoops-instructions",
+   "st": 3,
+   "c": "fo",
+   "n": "Swoop's Instructions",
+   "loc": "Tangleburg (Moonglade Marsh)",
+   "npc": "Swoop",
+   "need": "Пройти Heart of the Forest",
+   "steps": [
+    "Поговори с Swoop в Tangleburg.",
+    "Сломай ягоду под ним и сруби Fig Tree.",
+    "Он объяснит, как работают Sweep и Tree Gifts."
+   ],
+   "rw": "10 000 монет, 5 000 Foraging XP, +5 SkyBlock XP",
+   "en": "Swoop's Instructions"
+  },
+  {
+   "id": "davids-hunting",
+   "st": 3,
+   "c": "fo",
+   "n": "David's Hunting Lessons",
+   "loc": "Tangleburg, Evergreen Plateau, Fusion House, Murkwater Loch",
+   "npc": "David Hunterborough, Auryon, Kysha, Agatha",
+   "need": "Пройти Swoop's Instructions",
+   "steps": [
+    "Поговори с David Hunterborough: он научит основам охоты (Hunting).",
+    "Получи и опробуй охотничьи предметы у Auryon, Kysha и Agatha."
+   ],
+   "rw": "Знакомство с Hunting",
+   "en": "David's Hunting Lessons"
+  },
+  {
+   "id": "time-to-strike",
+   "st": 1,
+   "c": "c",
+   "n": "Time to Strike",
+   "loc": "Combat Settlement, Graveyard (Hub), Spider's Den",
+   "npc": "Bartender, Haymitch",
+   "need": "Побывать в Hub",
+   "steps": [
+    "Поговори с Bartender в Combat Settlement. Получишь Undead Sword.",
+    "Убей 10 Graveyard Zombie или Zombie Villager (+5 SkyBlock XP, 100 Combat XP).",
+    "Снова поговори с Bartender (+100 монет) и отправляйся в Spider's Den (+10 Combat XP).",
+    "Поговори с Haymitch, зайди в Spider Mound и добудь с мобов 1× String и 1× Spider Eye (+15 Combat XP)."
+   ],
+   "rw": "Undead Sword, 100 монет, 125 Combat XP, +5 SkyBlock XP",
+   "en": "Time to Strike"
+  },
+  {
+   "id": "flint-bros",
+   "st": 2,
+   "c": "c",
+   "n": "The Flint Bros",
+   "loc": "Spider's Den",
+   "npc": "Rick",
+   "need": "Побывать в Spider's Den",
+   "steps": [
+    "Поговори с Rick и отдай ему 2× Iron Ingot."
+   ],
+   "rw": "Promising Shovel (предмет и рецепт)",
+   "en": "The Flint Bros"
+  },
+  {
+   "id": "shaggys-quest",
+   "st": 2,
+   "c": "c",
+   "n": "Shaggy's Quest",
+   "loc": "Grandma's House, Arachne's Sanctuary (Spider's Den)",
+   "npc": "Shaggy",
+   "need": "Побывать в Spider's Den",
+   "steps": [
+    "Поговори с Shaggy в Grandma's House.",
+    "Призови Arachne с помощью 4× Arachne's Calling или Arachne Crystal.",
+    "Снова поговори с Shaggy: откроется магазин Arachne Crystal."
+   ],
+   "rw": "Магазин Arachne Crystal",
+   "note": "Делайте вместе с Arachne's Web: Spider Tamer засчитывает помощь в бою с Arachne.",
+   "en": "Shaggy's Quest"
+  },
+  {
+   "id": "arachnes-web",
+   "st": 2,
+   "c": "c",
+   "n": "Arachne's Web",
+   "loc": "Arachne's Sanctuary (Spider's Den)",
+   "npc": "Spider Tamer",
+   "need": "Побывать в Spider's Den",
+   "steps": [
+    "Поговори с Spider Tamer в Arachne's Sanctuary.",
+    "Помоги убить Arachne и снова поговори с ним."
+   ],
+   "rw": "10× Spider Essence, доступ в Spider Essence Shop",
+   "en": "Arachne's Web"
+  },
+  {
+   "id": "relic-hunting",
+   "st": 0,
+   "c": "c",
+   "n": "Relic Hunting",
+   "loc": "Archaeologist's Camp (Spider's Den)",
+   "npc": "Archaeologist",
+   "need": "Побывать в Spider's Den",
+   "steps": [
+    "Поговори с Archaeologist. Он даст Archaeologist's Compass, который указывает на ещё не найденные реликвии.",
+    "Найди все 28 реликвий, каждая даёт 10 000 монет.",
+    "Вернись к Archaeologist за последними 30 000 монет."
+   ],
+   "rw": "310 000 монет всего",
+   "en": "Relic Hunting"
+  },
+  {
+   "id": "beginning-of-the-end",
+   "st": 3,
+   "c": "c",
+   "n": "Beginning of The End",
+   "loc": "The End, Dragon's Nest",
+   "npc": "Pearl Dealer",
+   "need": "Побывать в The End",
+   "steps": [
+    "Поговори с Pearl Dealer и добудь 1× End Stone.",
+    "Иди в Dragon's Nest и будь там, когда появится Ender Dragon."
+   ],
+   "rw": "100 Combat XP",
+   "en": "Beginning of The End"
+  },
+  {
+   "id": "end-race",
+   "st": 0,
+   "c": "c",
+   "n": "The End Race",
+   "loc": "The End",
+   "npc": "Guber",
+   "need": "Побывать в The End",
+   "steps": [
+    "Поговори с Guber и встань на нажимную плиту рядом с ним.",
+    "Добеги до плиты на другом конце острова и вернись обратно.",
+    "Награды за время: быстрее 3 мин — 8× Silent Pearl, 2 мин — Enderman Mask, 80 с — Nope the Fish, 48 с — Pig's Foot и +5 SkyBlock XP."
+   ],
+   "rw": "8× Silent Pearl, Enderman Mask, Nope the Fish, Pig's Foot, +5 SkyBlock XP",
+   "en": "The End Race"
+  },
+  {
+   "id": "lone-adventurer",
+   "st": 3,
+   "c": "c",
+   "n": "Talk to Lone Adventurer",
+   "loc": "The End",
+   "npc": "Lone Adventurer, Pearl Dealer",
+   "need": "Побывать в The End; для финала Combat 18",
+   "steps": [
+    "Поговори с Lone Adventurer и убей 5 Enderman.",
+    "Он предложит Void Sword за 200 000 монет. Если откажешься, тот же меч продаёт Rusty.",
+    "Он перейдёт к воротам Dragon's Nest. Надень все 8 частей Ender Armor.",
+    "Убивай Seer, пока не выпадет Dragon Shortbow, и отнеси лук ему. Потом забери такой же у Pearl Dealer.",
+    "На Combat 18 поговори с ним снова: откроется меню статистики Ender Dragon."
+   ],
+   "rw": "Возможность купить Void Sword, Dragon Shortbow",
+   "en": "Talk to Lone Adventurer"
+  },
+  {
+   "id": "warriors-quest",
+   "st": 3,
+   "c": "c",
+   "n": "Warrior's Quest",
+   "loc": "Crimson Isle",
+   "npc": "—",
+   "need": "Побывать в Spider's Den",
+   "steps": [
+    "Прокачай Combat до 22 и отправляйся на Crimson Isle."
+   ],
+   "rw": "Доступ на Crimson Isle",
+   "en": "Warrior's Quest"
+  },
+  {
+   "id": "select-a-faction",
+   "st": 3,
+   "c": "c",
+   "n": "Select a Faction",
+   "loc": "Stronghold, Dragontail, Scarleton (Crimson Isle)",
+   "npc": "Elle и NPC фракций",
+   "need": "Побывать на Crimson Isle",
+   "steps": [
+    "Поговори с Elle и помоги убить 3 Blaze, которые на неё напали.",
+    "В центре Stronghold принеси ей 4× Magma Chunk, 3× Blaze Ashes и 2× Spectre Dust.",
+    "Elle появится у Chief's Hut в Dragontail и у Community Center в Scarleton. Поговори с четырьмя NPC каждой фракции.",
+    "Выбери фракцию. Дальше квест идёт по ветке магов (Mage) или варваров (Barbarian)."
+   ],
+   "rw": "Доступ к фракциям",
+   "note": "Фракцию выбирают один раз, и дальше открыта только её ветка квестов. Договоритесь в коопе заранее, кто куда идёт.",
+   "en": "Select a Faction"
+  },
+  {
+   "id": "join-mage",
+   "st": 3,
+   "c": "c",
+   "br": "mage",
+   "n": "Join the Mage Faction",
+   "loc": "Scarleton, Cathedral, Mage Council",
+   "npc": "Elle, Dean, Queen Nyx",
+   "need": "Пройти Select a Faction и выбрать магов",
+   "steps": [
+    "Скажи Elle, что вступаешь к магам. Она даст временный Maddox Batphone.",
+    "Отдай телефон Dean, он даст Letter of Recommendation.",
+    "Отнеси письмо Queen Nyx."
+   ],
+   "rw": "Вступление во фракцию Mage",
+   "en": "Join the Mage Faction"
+  },
+  {
+   "id": "purchase-abiphone",
+   "st": 3,
+   "c": "c",
+   "br": "mage",
+   "n": "Purchase an Abiphone",
+   "loc": "Scarleton Bank",
+   "npc": "Udel, Dean",
+   "need": "Пройти Join the Mage Faction",
+   "steps": [
+    "Поговори с Udel и купи Abiphone.",
+    "Позвони Dean по Abiphone."
+   ],
+   "rw": "Контакт Dean в Abiphone",
+   "en": "Purchase an Abiphone"
+  },
+  {
+   "id": "recover-lost-research",
+   "st": 3,
+   "c": "c",
+   "br": "mage",
+   "n": "Recover Lost Research",
+   "loc": "Stronghold, The Bastion, Mage Council",
+   "npc": "Elle, Dean, Queen Nyx, Captain Ahone, Counsellor",
+   "need": "Пройти Purchase an Abiphone",
+   "steps": [
+    "Поговори с Elle в Stronghold, она добавит свой контакт в Abiphone.",
+    "Проберись в The Bastion и верни украденные исследования.",
+    "Позвони Dean и приходи на Mage Council (+100 репутации)."
+   ],
+   "rw": "Контакт Elle, +100 репутации",
+   "en": "Recover Lost Research"
+  },
+  {
+   "id": "deans-apprentice",
+   "st": 3,
+   "c": "c",
+   "br": "mage",
+   "n": "Find the Dean's Apprentice",
+   "loc": "Cathedral, Burning Desert",
+   "npc": "Dean, Captain Ahone",
+   "need": "Пройти Recover Lost Research",
+   "steps": [
+    "Поговори с Dean в Cathedral: он попросит найти своего Apprentice.",
+    "В Burning Desert встретишь Captain Ahone и получишь его контакт.",
+    "Найди Apprentice и позвони ему: он прибежит и подлечит тебя зельями.",
+    "Вернись к Dean."
+   ],
+   "rw": "Контакт Captain Ahone",
+   "en": "Find the Dean's Apprentice"
+  },
+  {
+   "id": "help-dean",
+   "st": 3,
+   "c": "c",
+   "br": "mage",
+   "n": "Help Dean",
+   "loc": "Cathedral, Igrupan's Chicken Coop, Scarleton, Odger's Hut",
+   "npc": "Dean, Igrupan, Odexar, Odger",
+   "need": "Пройти Find the Dean's Apprentice",
+   "steps": [
+    "Принеси Dean 10× Magma Chunk и 5× Burning Eye (+150 репутации).",
+    "Найди 5 потерявшихся кур Igrupan (+50 репутации).",
+    "Возьми у Odexar Volcanic Stonefish для Odger. Тот забракует рыбу, поэтому вылови новый Volcanic Stonefish и отнеси ему.",
+    "Отдай Framed Volcanic Stonefish Odexar (+100 репутации, 80 монет).",
+    "Принеси Dean Hallowed Skull, Lumino Fiber и Leather Cloth."
+   ],
+   "rw": "+300 репутации, 80 монет",
+   "en": "Help Dean"
+  },
+  {
+   "id": "recover-sulphur-mage",
+   "st": 4,
+   "c": "c",
+   "br": "mage",
+   "n": "Recover Sulphur (маги)",
+   "loc": "Forgotten Skull, Kuudra's Hollow",
+   "npc": "Captain Ahone, Elle, Ugo, Crag",
+   "need": "Пройти Help Dean",
+   "steps": [
+    "Поговори с Captain Ahone про украденную серу (Sulphur). Начнётся встреча у Forgotten Skull.",
+    "Победи Kuudra (+200 репутации).",
+    "Поговори с Dean. На этом ветка магов заканчивается."
+   ],
+   "rw": "+200 репутации, доступ к боям с Kuudra",
+   "en": "Recover Sulphur"
+  },
+  {
+   "id": "join-barbarian",
+   "st": 3,
+   "c": "c",
+   "br": "barb",
+   "n": "Join the Barbarian Faction",
+   "loc": "Burning Desert, Chief's Hut (Crimson Isle)",
+   "npc": "Elle, Ugo, Chief Scorn",
+   "need": "Пройти Select a Faction и выбрать варваров",
+   "steps": [
+    "Скажи Elle, что вступаешь к варварам, и убей Corrupted Flaming Spider в Burning Desert.",
+    "Используй выпавшую Sulphur на Ugo.",
+    "Проводи их до Chief's Hut, отбиваясь от мобов.",
+    "Поговори с Chief Scorn, он примет тебя во фракцию."
+   ],
+   "rw": "Вступление во фракцию Barbarian",
+   "en": "Join the Barbarian Faction"
+  },
+  {
+   "id": "recover-deans-research",
+   "st": 3,
+   "c": "c",
+   "br": "barb",
+   "n": "Recover the Dean's Research",
+   "loc": "Dragontail, Cathedral",
+   "npc": "Ugo, Elle, Chief Scorn",
+   "need": "Пройти Join the Barbarian Faction",
+   "steps": [
+    "Поговори с Ugo и Elle: нужно украсть исследования у магов.",
+    "Elle приведёт тебя в Cathedral. Укради исследования из кабинета Dean.",
+    "Поговори с Elle, Ugo и Chief Scorn (+100 репутации)."
+   ],
+   "rw": "+100 репутации",
+   "en": "Recover the Dean's Research"
+  },
+  {
+   "id": "barbarian-training",
+   "st": 3,
+   "c": "c",
+   "br": "barb",
+   "n": "Barbarian Training",
+   "loc": "Dojo, Magma Chamber, Dragontail, Burning Desert",
+   "npc": "Ugo, Lasea, Odger, Gris",
+   "need": "Пройти Recover the Dean's Research",
+   "steps": [
+    "Выполни для Ugo задания Dojo и победи Magma Boss (+150 репутации).",
+    "Помоги Lasea: отдай ей Skeleton Fish и Flyfish и поговори с Odger (+100 репутации).",
+    "Поговори с Gris."
+   ],
+   "rw": "+250 репутации",
+   "en": "Barbarian Training"
+  },
+  {
+   "id": "recover-sulphur-barb-1",
+   "st": 4,
+   "c": "c",
+   "br": "barb",
+   "n": "Recover Sulphur (варвары, часть 1)",
+   "loc": "Matriarch's Lair",
+   "npc": "—",
+   "need": "Пройти Barbarian Training",
+   "steps": [
+    "Добудь Heavy Pearl у The Matriarch в Matriarch's Lair."
+   ],
+   "rw": "Heavy Pearl",
+   "en": "Recover Sulphur"
+  },
+  {
+   "id": "recover-sulphur-barb-2",
+   "st": 4,
+   "c": "c",
+   "br": "barb",
+   "n": "Recover Sulphur (варвары, часть 2)",
+   "loc": "Dragontail",
+   "npc": "Gris",
+   "need": "Пройти часть 1",
+   "steps": [
+    "Отнеси Heavy Pearl Gris."
+   ],
+   "rw": "+150 репутации, 200 000 монет",
+   "en": "Recover Sulphur"
+  },
+  {
+   "id": "recover-sulphur-barb-3",
+   "st": 4,
+   "c": "c",
+   "br": "barb",
+   "n": "Recover Sulphur (варвары, часть 3)",
+   "loc": "Chief's Hut, Forgotten Skull, Kuudra's Hollow",
+   "npc": "Chief Scorn, Captain Ahone, Elle, Ugo, Crag",
+   "need": "Пройти часть 2",
+   "steps": [
+    "Поговори с Chief Scorn про украденную серу. Начнётся встреча у Forgotten Skull.",
+    "Победи Kuudra (+200 репутации).",
+    "Поговори с Chief Scorn (+200 репутации). На этом ветка варваров заканчивается."
+   ],
+   "rw": "+400 репутации, доступ к боям с Kuudra",
+   "en": "Recover Sulphur"
+  }
+ ],
+ "chapters": {
+  "Backwater Bayou": {
+   "key": "bayou",
+   "npc": "Jonesy",
+   "about": "Рыболовный остров. Открывается квестом Finding the Engine, плыть туда через Ship Navigator.",
+   "final": "Pearl of the Swamp: навсегда +1 treasure chance",
+   "ch": [
+    {
+     "n": "I",
+     "i": "Начало пути по Seven Seas.",
+     "done": "Открывает главу II; 4× Treasure Bait; +5 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Узнай про Junk",
+       "h": "Junker Joel расскажет, как вылавливать хлам (Junk).",
+       "rw": "100 Fishing XP",
+       "en": "Learn About Junk"
+      },
+      {
+       "t": "Поставь Rod Part",
+       "h": "Roddy ставит на удочки детали (Rod Parts) для настройки.",
+       "rw": "100 Fishing XP",
+       "en": "Apply a Rod Part"
+      },
+      {
+       "t": "Узнай про хотспоты",
+       "h": "Fishing Hotspots дают бонус к статам, и только в них ловятся Hotspot Sea Creatures. Хотспоты есть на многих островах.",
+       "rw": "100 Fishing XP",
+       "en": "Learn About Hotspots"
+      }
+     ]
+    },
+    {
+     "n": "II",
+     "i": "Бери удочку и помогай с уборкой: лови хлам!",
+     "done": "Открывает главу III; 1 Rusty Coin, 8 Treasure Bait; +10 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad I",
+       "h": "Lily Pad падают с морских существ Bayou. Коллекция открывает новые рецепты.",
+       "rw": "250 Fishing XP",
+       "en": "Reach Lily Pad Collection I"
+      },
+      {
+       "t": "Поймай Rusty Coin",
+       "h": "С Junk Sinker большая часть хлама — Rusty Coin.",
+       "rw": "250 Fishing XP",
+       "en": "Catch a Rusty Coin"
+      },
+      {
+       "t": "Купи Treasure Bait",
+       "h": "Продаёт Junker Joel. Повышает шанс поймать сокровище и хлам.",
+       "rw": "250 Fishing XP",
+       "en": "Purchase Treasure Bait"
+      },
+      {
+       "t": "Поймай Trash Gobbler",
+       "h": "Обычное (Common) морское существо Bayou.",
+       "rw": "250 Fishing XP",
+       "en": "Catch a Trash Gobbler"
+      },
+      {
+       "t": "Поймай Dumpster Diver",
+       "h": "Необычное (Uncommon) существо Bayou, попадается реже Trash Gobbler.",
+       "rw": "250 Fishing XP",
+       "en": "Catch a Dumpster Diver"
+      }
+     ]
+    },
+    {
+     "n": "III",
+     "i": "Меняй хлам у Junker Joel на сильные улучшения снаряжения.",
+     "done": "Открывает главу IV; 4 Rusty Coin, 16 Treasure Bait; +15 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad III",
+       "h": "Lily Pad падают с морских существ Bayou.",
+       "rw": "500 Fishing XP",
+       "en": "Reach Lily Pad Collection III"
+      },
+      {
+       "t": "Купи Junk Talisman",
+       "h": "Повышает treasure chance на Backwater Bayou. Положи его в Accessory Bag.",
+       "rw": "500 Fishing XP",
+       "en": "Purchase a Junk Talisman"
+      },
+      {
+       "t": "Купи Challenging Rod",
+       "h": "Улучшенная удочка у Junker Joel.",
+       "rw": "500 Fishing XP",
+       "en": "Purchase a Challenging Rod"
+      },
+      {
+       "t": "Купи часть Backwater Armor",
+       "h": "Улучшай Angler Armor из Fishing Outpost до Backwater Armor.",
+       "rw": "500 Fishing XP",
+       "en": "Purchase a Piece of Backwater Armor"
+      },
+      {
+       "t": "Купи питомца Hermit Crab",
+       "h": "Питомцы начинают с Common. Kat в Hub повышает их редкость, а с ней усиливаются и открываются перки.",
+       "rw": "500 Fishing XP",
+       "en": "Purchase a Hermit Crab Pet"
+      },
+      {
+       "t": "Поймай Hotspot Sea Creature",
+       "h": "Ловится только в хотспоте.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a Hotspot Sea Creature"
+      }
+     ]
+    },
+    {
+     "n": "IV",
+     "i": "Ты уже местный, но впереди задачи сложнее.",
+     "done": "Открывает главу V; 1 Busted Belt Buckle, 8 Rusty Coin, 32 Treasure Bait; +20 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad V",
+       "h": "Lily Pad падают с морских существ Bayou.",
+       "rw": "1,000 Fishing XP",
+       "en": "Reach Lily Pad Collection V"
+      },
+      {
+       "t": "Поймай Busted Belt Buckle",
+       "h": "Иногда попадается среди хлама.",
+       "rw": "1,000 Fishing XP",
+       "en": "Catch a Busted Belt Buckle"
+      },
+      {
+       "t": "Поймай Banshee",
+       "h": "Редкое (Rare) существо Bayou.",
+       "rw": "1,000 Fishing XP",
+       "en": "Catch a Banshee"
+      },
+      {
+       "t": "Hermit Crab до Uncommon у Kat",
+       "h": "Улучшение питомца у Kat в Hub.",
+       "rw": "1,000 Fishing XP",
+       "en": "Upgrade Hermit Crab Pet to Uncommon at Kat"
+      },
+      {
+       "t": "Поставь Stingy Sinker",
+       "h": "Иногда не тратит наживку.",
+       "rw": "1,000 Fishing XP",
+       "en": "Apply a Stingy Sinker to Your Rod"
+      },
+      {
+       "t": "Купи Junk Ring",
+       "h": "Улучшение Junk Talisman у Junker Joel.",
+       "rw": "1,000 Fishing XP",
+       "en": "Purchase a Junk Ring"
+      }
+     ]
+    },
+    {
+     "n": "V",
+     "i": "Пора улучшить главный кусок хлама — твой корабль!",
+     "done": "Открывает главу VI; 2 Busted Belt Buckle, 16 Rusty Coin, 64 Treasure Bait; +25 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad VII",
+       "h": "Lily Pad падают с морских существ Bayou.",
+       "rw": "2,500 Fishing XP",
+       "en": "Reach Lily Pad Collection VII"
+      },
+      {
+       "t": "Поймай Bayou Sludge",
+       "h": "Эпическое (Epic) существо Bayou.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Bayou Sludge"
+      },
+      {
+       "t": "Поставь Bronze Ship Helm",
+       "h": "Крафтится из Bronze Bowl, которые изредка падают с Dumpster Diver.",
+       "rw": "2,500 Fishing XP",
+       "en": "Apply a Bronze Ship Helm"
+      },
+      {
+       "t": "Поставь Bronze Ship Engine",
+       "h": "Купи у Junker Joel и поставь на корабль: откроются дальние рыболовные острова.",
+       "rw": "2,500 Fishing XP",
+       "en": "Apply a Bronze Ship Engine"
+      },
+      {
+       "t": "Hermit Crab до Rare у Kat",
+       "h": "Улучшение питомца у Kat в Hub.",
+       "rw": "2,500 Fishing XP",
+       "en": "Upgrade Hermit Crab Pet to Rare at Kat"
+      },
+      {
+       "t": "Поставь Speedy Line",
+       "h": "Даёт Fishing Speed, клюёт быстрее. Полезна для любой рыбалки.",
+       "rw": "2,500 Fishing XP",
+       "en": "Apply a Speedy Line to Your Rod"
+      }
+     ]
+    },
+    {
+     "n": "VI",
+     "i": "Для самых сильных улучшений нужен редкий хлам.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad VIII",
+       "h": "Lily Pad падают с морских существ Bayou.",
+       "rw": "5,000 Fishing XP",
+       "en": "Reach Lily Pad Collection VIII"
+      },
+      {
+       "t": "Поймай Alligator",
+       "h": "Легендарное (Legendary) существо Bayou.",
+       "rw": "5,000 Fishing XP",
+       "en": "Catch an Alligator"
+      },
+      {
+       "t": "Поймай Old Leather Boot",
+       "h": "Очень редкий хлам.",
+       "rw": "5,000 Fishing XP",
+       "en": "Catch an Old Leather Boot"
+      },
+      {
+       "t": "Поставь Bronze Ship Hull",
+       "h": "Крафтится из Bronze Bowl и Torn Cloth, они падают с Dumpster Diver и Banshee.",
+       "rw": "5,000 Fishing XP",
+       "en": "Apply a Bronze Ship Hull"
+      },
+      {
+       "t": "Hermit Crab до Epic у Kat",
+       "h": "Улучшение питомца у Kat в Hub.",
+       "rw": "5,000 Fishing XP",
+       "en": "Upgrade Hermit Crab Pet to Epic at Kat"
+      },
+      {
+       "t": "Купи Junk Artifact",
+       "h": "Лучший из Junk-аксессуаров, продаёт Junker Joel.",
+       "rw": "5,000 Fishing XP",
+       "en": "Purchase a Junk Artifact"
+      }
+     ]
+    },
+    {
+     "n": "VII",
+     "i": "Закончи с Backwater Bayou и получи Pearl of the Swamp!",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Коллекция Lily Pad IX",
+       "h": "Lily Pad падают с морских существ Bayou.",
+       "rw": "10,000 Fishing XP",
+       "en": "Reach Lily Pad Collection IX"
+      },
+      {
+       "t": "Поймай Titanoboa",
+       "h": "Мифическое (Mythic) существо, самое редкое и опасное на Bayou.",
+       "rw": "10,000 Fishing XP",
+       "en": "Catch a Titanoboa"
+      },
+      {
+       "t": "Скрафти Bayou Water Orb",
+       "h": "Нужен для дорогих крафтов и покупок.",
+       "rw": "10,000 Fishing XP",
+       "en": "Craft a Bayou Water Orb"
+      },
+      {
+       "t": "Поставь Treasure Hook",
+       "h": "Продаёт Junker Joel. Лучшая деталь для ловли сокровищ.",
+       "rw": "10,000 Fishing XP",
+       "en": "Apply a Treasure Hook to Your Rod"
+      },
+      {
+       "t": "Купи Gold Bottle Cap",
+       "h": "Поднимает Luck of the Sea на любой удочке до максимума.",
+       "rw": "10,000 Fishing XP",
+       "en": "Purchase a Gold Bottle Cap"
+      },
+      {
+       "t": "Hermit Crab до Legendary у Kat",
+       "h": "Улучшение питомца у Kat в Hub.",
+       "rw": "10,000 Fishing XP",
+       "en": "Upgrade Hermit Crab Pet to Legendary at Kat"
+      }
+     ]
+    }
+   ]
+  },
+  "Lotus Atoll": {
+   "key": "lotus",
+   "npc": "Researcher Betty",
+   "about": "Остров трофейных лягушек. Ловишь Trophy Frog и меняешь их у Researcher Ribery на Lotus.",
+   "final": "Pearl of the Lotus: навсегда +2,5 trophy chance",
+   "ch": [
+    {
+     "n": "I",
+     "i": "Начало пути исследователя лягушек.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Поговори с Researcher Ribery",
+       "h": "Главный в экспедиции. В его Research Journal видны все виды Trophy Frog.",
+       "rw": "250 Fishing XP",
+       "en": "Talk to Researcher Ribery"
+      },
+      {
+       "t": "Поймай BRONZE Trophy Frog",
+       "h": "Trophy Frog меняются у Researcher Ribery на Lotus.",
+       "rw": "250 Fishing XP",
+       "en": "Catch a BRONZE Trophy Frog"
+      },
+      {
+       "t": "Поймай Atoll Croaker",
+       "h": "Обычное (Common) существо Lotus.",
+       "rw": "250 Fishing XP",
+       "en": "Catch an Atoll Croaker"
+      }
+     ]
+    },
+    {
+     "n": "II",
+     "i": "Познакомься с Lotus Atoll поближе.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Поговори с Researcher Lily",
+       "h": "Изучает странное явление на острове и знает, как поймать редкую лягушку Reality Hopper.",
+       "rw": "500 Fishing XP",
+       "en": "Talk to Researcher Lily"
+      },
+      {
+       "t": "Поговори с Researcher Tina",
+       "h": "По её данным, стат trophy chance повышает шанс поймать Trophy Frog.",
+       "rw": "500 Fishing XP",
+       "en": "Talk to Researcher Tina"
+      },
+      {
+       "t": "Поймай SILVER Trophy Frog",
+       "h": "Меняй у Researcher Ribery на Lotus.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a SILVER Trophy Frog"
+      },
+      {
+       "t": "Поймай Bullfrog",
+       "h": "Клюёт, только если на тебе Red Sweater.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a Bullfrog"
+      },
+      {
+       "t": "Добудь Lotusfish",
+       "h": "Ловится сетью (Fishing Net). Про Attribute Shards расскажет David Hunterborough в Moonglade Marsh.",
+       "rw": "500 Fishing XP",
+       "en": "Hunt a Lotusfish"
+      },
+      {
+       "t": "Добудь Lotum",
+       "h": "Прыгают по лотосам. Догони, чтобы получить Lotum Shard.",
+       "rw": "500 Fishing XP",
+       "en": "Hunt a Lotum"
+      },
+      {
+       "t": "Поймай Lotus Guardian",
+       "h": "Необычное (Uncommon) существо Lotus.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a Lotus Guardian"
+      },
+      {
+       "t": "Поймай gorF",
+       "h": "Редкое (Rare) существо Lotus.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a gorF"
+      },
+      {
+       "t": "Скрафти Froggles",
+       "h": "Открываются на коллекции Lotus I. В них видно Wormholes.",
+       "rw": "500 Fishing XP",
+       "en": "Craft Froggles"
+      },
+      {
+       "t": "Коллекция Lotus II",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "500 Fishing XP",
+       "en": "Reach Lotus Collection II"
+      }
+     ]
+    },
+    {
+     "n": "III",
+     "i": "Качай коллекцию Lotus и лови новые виды Trophy Frog.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Поговори с Researcher Kay",
+       "h": "Чудаковатая исследовательница, работает сама по себе.",
+       "rw": "1,000 Fishing XP",
+       "en": "Talk to Researcher Kay"
+      },
+      {
+       "t": "Скрафти Silver Froggles",
+       "h": "Улучшение Froggles, нужна коллекция Lotus IV.",
+       "rw": "1,000 Fishing XP",
+       "en": "Craft Silver Froggles"
+      },
+      {
+       "t": "Поймай Reality Hopper",
+       "h": "Если не получается, спроси Researcher Lily.",
+       "rw": "1,000 Fishing XP",
+       "en": "Catch a Reality Hopper"
+      },
+      {
+       "t": "Взорви Lily Pad",
+       "h": "Кувшинки на Lotus Atoll можно толкать и соединять. Большая взрывается и даёт Exploding Trophy Frog и другие награды.",
+       "rw": "1,000 Fishing XP",
+       "en": "Explode a Lily Pad"
+      },
+      {
+       "t": "Поймай Drowned Captain",
+       "h": "Эпическое (Epic) существо Lotus.",
+       "rw": "1,000 Fishing XP",
+       "en": "Catch a Drowned Captain"
+      },
+      {
+       "t": "Добудь Tewtil",
+       "h": "Корми Tewtil, пока он не взорвётся, и получишь Tewtil Shard.",
+       "rw": "1,000 Fishing XP",
+       "en": "Hunt a Tewtil"
+      },
+      {
+       "t": "Коллекция Lotus IV",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "1,000 Fishing XP",
+       "en": "Reach Lotus Collection IV"
+      }
+     ]
+    },
+    {
+     "n": "IV",
+     "i": "Собери все BRONZE Trophy Frog.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Поговори с Researcher Timmy",
+       "h": "Заметил кое-что о погоде на Lotus Atoll.",
+       "rw": "2,500 Fishing XP",
+       "en": "Talk to Researcher Timmy"
+      },
+      {
+       "t": "Поймай Wetlands Frog",
+       "h": "Только во время дождя. Когда будет дождь, подскажет Researcher Timmy.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Wetlands Frog"
+      },
+      {
+       "t": "Поймай Sea Frog",
+       "h": "Только под водой.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Sea Frog"
+      },
+      {
+       "t": "Поймай Tree Frog",
+       "h": "Лови, стоя на листве.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Tree Frog"
+      },
+      {
+       "t": "Поймай Cave Frog",
+       "h": "Только в Lotus Eater's Cave.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Cave Frog"
+      },
+      {
+       "t": "Поймай Highlands Frog",
+       "h": "Только в Lotus Highlands.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Highlands Frog"
+      },
+      {
+       "t": "Добудь Flipflopper",
+       "h": "Иногда появляется из взорванной Lily Pad, ловится сетью. Первую сеть даёт David Hunterborough в Moonglade Marsh.",
+       "rw": "2,500 Fishing XP",
+       "en": "Hunt a Flipflopper"
+      },
+      {
+       "t": "Все 12 видов BRONZE Trophy Frog",
+       "h": "Не забудь забрать награды у Researcher Ribery.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch all 12 unique BRONZE Trophy Frogs"
+      },
+      {
+       "t": "Поймай Puddle Jumper",
+       "h": "Легендарное (Legendary) существо, поймать сложнее обычного.",
+       "rw": "2,500 Fishing XP",
+       "en": "Catch a Puddle Jumper"
+      },
+      {
+       "t": "Пожертвуй Frogcoin",
+       "h": "Брось монету в воды Lotus Eater's Cave и получишь благословение. Пока оно действует, ловятся Blessed Frogs.",
+       "rw": "2,500 Fishing XP",
+       "en": "Donate a Frogcoin"
+      },
+      {
+       "t": "Коллекция Lotus VI",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "2,500 Fishing XP",
+       "en": "Reach Lotus Collection VI"
+      }
+     ]
+    },
+    {
+     "n": "V",
+     "i": "Собери все SILVER Trophy Frog.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Скрафти Gold Froggles",
+       "h": "Улучшение Silver Froggles, нужна коллекция Lotus VII.",
+       "rw": "5,000 Fishing XP",
+       "en": "Craft Gold Froggles"
+      },
+      {
+       "t": "Поймай GOLD Trophy Frog",
+       "h": "Меняй у Researcher Ribery на Lotus.",
+       "rw": "5,000 Fishing XP",
+       "en": "Catch a GOLD Trophy Frog"
+      },
+      {
+       "t": "Все 12 видов SILVER Trophy Frog",
+       "h": "Забери награды у Researcher Ribery.",
+       "rw": "5,000 Fishing XP",
+       "en": "Catch all 12 unique SILVER Trophy Frogs"
+      },
+      {
+       "t": "Добудь Seashine",
+       "h": "Редко появляется из взорванной Lily Pad. Нужна Medium Fishing Net.",
+       "rw": "5,000 Fishing XP",
+       "en": "Hunt a Seashine"
+      },
+      {
+       "t": "Коллекция Lotus VII",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "5,000 Fishing XP",
+       "en": "Reach Lotus Collection VII"
+      }
+     ]
+    },
+    {
+     "n": "VI",
+     "i": "Собери все GOLD Trophy Frog.",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Поставь Puddle Jumper Hook",
+       "h": "Крафтится на коллекции Lotus VIII, повышает шанс поймать Puddle Jumper.",
+       "rw": "10,000 Fishing XP",
+       "en": "Apply a Puddle Jumper Hook to Your Rod"
+      },
+      {
+       "t": "Поставь Trophy Line",
+       "h": "Полезна на всех островах с трофеями. Ставит Roddy на Backwater Bayou.",
+       "rw": "10,000 Fishing XP",
+       "en": "Apply a Trophy Line to Your Rod"
+      },
+      {
+       "t": "Поймай DIAMOND Trophy Frog",
+       "h": "Меняй у Researcher Ribery на Lotus.",
+       "rw": "10,000 Fishing XP",
+       "en": "Catch a DIAMOND Trophy Frog"
+      },
+      {
+       "t": "Поймай Frog Prince",
+       "h": "Мифическое (Mythic) существо Lotus.",
+       "rw": "10,000 Fishing XP",
+       "en": "Catch a Frog Prince"
+      },
+      {
+       "t": "Все 12 видов GOLD Trophy Frog",
+       "h": "Забери награды у Researcher Ribery.",
+       "rw": "10,000 Fishing XP",
+       "en": "Catch all 12 unique GOLD Trophy Frogs"
+      },
+      {
+       "t": "Коллекция Lotus IX",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "10,000 Fishing XP",
+       "en": "Reach Lotus Collection IX"
+      }
+     ]
+    },
+    {
+     "n": "VII",
+     "i": "Закончи с Lotus Atoll и получи Pearl of the Lotus!",
+     "done": "",
+     "tasks": [
+      {
+       "t": "Скрафти Diamond Lotus",
+       "h": "Нужен для дорогих крафтов и обменов.",
+       "rw": "25,000 Fishing XP",
+       "en": "Craft a Diamond Lotus"
+      },
+      {
+       "t": "Скрафти Diamond Froggles",
+       "h": "Повышают шанс поймать GOLD и DIAMOND лягушек. Нужна коллекция Lotus XI.",
+       "rw": "25,000 Fishing XP",
+       "en": "Craft Diamond Froggles"
+      },
+      {
+       "t": "Добудь Lily Pad Minion XI Upgrade Stone",
+       "h": "Его продаёт кто-то на Lotus Atoll, но продавца ещё надо найти. Ищи рядом с Lotus Eater's Cave.",
+       "rw": "25,000 Fishing XP",
+       "en": "Obtain a Lily Pad Minion XI Upgrade Stone"
+      },
+      {
+       "t": "Все 12 видов DIAMOND Trophy Frog",
+       "h": "Забери награды у Researcher Ribery.",
+       "rw": "25,000 Fishing XP",
+       "en": "Catch all 12 unique DIAMOND Trophy Frogs"
+      },
+      {
+       "t": "Коллекция Lotus XI",
+       "h": "Растёт за обмен Trophy Frog у Researcher Ribery.",
+       "rw": "25,000 Fishing XP",
+       "en": "Reach Lotus Collection XI"
+      }
+     ]
+    }
+   ]
+  },
+  "Moonglade Marsh": {
+   "key": "moonglade",
+   "npc": "Hina (Tangleburg's Path)",
+   "about": "Лесной остров Galatea: Foraging, Heart of the Forest и охота (Hunting). Открывается квестом Mole Problems при Foraging 12.",
+   "final": "",
+   "ch": [
+    {
+     "n": "I",
+     "i": "Начало пути через лес.",
+     "done": "Открывает главу II; +200 Heart Of The Forest XP; 1500 Foraging XP; +5 SkyBlock XP; 1× Phanpyre Shard; 1× Cod Shard; 1× Lapis Zombie Shard",
+     "tasks": [
+      {
+       "t": "Поговори с Swoop",
+       "h": "Научит основам Foraging на Galatea.",
+       "rw": "100 Foraging XP",
+       "en": "Talk to Swoop"
+      },
+      {
+       "t": "Воспользуйся Fusion Machine",
+       "h": "Пригодится для охоты (Hunting).",
+       "rw": "100 Hunting XP",
+       "en": "Use the Fusion Machine"
+      },
+      {
+       "t": "Поговори с David и его охотниками",
+       "h": "Квест David учит основам охоты.",
+       "rw": "100 Hunting XP",
+       "en": "Talk to David and his Hunters"
+      }
+     ]
+    },
+    {
+     "n": "II",
+     "i": "Пора исследовать остров и встретить новых существ.",
+     "done": "Открывает главу III; +500 Heart Of The Forest XP; 5000 Foraging XP; +10 SkyBlock XP; 1× Prime Lushlilac Bonbon; +200 Forest Whispers",
+     "tasks": [
+      {
+       "t": "10 Fig Tree Gifts",
+       "h": "Руби дерево, начиная со ствола.",
+       "rw": "+200 Forest Whispers",
+       "en": "Obtain 10 Fig Tree Gifts"
+      },
+      {
+       "t": "Поучаствуй в ежедневном конкурсе Agatha",
+       "h": "Agatha каждый день награждает за участие.",
+       "rw": "+100 Heart Of The Forest XP",
+       "en": "Participate in a Daily Agatha Contest"
+      },
+      {
+       "t": "Убей Chillshot",
+       "h": "Chillshot и Chillblade живут в скрытой пещере под деревней.",
+       "rw": "1000 Combat XP",
+       "en": "Kill Chillshots"
+      },
+      {
+       "t": "Добудь Verdant Shards",
+       "h": "Verdant — зелёные тропические рыбки в озёрах и реках.",
+       "rw": "500 Hunting XP",
+       "en": "Catch Verdant Shards"
+      },
+      {
+       "t": "Добудь Azure Shards",
+       "h": "Azure — более редкие синие тропические рыбки.",
+       "rw": "500 Hunting XP",
+       "en": "Catch Azure Shards"
+      }
+     ]
+    },
+    {
+     "n": "III",
+     "i": "Galatea награждает внимательных.",
+     "done": "Открывает главу IV; +1,000 Heart Of The Forest XP; 10000 Foraging XP; +15 SkyBlock XP; 3× Mossybit Shard; +1,000 Forest Whispers",
+     "tasks": [
+      {
+       "t": "100 Fig Tree Gifts",
+       "h": "Лучше рубить вдвоём.",
+       "rw": "+2,000 Forest Whispers",
+       "en": "Obtain 100 Fig Tree Gifts"
+      },
+      {
+       "t": "Uncommon в конкурсе Agatha",
+       "h": "Очки дают многие занятия на Galatea.",
+       "rw": "2000 Foraging XP",
+       "en": "Reach Uncommon in Agatha's Contest"
+      },
+      {
+       "t": "Возьми в руку Fig Hew",
+       "h": "Рецепт открывается в коллекции Fig.",
+       "rw": "2000 Foraging XP",
+       "en": "Hold a Fig Hew"
+      },
+      {
+       "t": "Собери ягоды с кустов",
+       "h": "Во время сбора могут появиться существа.",
+       "rw": "+500 Heart Of The Forest XP",
+       "en": "Collect Berries from Bushes"
+      },
+      {
+       "t": "Добудь шард с помощью Lushlilac Bonbon",
+       "h": "Пока действует Salt, убитые монстры могут дать свой шард.",
+       "rw": "750 Hunting XP",
+       "en": "Obtain a Shard using a Lushlilac Bonbon."
+      },
+      {
+       "t": "Добудь Mossybit Shards",
+       "h": "Лягушки прыгают вокруг центрального озера.",
+       "rw": "750 Hunting XP",
+       "en": "Catch Mossybit Shards"
+      },
+      {
+       "t": "Найди что-то на земле",
+       "h": "Если на земле что-то блестит, кликни по нему.",
+       "rw": "1000 Foraging XP",
+       "en": "Find something on the ground..."
+      }
+     ]
+    },
+    {
+     "n": "IV",
+     "i": "Половина пути.",
+     "done": "Открывает главу V; +2,500 Heart Of The Forest XP; 25000 Foraging XP; 5000 Hunting XP; +20 SkyBlock XP; 3× Salmon Shard; 3× Cod Shard; +2,000 Forest Whispers",
+     "tasks": [
+      {
+       "t": "250 Fig Tree Gifts",
+       "h": "С очень высоким Sweep можно срубить больше 30 брёвен подряд.",
+       "rw": "+6,000 Forest Whispers",
+       "en": "Obtain 250 Fig Tree Gifts"
+      },
+      {
+       "t": "Rare в конкурсе Agatha",
+       "h": "Набирай Sweep и Foraging Fortune, чтобы деревья давали больше очков.",
+       "rw": "3000 Foraging XP",
+       "en": "Reach Rare in Agatha's Contest"
+      },
+      {
+       "t": "Собери Sea Lumies",
+       "h": "Растут под водой.",
+       "rw": "+500 Heart Of The Forest XP",
+       "en": "Collect Sea Lumies"
+      },
+      {
+       "t": "Вылови Wetwing",
+       "h": "Ловится удочкой.",
+       "rw": "2000 Fishing XP",
+       "en": "Fish up a Wetwing"
+      },
+      {
+       "t": "Купи шард у Kiara",
+       "h": "Kiara продаёт шарды амфибий и рептилий для слияний (Fusion).",
+       "rw": "1000 Hunting XP",
+       "en": "Buy a Shard from Kiara"
+      },
+      {
+       "t": "Добудь Cod Shards",
+       "h": "Треска теряет сознание, если её как следует закрутить.",
+       "rw": "1000 Hunting XP",
+       "en": "Catch Cod Shards"
+      },
+      {
+       "t": "Добудь Salmon Shards",
+       "h": "Лосось водится в озере.",
+       "rw": "1000 Hunting XP",
+       "en": "Catch Salmon Shards"
+      },
+      {
+       "t": "Настрой маяк",
+       "h": "Маяк стоит у старой башни.",
+       "rw": "+200 Heart Of The Forest XP",
+       "en": "Tune a beacon"
+      },
+      {
+       "t": "Прокачай перк в магазине Rosemary",
+       "h": "Rosemary сидит высоко, откуда виден весь остров.",
+       "rw": "+6,000 Forest Whispers",
+       "en": "Level up a perk in Rosemary's Shop"
+      }
+     ]
+    },
+    {
+     "n": "V",
+     "i": "Ты готов к сложной охоте и скрытым приключениям.",
+     "done": "Открывает главу VI; +5,000 Heart Of The Forest XP; 50000 Foraging XP; 7500 Hunting XP; +20 Forest Essence; +25 SkyBlock XP; 3× Hideonleaf Shard; 3× Coralot Shard; 1× Sparrow Shard; +3,000 Forest Whispers",
+     "tasks": [
+      {
+       "t": "10 Mangrove Tree Gifts",
+       "h": "Мангровые деревья всегда руби, начиная с веток.",
+       "rw": "+6,000 Forest Whispers",
+       "en": "Obtain 10 Mangrove Tree Gifts"
+      },
+      {
+       "t": "Epic в конкурсе Agatha",
+       "h": "Очки дают многие занятия на Galatea.",
+       "rw": "4000 Foraging XP",
+       "en": "Reach Epic in Agatha's Contest"
+      },
+      {
+       "t": "Набери 50 Sweep",
+       "h": "С таким Sweep уже можно рубить Mangrove Tree.",
+       "rw": "4000 Foraging XP",
+       "en": "Reach 50 Sweep"
+      },
+      {
+       "t": "Возьми в руку Figstone Splitter",
+       "h": "Улучшение Fig Hew.",
+       "rw": "4000 Foraging XP",
+       "en": "Hold a Figstone Splitter"
+      },
+      {
+       "t": "Вылови Flexbone в Tomb Floodway",
+       "h": "В Tomb Floodway повышен шанс сокровищ.",
+       "rw": "3000 Fishing XP",
+       "en": "Fish a Flexbone in the Tomb Floodway"
+      },
+      {
+       "t": "Добудь Hideonleaf Shards",
+       "h": "Шалкеры злятся, если встать им на панцирь.",
+       "rw": "1250 Hunting XP",
+       "en": "Catch Hideonleaf Shards"
+      },
+      {
+       "t": "Добудь Coralot Shards",
+       "h": "Аксолотли пугаются, когда ты двигаешься.",
+       "rw": "1250 Hunting XP",
+       "en": "Catch Coralot Shards"
+      },
+      {
+       "t": "Добудь Dreadwing Shards",
+       "h": "Это фантомы, и даже не самые крупные.",
+       "rw": "1250 Hunting XP",
+       "en": "Catch Dreadwing Shards"
+      },
+      {
+       "t": "Найди Mudworm",
+       "h": "Многие существа живут под землёй.",
+       "rw": "1250 Hunting XP",
+       "en": "Find a Mudworm"
+      },
+      {
+       "t": "Добудь шард с помощью Huntrap",
+       "h": "Ловушки крафтятся из Tender Wood.",
+       "rw": "1250 Hunting XP",
+       "en": "Obtain a Shard using a Huntrap."
+      },
+      {
+       "t": "Добудь шард, который даёт только Fusion",
+       "h": "Некоторые шарды получаются только слиянием.",
+       "rw": "1250 Hunting XP",
+       "en": "Obtain a Shard only obtainable from a Fusion"
+      },
+      {
+       "t": "Поставь Booster",
+       "h": "Бустеры ставятся на любое снаряжение для Foraging.",
+       "rw": "4000 Foraging XP",
+       "en": "Apply a Booster"
+      }
+     ]
+    },
+    {
+     "n": "VI",
+     "i": "Пора глубже: старый лес продолжается под водой.",
+     "done": "Открывает главу VII; +10,000 Heart Of The Forest XP; 75000 Foraging XP; 12500 Hunting XP; +50 Forest Essence; +30 SkyBlock XP; 3× Drowned Shard; 1× Piranha Shard; 1× Seagull Shard; 1× Beaconmite Shard; +5,000 Forest Whispers",
+     "tasks": [
+      {
+       "t": "100 Mangrove Tree Gifts",
+       "h": "Мангровые деревья выгодно рубить примерно от 70 Sweep.",
+       "rw": "+20,000 Forest Whispers",
+       "en": "Obtain 100 Mangrove Tree Gifts"
+      },
+      {
+       "t": "Legendary в конкурсе Agatha",
+       "h": "Теперь ты мастер Moonglade Marsh.",
+       "rw": "5000 Foraging XP",
+       "en": "Reach Legendary in Agatha's Contest"
+      },
+      {
+       "t": "Стань благотворителем Starborn Temple",
+       "h": "По легенде, Starborn Temple спрятан в секретной подводной комнате.",
+       "rw": "+10,000 Forest Whispers",
+       "en": "Become a Starborn Temple Benefactor"
+      },
+      {
+       "t": "Набери 100 Pressure Resistance",
+       "h": "Озеро многоуровневое, глубоко внизу есть комнаты.",
+       "rw": "1000 Foraging XP",
+       "en": "Get at least 100 Pressure Resistance"
+      },
+      {
+       "t": "Убей Drowned Creatures",
+       "h": "Прячутся на дне озера.",
+       "rw": "5000 Combat XP",
+       "en": "Kill Drowned Creatures"
+      },
+      {
+       "t": "Найди Piranha",
+       "h": "Иногда клюёт на поплавок в Moonglade Marsh.",
+       "rw": "1500 Hunting XP",
+       "en": "Find a Piranha"
+      },
+      {
+       "t": "Добудь Stridersurfer Shards",
+       "h": "Эти лавовые существа прячутся в одном из углов острова.",
+       "rw": "1500 Hunting XP",
+       "en": "Catch Stridersurfer Shards"
+      },
+      {
+       "t": "Слей шарды в Elemental Shards",
+       "h": "Elemental Shards — самые чистые формы существ.",
+       "rw": "1500 Hunting XP",
+       "en": "Fuse into Elemental Shards"
+      },
+      {
+       "t": "Добудь 5 шардов через Huntrap",
+       "h": "Huntrap можно поставить до 5 штук в любом месте мира.",
+       "rw": "1500 Hunting XP",
+       "en": "Obtain 5 Shards using a Huntrap"
+      },
+      {
+       "t": "Добудь 25 шардов с Lushlilac Bonbon",
+       "h": "Перед долгим боем съешь Salt.",
+       "rw": "1500 Hunting XP",
+       "en": "Obtain 25 Shards using a Lushlilac Bonbon"
+      },
+      {
+       "t": "Поставь 3 разных бустера на один предмет",
+       "h": "Ставь бустеры на всё снаряжение для Foraging.",
+       "rw": "5000 Foraging XP",
+       "en": "Apply 3 different boosters on the same item"
+      },
+      {
+       "t": "Улучши маяк",
+       "h": "Beaconmite помогают найти Signal Enhancer, но сначала надо найти самого Beaconmite.",
+       "rw": "+10,000 Forest Whispers",
+       "en": "Upgrade a Beacon"
+      },
+      {
+       "t": "Agatha Level 4",
+       "h": "Повышай уровень дружбы с Agatha.",
+       "rw": "5000 Foraging XP",
+       "en": "Reach Agatha Level 4"
+      },
+      {
+       "t": "Пройди Tier X испытания Brian",
+       "h": "Испытание у Brian, который гораздо круче Ryan.",
+       "rw": "+10,000 Forest Whispers",
+       "en": "Complete the Tier X of Brian's challenge"
+      },
+      {
+       "t": "Heart of the Forest Tier 4",
+       "h": "Почти у цели.",
+       "rw": "5000 Foraging XP",
+       "en": "Reach HOTF Tier 4"
+      }
+     ]
+    },
+    {
+     "n": "VII",
+     "i": "Впереди мастерство: глава проверяет всё, чему ты научился.",
+     "done": "+20,000 Heart Of The Forest XP; 150000 Foraging XP; 20000 Hunting XP; +100 Forest Essence; +35 SkyBlock XP; 1× Invisibug Shard; 1× Lumisquid Shard; 1× Joydive Shard; 1× Spike Shard; 1× Chameleon Shard; 1× Bambloom Shard; +10,000 Forest Whispers",
+     "tasks": [
+      {
+       "t": "500 Mangrove Tree Gifts",
+       "h": "Не переживай, деревья отрастают.",
+       "rw": "+30,000 Forest Whispers",
+       "en": "Obtain 500 Mangrove Tree Gifts"
+      },
+      {
+       "t": "Надень полный Fig Armor",
+       "h": "Лучший билд для Foraging, по крайней мере пока.",
+       "rw": "25000 Foraging XP",
+       "en": "Wear a full set of the Fig Armor"
+      },
+      {
+       "t": "Набери 200 Sweep",
+       "h": "Truffle Tree и Pinerise Tree требуют тысячи Sweep.",
+       "rw": "25000 Foraging XP",
+       "en": "Reach 200 swp"
+      },
+      {
+       "t": "Найди Beaconmite",
+       "h": "Изредка встречаются внутри маяков.",
+       "rw": "2000 Hunting XP",
+       "en": "Find a Beaconmite"
+      },
+      {
+       "t": "Поймай Invisibug",
+       "h": "Подсказки нет даже в игре.",
+       "rw": "2000 Hunting XP",
+       "en": "Catch an Invisibug"
+      },
+      {
+       "t": "Добудь Lumisquid Shards",
+       "h": "Нужно много Pressure Resistance. Или просто Huntrap.",
+       "rw": "2000 Hunting XP",
+       "en": "Catch Lumisquid Shards"
+      },
+      {
+       "t": "Добудь Shellwise Shards",
+       "h": "Мудрые и живучие.",
+       "rw": "2000 Hunting XP",
+       "en": "Catch Shellwise Shards"
+      },
+      {
+       "t": "Добудь Joydive Shards",
+       "h": "При опасности прячутся в нору.",
+       "rw": "2000 Hunting XP",
+       "en": "Catch Joydive Shards"
+      },
+      {
+       "t": "Добудь Spike Shards",
+       "h": "Близко к ним лучше не подходить.",
+       "rw": "2000 Hunting XP",
+       "en": "Catch Spike Shards"
+      },
+      {
+       "t": "Добудь 25 шардов через Huntrap",
+       "h": "Главная сила охотника — терпение.",
+       "rw": "2000 Hunting XP",
+       "en": "Obtain 25 Shards using a Huntrap"
+      },
+      {
+       "t": "Прокачай атрибут Foraging до максимума",
+       "h": "Подсказки нет.",
+       "rw": "2000 Hunting XP",
+       "en": "Max out a Foraging Attribute"
+      },
+      {
+       "t": "Сделай слияние с Chameleon",
+       "h": "Самое странное из существ.",
+       "rw": "2000 Hunting XP",
+       "en": "Fuse with a Chameleon"
+      },
+      {
+       "t": "Добудь Bambuleaf, Mochibear и Bambloom",
+       "h": "Разные панды появляются в разные сезоны, а некоторые только из слияний.",
+       "rw": "2000 Hunting XP",
+       "en": "Obtain a Bambuleaf, Mochibear, and Bambloom"
+      },
+      {
+       "t": "Купи Shiniest",
+       "h": "Любимец Jade Dragon.",
+       "rw": "+40,000 Forest Whispers",
+       "en": "Purchase a Shiniest"
+      },
+      {
+       "t": "Найди Tree the Fish",
+       "h": "Изредка выпадает из Tree Gifts.",
+       "rw": "10000 Foraging XP",
+       "en": "Find a Tree the Fish"
+      },
+      {
+       "t": "Найди Swamp the Fish",
+       "h": "Изредка ловится на рыбалке на Galatea.",
+       "rw": "10000 Fishing XP",
+       "en": "Find a Swamp the Fish"
+      },
+      {
+       "t": "Найди Mob the Fish",
+       "h": "Изредка падает с монстров на Galatea.",
+       "rw": "10000 Combat XP",
+       "en": "Find a Mob the Fish"
+      },
+      {
+       "t": "Покажи Coral 15 разных рыб",
+       "h": "Coral тоже рыба.",
+       "rw": "+40,000 Forest Whispers",
+       "en": "Show 15 Different Fish to Coral"
+      }
+     ]
+    }
+   ]
+  },
+  "Torrhus Canyon": {
+   "key": "torrhus",
+   "npc": "Helia",
+   "about": "Каньон с деревьями Helix, ульями, охотой и Critter Safari. Награды за вехи Helix Tree выдаёт Swoop в Moonglade Marsh.",
+   "final": "",
+   "ch": [
+    {
+     "n": "I",
+     "i": "Начало путешествия по Torrhus Canyon.",
+     "done": "Открывает главу II; 1× Honeybuzz Shard; +250 Heart Of The Forest XP; 2500 Foraging XP; +5 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "Поговори с Miria",
+       "h": "Одна из сестёр Starlyn. Каждый день проводит Miria's Contests по всему каньону.",
+       "rw": "+250 Desert Whispers",
+       "en": "Talk to Miria"
+      },
+      {
+       "t": "Открой Helix Tree Gift",
+       "h": "Helix Tree прочнее Fig и Mangrove. Сначала полностью сруби бежевую спираль и только потом красную, иначе получишь штраф к Sweep.",
+       "rw": "64× Helix Log",
+       "en": "Open a Helix Tree Gift"
+      },
+      {
+       "t": "Обыщи Honeyhive",
+       "h": "Ульи есть по всему каньону, один прямо у входа. В них лут: шарды и Honeycomb. Ульи со временем пополняются, это главный источник коллекции Honeycomb.",
+       "rw": "16× Honeycomb",
+       "en": "Loot a Honeyhive"
+      }
+     ]
+    },
+    {
+     "n": "II",
+     "i": "Освойся и проведи первые охоты.",
+     "done": "Открывает главу III; 1 Bunbun Shard, 1 Firefox Shard, 1 Groundhog Shard; +500 Heart Of The Forest XP; +1,000 Desert Whispers; 5000 Foraging XP; +10 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "10 Helix Tree Gifts",
+       "h": "Чем больше Sweep, тем быстрее рубка. Сначала бежевая спираль, потом красная.",
+       "rw": "1× Enchanted Helix Log",
+       "en": "Obtain 10 Helix Tree Gifts"
+      },
+      {
+       "t": "Поучаствуй в конкурсе Miria",
+       "h": "Ежедневные Starlyn Contests в Torrhus Canyon.",
+       "rw": "+500 Desert Whispers",
+       "en": "Participate in Miria's Contest"
+      },
+      {
+       "t": "Добудь Bunbun",
+       "h": "Скачут по всему каньону. Лови с помощью Lasso.",
+       "rw": "500 Hunting XP",
+       "en": "Hunt a Bunbun"
+      },
+      {
+       "t": "Добудь Firefox",
+       "h": "Часто появляются из Helix Tree Gifts. Лови с помощью Lasso.",
+       "rw": "1000 Hunting XP",
+       "en": "Hunt a Firefox"
+      },
+      {
+       "t": "Добудь Groundhog",
+       "h": "Часто появляются из Helix Tree Gifts. Лови с помощью Lasso.",
+       "rw": "1000 Hunting XP",
+       "en": "Hunt a Groundhog"
+      },
+      {
+       "t": "Купи подсказку у Freddy",
+       "h": "Freddy знает, где водится почти каждое существо каньона, но берёт плату.",
+       "rw": "+1000 Desert Whispers",
+       "en": "Purchase a Hint from Freddy"
+      }
+     ]
+    },
+    {
+     "n": "III",
+     "i": "Первые шаги в Critter Safari!",
+     "done": "Открывает главу IV; 25 Safari Essence, 1 Travel Scroll to Critter Safari Entrance, 1 Drybark Shard, 1 Puck Shard, 1 Dung Beetle Shard; +1,000 Heart Of The Forest XP; +2,500 Desert Whispers; 10000 Foraging XP; +15 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "25 Helix Tree Gifts",
+       "h": "Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.",
+       "rw": "2× Enchanted Helix Log",
+       "en": "Obtain 25 Helix Tree Gifts"
+      },
+      {
+       "t": "Uncommon в конкурсе Miria",
+       "h": "Даёт Basic Safari Ticket для входа в Critter Safari.",
+       "rw": "1× Basic Safari Ticket",
+       "en": "Reach Uncommon in Miria's Contest"
+      },
+      {
+       "t": "Добудь Drybark",
+       "h": "Иногда появляется из Helix Tree Gifts. Лови с помощью Lasso.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Drybark"
+      },
+      {
+       "t": "Добудь Puck",
+       "h": "Иногда появляется из Helix Tree Gifts. Лови с помощью Lasso.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Puck"
+      },
+      {
+       "t": "Подбери Floor Drop",
+       "h": "В каньоне свои находки на земле, в том числе Dung Beetle Shards.",
+       "rw": "+2500 Desert Whispers",
+       "en": "Pick up a Floor Drop"
+      },
+      {
+       "t": "Скрафти Fun-Sized Pot of Honeycomb",
+       "h": "Открывается на коллекции Honeycomb I. Намажь им дерево и подожди: придёт редкое существо, какое именно, зависит от дерева.",
+       "rw": "Fun-Sized Pot of Honeycomb",
+       "en": "Craft a Fun-Sized Pot of Honeycomb"
+      },
+      {
+       "t": "Получи Safari Belt у Andrea",
+       "h": "Andrea стоит у входа в Critter Safari. Пояс улучшается по мере Safari Milestones.",
+       "rw": "10× Safari Essence",
+       "en": "Obtain a Safari Belt from Andrea"
+      },
+      {
+       "t": "Войди в Critter Safari",
+       "h": "Поговори с Safari Manager у входа. Нужен любой Safari Ticket, их дают за высокие места в конкурсах Miria.",
+       "rw": "10× Safari Essence",
+       "en": "Enter the Critter Safari"
+      },
+      {
+       "t": "Поймай 5 уникальных существ в Critter Safari",
+       "h": "В сафари 4 биома, и у каждого свои существа.",
+       "rw": "10× Safari Essence",
+       "en": "Catch 5 Unique Critters in the Critter Safari"
+      }
+     ]
+    },
+    {
+     "n": "IV",
+     "i": "Спустись по Spring Path и осмотрись.",
+     "done": "Открывает главу V; 50 Safari Essence, 1 Mountain Goat Shard, 1 Sprawl Shard, 1 Hideonsun Shard; +1,500 Heart Of The Forest XP; +5,000 Desert Whispers; 20000 Foraging XP; +20 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "100 Helix Tree Gifts",
+       "h": "Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.",
+       "rw": "8× Enchanted Helix Log",
+       "en": "Obtain 100 Helix Tree Gifts"
+      },
+      {
+       "t": "Rare в конкурсе Miria",
+       "h": "Даёт Economy Safari Ticket с бонусами получше обычного.",
+       "rw": "1× Economy Safari Ticket",
+       "en": "Reach Rare in Miria's Contest"
+      },
+      {
+       "t": "Добудь Hideonsun",
+       "h": "Прячутся по каньону, оранжевый цвет сливается с местностью.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Hideonsun"
+      },
+      {
+       "t": "Добудь Grizzly Bear",
+       "h": "Очень редко появляется из Helix Tree Gifts. Лови с помощью Lasso, а если лассо порвётся, будет драка.",
+       "rw": "10000 Hunting XP",
+       "en": "Hunt a Grizzly Bear"
+      },
+      {
+       "t": "Добудь Dustybit",
+       "h": "Живут у Spring Path, их надо догнать.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Dustybit"
+      },
+      {
+       "t": "Добудь Mountain Goat",
+       "h": "Живут на Spring Path и бодаются. С Lasso держи дистанцию.",
+       "rw": "5000 Hunting XP",
+       "en": "Hunt a Mountain Goat"
+      },
+      {
+       "t": "Добудь Sepialot",
+       "h": "У Spring Path и Torrhus Springs. Подкрадись с Fishing Net.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Sepialot"
+      },
+      {
+       "t": "Добудь Solar",
+       "h": "У поверхности Torrhus Springs, ловится Fishing Net.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Solar"
+      },
+      {
+       "t": "Вылови Haggard",
+       "h": "Обычное (Common) морское существо каньона.",
+       "rw": "500 Fishing XP",
+       "en": "Catch a Haggard while Fishing"
+      },
+      {
+       "t": "Вылови Brineling",
+       "h": "Необычное (Uncommon) морское существо каньона.",
+       "rw": "1000 Fishing XP",
+       "en": "Catch a Brineling while Fishing"
+      },
+      {
+       "t": "Вылови Sprawl",
+       "h": "Редкое (Rare) морское существо каньона.",
+       "rw": "1500 Fishing XP",
+       "en": "Catch a Sprawl while Fishing"
+      },
+      {
+       "t": "Собери Ruby Veilshroom",
+       "h": "Растут по каньону и падают с морских существ Torrhus.",
+       "rw": "32× Ruby Veilshroom",
+       "en": "Obtain Ruby Veilshrooms"
+      },
+      {
+       "t": "Купи перк в Safari Essence Shop",
+       "h": "Safari Essence из сафари трать у Archie.",
+       "rw": "+2500 Desert Whispers",
+       "en": "Purchase a Perk from the Safari Essence Shop"
+      },
+      {
+       "t": "Поймай 10 уникальных существ в Critter Safari",
+       "h": "В сафари 4 биома, и у каждого свои существа.",
+       "rw": "25× Safari Essence",
+       "en": "Catch 10 Unique Critters in the Critter Safari"
+      }
+     ]
+    },
+    {
+     "n": "V",
+     "i": "Ныряй глубже и узнай, что скрывает Torrhus Springs.",
+     "done": "Открывает главу VI; 75 Safari Essence, 1 Giant Water Bug Shard, 1 Queen Ant Shard, 1 Blue Jay Shard; +2,000 Heart Of The Forest XP; +10,000 Desert Whispers; 30000 Foraging XP; +25 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "250 Helix Tree Gifts",
+       "h": "Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.",
+       "rw": "16× Enchanted Helix Log",
+       "en": "Obtain 250 Helix Tree Gifts"
+      },
+      {
+       "t": "Epic в конкурсе Miria",
+       "h": "Даёт Premium Safari Ticket.",
+       "rw": "1× Premium Safari Ticket",
+       "en": "Reach Epic in Miria's Contest"
+      },
+      {
+       "t": "Приманка: Pot of Honey на дереве",
+       "h": "Некоторые существа приходят только к деревьям, намазанным Honeycomb. У каждого вида деревьев свои существа, в том числе в Moonglade Marsh.",
+       "rw": "1× Family-Sized Pot of Honeycomb",
+       "en": "Use a Pot of Honey to attract a Critter to a Tree"
+      },
+      {
+       "t": "Добудь Blue Jay",
+       "h": "Живут на самых высоких пиках Torrhus Heights. Подкрадись с Lasso.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt a Blue Jay"
+      },
+      {
+       "t": "Добудь Goldolot",
+       "h": "Редкая мутация Sepialot. Подкрадись с Fishing Net.",
+       "rw": "5000 Hunting XP",
+       "en": "Hunt a Goldolot"
+      },
+      {
+       "t": "Добудь Ember",
+       "h": "Глубже в Torrhus Springs, ловится Fishing Net.",
+       "rw": "2500 Hunting XP",
+       "en": "Hunt an Ember"
+      },
+      {
+       "t": "Убей Ant",
+       "h": "Живут в Ant's Cave, вход через Torrhus Springs. Это вредители (Pests), нужен Vacuum. Иногда падает Ant Shard.",
+       "rw": "2500 Hunting XP",
+       "en": "Kill an Ant"
+      },
+      {
+       "t": "Убей Queen Ant",
+       "h": "Встречаются реже, чаще появляются из разрушенных муравейников. Всегда дают Queen Ant Shard.",
+       "rw": "10000 Hunting XP",
+       "en": "Kill a Queen Ant"
+      },
+      {
+       "t": "Добудь Stingray Shard",
+       "h": "Ловится как сокровище на рыбалке в любой точке каньона.",
+       "rw": "2500 Fishing XP",
+       "en": "Catch a Stingray Shard"
+      },
+      {
+       "t": "Добудь Giant Water Bug",
+       "h": "Только в хотспоте глубоко в Torrhus Springs.",
+       "rw": "2500 Fishing XP",
+       "en": "Catch a Giant Water Bug"
+      },
+      {
+       "t": "Купи шард у Sanger",
+       "h": "Продаёт шарды семейства Evasive, но каждый день меняет место.",
+       "rw": "+5,000 Desert Whispers",
+       "en": "Purchase a Shard from Sanger"
+      },
+      {
+       "t": "Забери Safari Milestone у Andrea",
+       "h": "Охота в сафари двигает вехи и улучшает Safari Belt.",
+       "rw": "25× Safari Essence",
+       "en": "Claim a Safari Milestone from Andrea"
+      },
+      {
+       "t": "Поймай 20 уникальных существ в Critter Safari",
+       "h": "В сафари 4 биома, и у каждого свои существа.",
+       "rw": "50× Safari Essence",
+       "en": "Catch 20 Unique Critters in the Critter Safari"
+      },
+      {
+       "t": "Купи Booster Upgrade у Maxim",
+       "h": "Превращает Common Booster на снаряжении Foraging в Uncommon.",
+       "rw": "+5,000 Desert Whispers",
+       "en": "Purchase a Booster Upgrade from Maxim"
+      }
+     ]
+    },
+    {
+     "n": "VI",
+     "i": "Ищи самых редких существ!",
+     "done": "Открывает главу VII; 100 Safari Essence, 1 Beeheemoth Shard, 1 Torrid Shard, 1 Water Snake Shard; +3,000 Heart Of The Forest XP; +15,000 Desert Whispers; 45000 Foraging XP; +30 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "500 Helix Tree Gifts",
+       "h": "Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.",
+       "rw": "32× Enchanted Helix Log",
+       "en": "Obtain 500 Helix Tree Gifts"
+      },
+      {
+       "t": "Legendary в конкурсе Miria",
+       "h": "Даёт First-Class Safari Ticket, лучший из билетов.",
+       "rw": "1× First-Class Safari Ticket",
+       "en": "Reach Legendary in Miria's Contest"
+      },
+      {
+       "t": "Возьми в руку Helix Chopper",
+       "h": "Улучшение Figstone Splitter, крафтится на коллекции Helix VI.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Hold a Helix Chopper"
+      },
+      {
+       "t": "Добудь Water Snake",
+       "h": "Глубоко в Torrhus Springs. Нужна Turbo Fishing Net или лучше.",
+       "rw": "5000 Hunting XP",
+       "en": "Hunt a Water Snake"
+      },
+      {
+       "t": "Добудь Sneaky, Shrieky или Cheeky Tiki",
+       "h": "Живут высоко в Torrhus Heights. Реши их головоломку и лови с помощью Pocket Black Hole.",
+       "rw": "5000 Hunting XP",
+       "en": "Hunt a Sneaky Tiki, Shrieky Tiki, or Cheeky Tiki"
+      },
+      {
+       "t": "Добудь Beeheemoth",
+       "h": "Огромная пчела, появляется в случайном месте. Нужна целая группа с Lasso, так что зовите весь кооп.",
+       "rw": "5000 Hunting XP",
+       "en": "Hunt a Beeheemoth"
+      },
+      {
+       "t": "Вылови Torrid",
+       "h": "Эпическое (Epic) морское существо каньона.",
+       "rw": "2000 Fishing XP",
+       "en": "Catch a Torrid while Fishing"
+      },
+      {
+       "t": "Вылови Silkbreeze",
+       "h": "Легендарное (Legendary) морское существо каньона.",
+       "rw": "3500 Fishing XP",
+       "en": "Catch a Silkbreeze while Fishing"
+      },
+      {
+       "t": "Поймай 30 уникальных существ в Critter Safari",
+       "h": "В сафари 4 биома, и у каждого свои существа.",
+       "rw": "75× Safari Essence",
+       "en": "Catch 30 Unique Critters in the Critter Safari"
+      }
+     ]
+    },
+    {
+     "n": "VII",
+     "i": "Активируй Starborn Temple и готовься к следующему испытанию.",
+     "done": "150 Safari Essence, 4 First-Class Safari Ticket; +4,000 Heart Of The Forest XP; +20,000 Desert Whispers; 60000 Foraging XP; +35 SkyBlock XP",
+     "tasks": [
+      {
+       "t": "1000 Helix Tree Gifts",
+       "h": "Награды за вехи Helix Tree забирай у Swoop в Moonglade Marsh.",
+       "rw": "64× Enchanted Helix Log",
+       "en": "Obtain 1000 Helix Tree Gifts"
+      },
+      {
+       "t": "Скрытая категория в конкурсе Miria",
+       "h": "Ходят слухи о категориях выше Legendary.",
+       "rw": "2× First-Class Safari Ticket",
+       "en": "Reach a Hidden Bracket in Miria's Contest"
+      },
+      {
+       "t": "Надень полный Helix Armor",
+       "h": "Улучшение Fig Armor, крафтится на коллекции Helix VIII.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Wear a Full Set of Helix Armor"
+      },
+      {
+       "t": "Возьми в руку Honeycomb Necklace",
+       "h": "Улучшение Mangrove Locket, нужна коллекция Honeycomb IX.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Hold a Honeycomb Necklace"
+      },
+      {
+       "t": "Возьми в руку Veilshroom Bracelet",
+       "h": "Улучшение Mangrove Grippers, нужна коллекция Ruby Veilshroom IX.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Hold a Veilshroom Bracelet"
+      },
+      {
+       "t": "Вылови Giant Isopod",
+       "h": "Мифическое (Mythic) морское существо каньона.",
+       "rw": "5000 Fishing XP",
+       "en": "Catch a Giant Isopod while Fishing"
+      },
+      {
+       "t": "Купи Tier XII Upgrade Stone у Ant",
+       "h": "Ant продаёт камни XII тира для миньонов Foraging.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Purchase a Tier XII Upgrade Stone from Ant"
+      },
+      {
+       "t": "Активируй Starborn Temple",
+       "h": "Говорят, он скрыт на дне Torrhus Springs.",
+       "rw": "+10,000 Desert Whispers",
+       "en": "Activate the Starborn Temple"
+      },
+      {
+       "t": "Safari Belt до Mythic",
+       "h": "Закрой все Safari Milestones у Andrea.",
+       "rw": "100× Safari Essence",
+       "en": "Upgrade your Safari Belt to Mythic"
+      },
+      {
+       "t": "Заверши Critterdex",
+       "h": "Поймай все виды существ.",
+       "rw": "100× Safari Essence",
+       "en": "Complete the Critterdex"
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "rift": {
+  "about": "Rift Guide открывает Wizard but Weird на вершине Wizard Tower в Rift. Потом гайд доступен в SkyBlock Menu или по команде /riftguide внутри Rift. Задания, отмеченные «ведёт к Timecharm», дают Timecharm: это главная цель каждой зоны.",
+  "areas": [
+   {
+    "id": "wyld",
+    "n": "Wyld Woods",
+    "i": "Дом Argofay. Они любят гостей.",
+    "t": [
+     [
+      "Скрафти Crux Talisman",
+      "Убивай Shy и собирай Shy Crux."
+     ],
+     [
+      "Лодка Reed: Larva Silk",
+      "Отдай Reed 16× Larva Silk. В игре задание подписано «Powerful Glue», но нужен именно Larva Silk."
+     ],
+     [
+      "Помоги Bughunter",
+      "Отдай Argofay Bughunter 8× Bottled Odonata."
+     ],
+     [
+      "Montezuma: фрагмент 1",
+      "Лежит под деревом в Wyld Woods."
+     ],
+     [
+      "Montezuma: фрагмент 2",
+      "В доме в Rift Gallery. Дверь открывается каменной кнопкой."
+     ],
+     [
+      "Глаз: The Intruder",
+      "Найди и успокой первый глаз Porhtal в Wizard Tower. Откроется быстрое перемещение туда."
+     ],
+     [
+      "Помоги Inverted Sirius",
+      "Он «стоит» за своей лачугой. Поговори с посетителями Shifted Tavern, добудь Stability Elixir у Argofay Serialbather и отдай Sirius. Откроются предметы Rift-Transferable."
+     ],
+     [
+      "Поговори с Sad Jacquelle",
+      "Ищет кошку и сидит на ветке у своего дома. Даст питомца Montezuma, который растёт за найденные Montezuma Soul Fragments."
+     ],
+     [
+      "Поговори с Porhtal",
+      "Научит быстрым перемещениям. Его глаза есть в Wizard Tower, Lagoon Hut, Dreadfarm, Village Plaza, Colosseum, Stillgore Château и на The Mountaintop."
+     ],
+     [
+      "Надень Enigma's Cloak",
+      "Поговори с Enigma у подножия Wizard Tower."
+     ],
+     [
+      "Поговори с Threebrothers",
+      "Поговори со всеми тремя Argofay Threebrothers и купи Wyld Sword."
+     ],
+     [
+      "Надень Wyld Armor",
+      "Купи полный комплект у Argofay Traffickers в домиках на деревьях."
+     ]
+    ]
+   },
+   {
+    "id": "lagoon",
+    "n": "Black Lagoon",
+    "i": "Узкая и опасная полоска земли: грибы выскакивают от вибраций.",
+    "t": [
+     [
+      "Montezuma: фрагмент 3",
+      "За водопадом у входа в Leeches Lair."
+     ],
+     [
+      "Убей Deadgehog",
+      "Скрафти Not-Dead-Gehog Mask из Wyld Helmet и Deadgehog Spines."
+     ],
+     [
+      "Победи Leech Supreme",
+      "Босс в Leeches Lair. Ведёт к Timecharm."
+     ],
+     [
+      "Глаз: The Gill-Man",
+      "Второй глаз Porhtal, в Lagoon Hut."
+     ],
+     [
+      "Поговори с Reed",
+      "Застрял на Lagoon Hut. Соберёт Rift Boat, если принести материалы."
+     ]
+    ]
+   },
+   {
+    "id": "west",
+    "n": "West Village",
+    "i": "Здесь реальность искажена сильнее всего.",
+    "t": [
+     [
+      "Скрафти Crux Ring",
+      "Убивай Shadow и собирай Shadow Crux."
+     ],
+     [
+      "Пройди Mirrorverse",
+      "Все 7 комнат с головоломками Dr. Emmett. Ведёт к Timecharm."
+     ],
+     [
+      "Защити дом от огненного шара",
+      "Помоги Sorcerer Okron: собери глифы по West Village и Dreadfarm и колдуй защиту через Warding Diamathame."
+     ],
+     [
+      "Montezuma: фрагмент 4",
+      "На крыше здания, где сидит Plumber Joe."
+     ],
+     [
+      "Очисти Infested House",
+      "Заполни Vermin Bin и получи Disinfestor Gloves."
+     ],
+     [
+      "Hacking for dummies",
+      "Взломай терминалы по West Village и получи Defective Monitor у Unhinged Kloon."
+     ],
+     [
+      "Гонка Gunther",
+      "Пройди Gunther's Rift Race и скрафти Gunther's Sneakers."
+     ]
+    ]
+   },
+   {
+    "id": "dreadfarm",
+    "n": "Dreadfarm",
+    "i": "Ферма, где растут культуры, которых нет нигде, кроме Rift.",
+    "t": [
+     [
+      "Скрафти Crux Artifact",
+      "Убивай Volt и собирай Volt Crux."
+     ],
+     [
+      "Лодка Reed: Wilted Berberis",
+      "Отдай Reed 64× Wilted Berberis."
+     ],
+     [
+      "Montezuma: фрагмент 5",
+      "За хрупкой стеной в Dreadfarm. Взорви её из Horsezooka."
+     ],
+     [
+      "Глаз: The Baba Yaga",
+      "Третий глаз Porhtal, в Dreadfarm."
+     ],
+     [
+      "Урожай для Shania",
+      "Собери всё, что просит Shania, скрафти и надень Chicken Leggs. Ведёт к Timecharm."
+     ]
+    ]
+   },
+   {
+    "id": "plaza",
+    "n": "Village Plaza",
+    "i": "Центр деревни. Обходи бродящих эндерменов.",
+    "t": [
+     [
+      "Скрафти Crux Relic",
+      "Убивай Scribe и собирай Scribe Crux."
+     ],
+     [
+      "Barry, Premier Leader of SkyBlock",
+      "Помоги Barry разобраться с протестующими. Ведёт к Timecharm."
+     ],
+     [
+      "Аукцион Shen",
+      "Damia проводит аукционы Shen на Barrier Street. Сделай ставку."
+     ],
+     [
+      "Лодка Reed: Half-Eaten Carrot",
+      "Отдай Reed 128× Half-Eaten Carrot."
+     ],
+     [
+      "Кролики Cowboy Nick",
+      "Собери Half-Eaten Carrot в Half-Eaten Cave и скрафти для Cowboy Nick 7× Nearly-Whole Carrot."
+     ],
+     [
+      "Montezuma: фрагмент 6",
+      "В книге Book in a Book: кликни книжную полку в Marcia's Flower House."
+     ],
+     [
+      "Montezuma: фрагмент 7",
+      "На летающем островке у Déjà Vu Alley."
+     ],
+     [
+      "Reverse-Murder Investigation",
+      "Помоги Detective Amog раскрыть будущее убийство Ramero, в котором убийца — ты сам."
+     ],
+     [
+      "Глаз: The Bankster",
+      "Четвёртый глаз Porhtal, в Village Plaza."
+     ],
+     [
+      "Лицо Seraphine",
+      "Добудь Anti-Morph Potion для Detransfigured Seraphine и получи Used Detransfigured Face."
+     ],
+     [
+      "Удобные кроссовки",
+      "Купи Exceedingly Comfy Sneakers у Seymour в доме портного."
+     ]
+    ]
+   },
+   {
+    "id": "cave",
+    "n": "Living Cave",
+    "i": "Здесь даже стены живые.",
+    "t": [
+     [
+      "Скрафти Crux Heirloom",
+      "Убивай Frozille и собирай Frosty Crux."
+     ],
+     [
+      "Лодка Reed: Living Metal Anchor",
+      "Скрафти Living Metal Anchor и отдай Reed."
+     ],
+     [
+      "Скрафти Self-Recursive Pickaxe",
+      "Убивай Autonull и с помощью Nullified Metal улучши меч до кирки."
+     ],
+     [
+      "Прокачай костюм до максимума",
+      "Убивай Autocap, Autochest, Autopants и Autoboots, пока на всех частях брони не будет бонуса Living Metal Suit. Потом спускайся в Living Stillness."
+     ],
+     [
+      "Скрафти Living Timecharm",
+      "Спрыгни в Living Stillness, убивай Frozille и скрафти Timecharm из Frosty Crux и Living Metal."
+     ],
+     [
+      "Добудь Living Metal Heart",
+      "Расспроси каменных жителей Living Stillness и успокой Living Metal Snakes с помощью Frozen Water Pungi."
+     ],
+     [
+      "Montezuma: фрагмент 8",
+      "В Living Stillness, под ломаемым блоком снега."
+     ]
+    ]
+   },
+   {
+    "id": "colosseum",
+    "n": "Colosseum",
+    "i": "Колизей захватила ядовитая слизь.",
+    "t": [
+     [
+      "Лодка Reed: Bacte Fragments",
+      "Отдай Reed 8× Bacte Fragments."
+     ],
+     [
+      "Победи Bacte",
+      "Собери друзей и убей Bacte в Colosseum, с него падают Bacte Fragments. Ведёт к Timecharm."
+     ],
+     [
+      "Глаз: The Gooey",
+      "Пятый глаз Porhtal, в Colosseum."
+     ]
+    ]
+   },
+   {
+    "id": "chateau",
+    "n": "Stillgore Château",
+    "i": "В замке поселились вампиры. Берегись их тюрьмы.",
+    "t": [
+     [
+      "Скрафти Crux Chronomicon",
+      "Убивай Splatter и собирай Splatter Crux."
+     ],
+     [
+      "Montezuma: фрагмент 9",
+      "На втором этаже дома рядом с Deer."
+     ],
+     [
+      "Глаз: The Prince",
+      "Шестой глаз Porhtal, у Stillgore Château."
+     ],
+     [
+      "Добудь Healing Melon",
+      "В замке монстры бьют по сердцам. Скрафти Healing Melon из Vampiric Melon, их роняют вампиры."
+     ]
+    ]
+   },
+   {
+    "id": "mountain",
+    "n": "The Mountaintop",
+    "i": "Вершина измерения, где когда-то раскололся мир SkyBlock.",
+    "t": [
+     [
+      "Скрафти Celestial Starstone",
+      "Убивай Puff и собирай Puff Crux."
+     ],
+     [
+      "Глаз: The Seventh Sin",
+      "Седьмой глаз Porhtal, на The Mountaintop. Даёт быстрый переход к площадке у Breach."
+     ],
+     [
+      "The Richest Man in the Multiverse",
+      "Найди Shen: пройди Walk of Fame и последовательности hivemind в Cerebral Citadel. Ведёт к Timecharm."
+     ],
+     [
+      "Закрой Breach",
+      "Накопи достаточно Rift Time, закрой Breach и заверши путешествие по Rift."
+     ],
+     [
+      "Открой коллекцию Timite",
+      "Начни добывать Timite."
+     ],
+     [
+      "Испытания Wizardman",
+      "Пройди испытания в Wizardman Bureau и собери полный Wizardman Armor."
+     ],
+     [
+      "Третье обратное убийство",
+      "Убей Detective Amog и забери его Wallet."
+     ],
+     [
+      "Второе обратное убийство",
+      "Снова помоги Amog: убей своё прошлое «я», пока оно не убило Ramero."
+     ],
+     [
+      "Eleanor",
+      "Докажи свою личность всем Eleanor на горе (I, V, VII, IX и X). Ведёт к Timecharm."
+     ]
+    ]
+   }
+  ]
+ },
+ "factions": {
+  "about": "Если ты вступил к магам (Mage) или варварам (Barbarian), каждый день можно выполнять до 5 квестов своей фракции. За них дают репутацию, Combat XP и Bits.",
+  "how": [
+   "Список квестов висит на доске в Community Center твоей фракции. Нажми на значок карты, чтобы открыть квест.",
+   "Когда квест выполнен, забери награду на той же доске."
+  ],
+  "types": [
+   [
+    "Fishing",
+    "Поймать определённую Trophy Fish."
+   ],
+   [
+    "Fetch",
+    "Принести на доску нужные материалы."
+   ],
+   [
+    "Miniboss",
+    "Убить определённого мини-босса."
+   ],
+   [
+    "Rescue",
+    "Найти заложника: варвары ищут его в Cathedral, маги — в The Bastion."
+   ],
+   [
+    "Dojo",
+    "Пройти испытание Dojo не ниже нужного ранга."
+   ],
+   [
+    "Kuudra",
+    "Победить Kuudra нужного тира."
+   ]
+  ],
+  "tiers": [
+   [
+    "Ⓢ",
+    "Legendary",
+    "20 000",
+    "125",
+    "60"
+   ],
+   [
+    "Ⓐ",
+    "Epic",
+    "15 000",
+    "100",
+    "50"
+   ],
+   [
+    "Ⓑ",
+    "Rare",
+    "10 000",
+    "75",
+    "40"
+   ],
+   [
+    "Ⓒ",
+    "Uncommon",
+    "5 000",
+    "50",
+    "30"
+   ],
+   [
+    "Ⓓ",
+    "Common",
+    "2 000",
+    "30",
+    "20"
+   ]
+  ],
+  "note": "Кроме гарантированной награды выпадают случайные предметы: Compact Ooze, Corrupted Fragment, Hallowed Skull, Leather Cloth, Lumino Fiber, Spell Powder и другие. У рыбацких квестов свой список наград."
+ },
+ "other": [
+  [
+   "Slayer",
+   "Боссы-слейеры. Квесты берутся у Maddox the Slayer.",
+   "https://hypixelskyblock.minecraft.wiki/w/Slayer"
+  ],
+  [
+   "Kat",
+   "Повышает редкость питомцев.",
+   "https://hypixelskyblock.minecraft.wiki/w/Kat"
+  ],
+  [
+   "Abiphone",
+   "Контакты для Abiphone, многие появляются после диалогов с NPC.",
+   "https://hypixelskyblock.minecraft.wiki/w/Abiphone"
+  ],
+  [
+   "Rusty",
+   "Предметы, которые Rusty продаёт после выполнения условий.",
+   "https://hypixelskyblock.minecraft.wiki/w/Rusty"
+  ],
+  [
+   "Kuudra Follower Armor",
+   "NPC, связанные с получением брони Kuudra Follower.",
+   "https://hypixelskyblock.minecraft.wiki/w/Kuudra_Follower_Armor"
+  ],
+  [
+   "Romero and Juliette",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/Romero_and_Juliette"
+  ],
+  [
+   "Cult of the Fallen Star",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/Cult_of_the_Fallen_Star"
+  ],
+  [
+   "Bednom",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/Bednom"
+  ],
+  [
+   "Royal Resident",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/Royal_Resident"
+  ],
+  [
+   "Lucius",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/Lucius"
+  ],
+  [
+   "George",
+   "",
+   "https://hypixelskyblock.minecraft.wiki/w/George"
+  ]
+ ]
+}

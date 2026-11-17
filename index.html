@@ -3,19 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Квесты коопа Cucumber</title>
-<style>html,body{margin:0;background:#262626;color:#fff;font:16px/1.5 system-ui,sans-serif}.l{padding:48px 20px;text-align:center;color:#c4c4c4}</style>
+<title>Кооп Cucumber — путь</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Tiny5&family=Rubik:wght@400;500&display=swap">
+<style>
+html,body{margin:0;min-height:100vh}
+body{display:grid;place-items:center;background:radial-gradient(ellipse 120% 70% at 50% 0%,#6e6680 0%,#5d5568 45%,#4b4456 80%,#3a3443 100%) fixed #4b4456;color:#f4e6c8;font:15px/1.5 "Rubik",system-ui,sans-serif}
+body.obs{background:transparent}
+body.obs .box{display:none}
+.box{width:min(320px,calc(100vw - 32px));padding:18px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;
+  border:12px solid transparent;border-image:var(--wood) 4 / 12px stretch;background:repeating-linear-gradient(180deg,transparent 0 15px,rgba(59,31,22,.22) 15px 18px),#8b4c2c;background-clip:padding-box}
+h1{margin:0;font:22px/1 "Tiny5",monospace;letter-spacing:.06em;color:#fffaf0;text-shadow:2px 2px 0 #3b1f16}
+.isl{width:96px;height:auto;image-rendering:pixelated;animation:bob 1.2s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.bar{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;width:100%;height:22px;padding:3px;box-sizing:border-box;background:#2a1712;box-shadow:0 0 0 3px #3b1f16}
+.bar i{background:#4a2c25;animation:seg 1.5s steps(1) infinite;animation-delay:calc(var(--i) * .15s)}
+@keyframes seg{0%{background:#f1c24c;box-shadow:inset 0 3px 0 #ffe593,inset 0 -3px 0 #b8812a}60%,100%{background:#4a2c25;box-shadow:none}}
+p{margin:0;font:14px/1.4 "Tiny5","Rubik",sans-serif;letter-spacing:.04em;color:#fff3cf}
+.err .bar,.err .isl{display:none}
+button{display:none;font:16px/1 "Tiny5",monospace;letter-spacing:.06em;color:#fff;background:#63ab46;border:0;padding:10px 18px 12px;cursor:pointer;box-shadow:0 0 0 3px #3b1f16,inset 0 3px 0 #9ad66f,inset 0 -4px 0 #3d7a33}
+button:active{transform:translateY(2px)}
+.err.retry button{display:block}
+@media (prefers-reduced-motion:reduce){.isl,.bar i{animation:none}}
+</style>
 </head>
 <body>
-<p class="l" id="msg">Загружаю путь коопа…</p>
+<div class="box" id="box">
+  <h1>КООП CUCUMBER</h1>
+  <svg class="isl" viewBox="0 0 20 15" width="100" height="75" shape-rendering="crispEdges" aria-hidden="true" id="isl"></svg>
+  <div class="bar" aria-hidden="true"><i style="--i:0"></i><i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i><i style="--i:7"></i><i style="--i:8"></i><i style="--i:9"></i></div>
+  <p id="msg" role="status">Загружаю остров…</p>
+  <button type="button" onclick="location.reload()">Повторить</button>
+</div>
 <script>
 // Entry of the Mini App on GitHub Pages. ?p=<nick>, &obs=1 for the OBS overlay, &api=<the sheet's Apps Script /exec URL>
 // (remembered in this browser). Takes the page, the roadmap and the co-op's live data, then draws the page.
+(() => {
+  // pixel frame and the little island on the loading card
+  const F = {o: '#3b1f16', h: '#b0683c', w: '#8b4c2c', s: '#5e301d'}, P = {o: '#3b1f16', g: '#63ab46', L: '#9ad66f', G: '#3d7a33', b: '#8b4c2c', B: '#5e301d', y: '#f1c24c', S: '#6c7380'};
+  const runs = (rows, pal) => rows.map((r, y) => [...r].map((c, x) => pal[c] ? `<rect x="${x}" y="${y}" width="1" height="1" fill="${pal[c]}"/>` : '').join('')).join('');
+  const wood = ['..ooooo..', '.ohhhhho.', 'ohwwwwwso', 'ohwwwwwso', 'ohwwwwwso', 'ohwwwwwso', 'ohwwwwwso', '.ossssso.', '..ooooo..'];
+  document.documentElement.style.setProperty('--wood', `url("data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 9" width="9" height="9" shape-rendering="crispEdges">${runs(wood, F)}</svg>`)}")`);
+  document.getElementById('isl').innerHTML = runs(['.........oo.........', '........oSyyo.......', '........oSyyyo......', '........oSoo........', '..oooooooSoooooooo..', '.oggLggggggggLgggo..', 'oggggGggggLggggggo..', 'obbbbbBbbbbbbBbbbbo.', '.obbBbbbbbBbbbbbbo..', '..obbbbbbbbbBbbbo...', '...obbbBbbbbbbbo....', '....obbbbbBbbbo.....', '.....obbbbbbbo......', '.......obbbo........', '........ooo.........'], P);
+})();
 (async () => {
-  const q = new URLSearchParams(location.search), msg = t => { document.getElementById('msg').textContent = t; };
+  const q = new URLSearchParams(location.search), box = document.getElementById('box');
+  const fail = (t, retry) => { document.getElementById('msg').textContent = t; box.className = 'box err' + (retry ? ' retry' : ''); };
+  if (q.get('obs') === '1') document.body.className = 'obs';
   let api = q.get('api') || '';
   try { if (api) localStorage.setItem('hp_api', api); else api = localStorage.getItem('hp_api') || ''; } catch (e) {}
-  if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(api)) { msg('Открой приложение из бота коопа: команда /app.'); return; }
+  if (!/^https:\/\/script\.google\.com\/.+\/exec$/.test(api)) { fail('Открой приложение из бота коопа: команда /app.'); return; }
   const p = q.get('p') || '', obs = q.get('obs') === '1';
   try {
     const [page, road, live] = await Promise.all([
@@ -29,7 +67,8 @@
       + page.replace('__ROAD__', () => safe(road)).replace('__LIVE__', () => safe(live)) + '</body></html>';
     document.open(); document.write(html); document.close();
   } catch (e) {
-    msg('Не получилось загрузить данные коопа. Обнови страницу через минуту.');
+    document.body.className = '';
+    fail('Не получилось загрузить данные коопа. Попробуй ещё раз через минуту.', true);
   }
 })();
 </script>
