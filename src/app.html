@@ -863,7 +863,7 @@ function viewMore() {
 // =====================================================================
 // Ask: the co-op's advisor (a Claude routine). Questions, answers and memory live in the sheet.
 // =====================================================================
-const ASK = {loaded: false, items: [], memo: [], ready: true, err: "", sending: false, toType: {}, draft: "", badge: 0, sig: ""};
+const ASK = {loaded: false, items: [], memo: [], ready: true, err: "", sending: false, toType: {}, wake: {}, draft: "", badge: 0, sig: ""};
 const SUGG = ["Что мне делать дальше?", "Как быстрее заработать первые 100k?", "Какие миньоны ставить первыми?", "Как быстрее прокачать мою роль?"];
 const DOTS = '<span class="dots"><i></i><i></i><i></i></span>';
 let askTimer = 0;
@@ -873,7 +873,7 @@ const when = t => t ? new Date(t).toLocaleString("ru-RU", {day: "2-digit", month
 function askItemHtml(x, last) {
   const p = players.find(pl => pl.name === x.who);
   const q = `<div class="msg q"><div class="bub fr-sign"><span class="mt">${esc(x.who)} · ${esc(when(x.t))}${x.src === "Telegram" ? " · Telegram" : ""}</span><p>${esc(x.q)}</p></div><span class="face fr-slot">${head(p)}</span></div>`;
-  const a = x.st === "думает" ? `<div class="bub fr-parch"><p>Думаю ${DOTS.replace("dots", "dots ink")}</p></div>`
+  const a = x.st === "думает" ? `<div class="bub fr-parch"><p>${ASK.wake[x.id] ? "Просыпаюсь, это 1–2 минуты" : "Думаю"} ${DOTS.replace("dots", "dots ink")}</p></div>`
     : x.st === "готово" ? `<div class="bub fr-parch${last ? " last" : ""}" data-aid="${esc(x.id)}"><p class="txt">${ASK.toType[x.id] ? "" : esc(x.a)}</p></div>`
     : `<div class="bub fr-parch dim"><p>Ответ не пришёл. Спроси ещё раз.</p></div>`;
   return `<div class="pair">${x.q ? q : ""}<div class="msg a"><span class="face fr-slot">${owl(2, x.st === "думает" ? "think" : "")}</span>${a}</div></div>`;
@@ -894,7 +894,7 @@ function viewAsk() {
   if (!LIVE.auto || !players.length) return needLive("Здесь можно задать вопрос ИИ-советнику коопа.");
   const me = asker(), off = !ASK.ready || ASK.err === "old";
   return `<article class="card fr-parch advisor" style="--i:0"><div class="adv"><span class="slotbig fr-slot">${owl(4)}</span><div><h2>Советник</h2>`
-    + `<p class="muted">Знает SkyBlock, видит путь каждого и помнит, о чём кооп спрашивал раньше. Отвечает за 1–2 минуты, а вопросы и ответы сохраняются в таблице.</p></div></div>`
+    + `<p class="muted">Знает SkyBlock, видит путь каждого и помнит, о чём кооп спрашивал раньше. Обычно отвечает за полминуты, после долгой паузы просыпается 1–2 минуты. Вопросы и ответы сохраняются в таблице.</p></div></div>`
     + (ASK.ready ? "" : `<p class="note">ИИ ещё не подключён: владельцу таблицы нужно вставить токен (меню «Квесты коопа → Подключить ИИ для /ask»).</p>`)
     + `<details class="memo" id="memo">${memoHtml()}</details></article>`
     + `<section class="chat" id="chat" style="--i:1" aria-live="polite">${chatHtml()}</section>`
@@ -980,7 +980,7 @@ function askSend() {
   ASK.items.push(tmp); askRender(); toEnd(true); haptic("light");
   const done = d => {
     ASK.sending = false;
-    if (d && d.ok) { tmp.id = d.id; askRender(); askFetch(askSchedule); return; }
+    if (d && d.ok) { tmp.id = d.id; if (d.fast === false) ASK.wake[d.id] = 1; askRender(); askFetch(askSchedule); return; }
     ASK.items = ASK.items.filter(x => x !== tmp); ASK.draft = text;
     const t2 = $("askq"); if (t2) { t2.value = text; autosize(t2); }
     askRender(); toast((d && d.error) || "Не получилось отправить, попробуй ещё раз.");
