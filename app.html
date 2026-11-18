@@ -894,7 +894,7 @@ function viewAsk() {
   if (!LIVE.auto || !players.length) return needLive("Здесь можно задать вопрос ИИ-советнику коопа.");
   const me = asker(), off = !ASK.ready || ASK.err === "old";
   return `<article class="card fr-parch advisor" style="--i:0"><div class="adv"><span class="slotbig fr-slot">${owl(4)}</span><div><h2>Советник</h2>`
-    + `<p class="muted">Знает SkyBlock, видит путь каждого и помнит, о чём кооп спрашивал раньше. Обычно отвечает за полминуты, после долгой паузы просыпается 1–2 минуты. Вопросы и ответы сохраняются в таблице.</p></div></div>`
+    + `<p class="muted">Знает SkyBlock, видит путь каждого и помнит, о чём кооп спрашивал раньше. Днём отвечает примерно за полминуты, а ночью, с 3:00 до 9:00, спит, и первый ответ занимает 1–2 минуты. Вопросы и ответы сохраняются в таблице.</p></div></div>`
     + (ASK.ready ? "" : `<p class="note">ИИ ещё не подключён: владельцу таблицы нужно вставить токен (меню «Квесты коопа → Подключить ИИ для /ask»).</p>`)
     + `<details class="memo" id="memo">${memoHtml()}</details></article>`
     + `<section class="chat" id="chat" style="--i:1" aria-live="polite">${chatHtml()}</section>`
