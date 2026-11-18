@@ -252,7 +252,7 @@ details.card[open] summary::before{content:"▾ "}
 .empty{padding:20px;text-align:center}
 
 /* ---- hotbar ---- */
-#hotbar{--slot:clamp(34px,calc((100vw - 76px) / 8),50px);position:fixed;left:50%;bottom:calc(8px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:flex;align-items:flex-end;gap:4px;padding:6px;max-width:calc(100vw - 8px)}
+#hotbar{--slot:clamp(32px,calc((100vw - 68px) / 9),50px);position:fixed;left:50%;bottom:calc(8px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;display:flex;align-items:flex-end;gap:3px;padding:4px;max-width:calc(100vw - 8px)}
 #hotbar.in{animation:barin .5s steps(5) both}
 @keyframes barin{0%{transform:translate(-50%,130%)}70%{transform:translate(-50%,-6px)}100%{transform:translate(-50%,0)}}
 .hb{position:relative;width:var(--slot);height:var(--slot);flex:none;display:grid;place-items:center;transition:transform .1s steps(2)}
@@ -263,7 +263,9 @@ details.card[open] summary::before{content:"▾ "}
 .hb.pulse{animation:hbpulse .36s steps(3)}
 @keyframes hbpulse{0%{transform:translateY(-8px) scale(1)}40%{transform:translateY(-12px) scale(1.12,.9)}100%{transform:translateY(-8px) scale(1)}}
 .hb .key{top:-9px;left:-9px;right:auto;min-width:16px;font-size:12px}
-.hb.sep{margin-left:6px}
+.hb.sep{margin-left:4px}
+.hb.sepr{margin-right:4px}
+.hb .badge{position:absolute;bottom:-8px;right:-8px;min-width:18px;height:18px;padding:0 4px;font:13px/18px var(--px);color:#fff;text-align:center;background:var(--red);box-shadow:0 0 0 2px var(--wood-dk),inset 0 -3px 0 var(--red-lo);animation:wiggle 1s steps(2) infinite;z-index:3}
 .leaf{position:absolute;pointer-events:none;animation:sway 1.6s steps(1) infinite}
 .leaf.b{animation-delay:.8s}
 @keyframes sway{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
@@ -271,6 +273,54 @@ details.card[open] summary::before{content:"▾ "}
   font:22px/1 var(--px);letter-spacing:.06em;color:#fff;text-shadow:3px 3px 0 #2a1712;opacity:0;white-space:nowrap}
 #itemname.show{animation:iname 1.8s steps(9) forwards}
 @keyframes iname{0%{opacity:0;transform:translate(-50%,8px)}12%{opacity:1;transform:translate(-50%,0)}75%{opacity:1}100%{opacity:0}}
+
+/* ---- ask: the co-op's advisor ---- */
+.advisor{gap:10px}
+.adv{display:flex;align-items:center;gap:12px}
+.adv h2{margin-bottom:2px}
+.slotbig{flex:none;width:76px;height:76px;display:grid;place-items:center}
+.owlbox{display:grid;place-items:center}
+.owlbox>span{grid-area:1/1;display:grid;place-items:center}
+.owlbox .blink{visibility:hidden;animation:owlblink 4.6s steps(1) infinite}
+@keyframes owlblink{0%,90%{visibility:hidden}91%,95%{visibility:visible}96%,100%{visibility:hidden}}
+.owlbox.think{animation:bob 1s steps(2) infinite}
+.memo summary{cursor:pointer;display:flex;align-items:center;gap:8px;font:15px/1.3 var(--px);letter-spacing:.04em;color:var(--ink);list-style:none}
+.memo summary::-webkit-details-marker{display:none}
+.memo summary::after{content:"▸";color:var(--wood)}
+.memo[open] summary::after{content:"▾"}
+.memo[open]>*:not(summary){margin-top:8px}
+.chat{display:flex;flex-direction:column;gap:14px}
+.pair{display:flex;flex-direction:column;gap:6px}
+.msg{display:flex;align-items:flex-end;gap:6px;min-width:0}
+.msg.q{justify-content:flex-end;padding-left:34px}
+.msg.a{padding-right:14px}
+.msg .face{flex:none;width:40px;height:40px;display:grid;place-items:center}
+.msg .face img,.msg .face .ini{width:28px;height:28px;font-size:16px}
+.bub{min-width:0;padding:4px 8px 6px;font-size:15px;line-height:1.45}
+.bub p{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.bub .mt{display:block;margin-bottom:2px;font:12px/1.3 var(--px);letter-spacing:.04em;opacity:.85}
+.msg.a .bub{color:var(--ink)}
+.bub.dim{opacity:.7}
+.bub.last p::after,.bub.typing p::after{content:"";display:inline-block;vertical-align:-1px;margin-left:5px;animation:blink 1s steps(2) infinite}
+.bub.last p::after{width:10px;height:7px;background:var(--wood);clip-path:polygon(0 0,100% 0,50% 100%)}
+.bub.typing p::after{width:8px;height:14px;background:var(--ink-2)}
+.dots.ink i{background:var(--ink-2)}
+.ask-note{margin:0;padding:10px 4px;text-align:center;color:#d9cfe3}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.sugg.row{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;padding:4px 2px 6px;margin:0 -2px;scrollbar-width:none}
+.sugg.row::-webkit-scrollbar{display:none}
+.sugg .chip{flex:none;font-size:14px;text-align:left}
+.composer{position:sticky;bottom:calc(var(--hb) + 22px + env(safe-area-inset-bottom,0px));z-index:5;display:flex;align-items:flex-end;gap:6px;padding:4px}
+.composer .me{flex:none;width:44px;height:44px;display:grid;place-items:center}
+.composer .me img,.composer .me .ini{width:28px;height:28px;font-size:16px}
+.composer textarea{flex:1;min-width:0;height:44px;min-height:44px;max-height:132px;resize:none;border:6px solid transparent;border-image:var(--f-slot) 3 / 6px stretch;background:var(--cream);background-clip:padding-box;color:var(--ink);font:16px/1.35 var(--ui);padding:5px 8px;outline:none}
+.composer textarea::placeholder{color:var(--ink-3)}
+.composer .btn{flex:none;min-height:44px;height:44px;padding:0 6px 2px}
+#fade{position:fixed;left:0;right:0;bottom:0;height:calc(var(--hb) + 18px + env(safe-area-inset-bottom,0px));z-index:4;pointer-events:none;background:linear-gradient(180deg,rgba(58,52,67,0),rgba(46,41,54,.94) 16px)}
+body.asking #fade{height:calc(var(--hb) + 44px + env(safe-area-inset-bottom,0px))}
+body.typing #fade{height:calc(28px + env(safe-area-inset-bottom,0px))}
+body.typing #hotbar,body.typing #itemname{display:none}
+body.typing .composer{bottom:calc(8px + env(safe-area-inset-bottom,0px))}
 
 /* ---- popover, toast, effects ---- */
 .wipe{position:fixed;left:0;right:0;z-index:15;display:grid;grid-auto-rows:36px;overflow:hidden;pointer-events:none}
@@ -302,7 +352,7 @@ details.card[open] summary::before{content:"▾ "}
 
 /* ---- OBS overlay (?obs=1): only the path ---- */
 body.obs{background:transparent}
-body.obs::before,body.obs #dust,body.obs #hud,body.obs #hotbar,body.obs #itemname,body.obs .card,body.obs .pathbar,body.obs .upd{display:none!important}
+body.obs::before,body.obs #dust,body.obs #fade,body.obs #hud,body.obs #hotbar,body.obs #itemname,body.obs .card,body.obs .pathbar,body.obs .upd{display:none!important}
 body.obs main{padding:0;max-width:none}
 body.obs #view{gap:0}
 body.obs .obsline{display:flex;align-items:center;gap:10px;padding:6px 14px 8px;font:16px/1.3 var(--px);color:var(--cream-hi);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -313,14 +363,15 @@ body.obs .obsline b{color:var(--gold)}
   .bars{display:contents}
   .bg.l{grid-area:l}.bg.r{grid-area:r}
 }
-@media (max-width:380px){#hotbar{gap:3px}}
+@media (min-width:500px){#hotbar{gap:4px;padding:6px}.hb.sep{margin-left:6px}.hb.sepr{margin-right:6px}}
+@media (max-width:384px){.hb.fr-slot{border-width:4px;border-image:var(--f-slot-s) 2 / 4px stretch}}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}#dust{display:none}#toast.show{transform:translate(-50%,0)}#itemname.show{opacity:1}}
 </style>
 
 <div id="dust" aria-hidden="true"></div>
 <header id="hud"></header>
 <div id="who-pop" class="fr-parch" role="menu" aria-label="Игроки коопа"></div>
-<main><div id="view" role="tabpanel" tabindex="-1"></div></main>
+<main><div id="view" role="tabpanel" tabindex="-1"></div><div id="fade" aria-hidden="true"></div></main>
 <nav id="hotbar" class="fr-wood-s" role="tablist" aria-label="Разделы"></nav>
 <div id="itemname" aria-hidden="true"></div>
 <div id="toast" class="fr-sign" role="status" aria-live="polite"></div>
@@ -405,6 +456,7 @@ const FR = {
   "wbtn-down": ["..ooooo..", ".owwwwwo.", "oshhhhhWo", "oshhhhhWo", "oshhhhhWo", "oshhhhhWo", "oshhhhhWo", ".oWWWWWo.", "..ooooo.."],
   sign: ["..ooooo..", ".oyyyyyo.", "oyhhhhhso", "oyhhhhhso", "oyhhhhhso", "oyhhhhhso", "oyhhhhhso", ".ossssso.", "..ooooo.."],
   slot: ["..ooo..", ".oHHHo.", "oHcccCo", "oHcccCo", "oHcccCo", ".oCCCo.", "..ooo.."],
+  "slot-s": [".ooo.", "oHHCo", "oHcCo", "oCCCo", ".ooo."],
   selbox: ["xxx...xxx", "x.......x", "x.......x", ".........", ".........", ".........", "x.......x", "x.......x", "xxx...xxx"]
 };
 function frameUrl(map) {
@@ -440,6 +492,9 @@ const IC = {
   bulb: ["...oooo...", "..oyyyyo..", ".oywyyyYo.", ".oywyyyYo.", ".oyyyyyYo.", "..oyyyYo..", "...oYYo...", "...osso...", "...oSSo...", "....oo...."],
   compass: ["...oooo...", "..osssso..", ".osrSSSSo.", "osSrSSSSso", "osSSrSSSso", "osSSSuSSso", "osSSSSuSso", ".osSSSSuo.", "..osssso..", "...oooo..."],
   arrow: ["ooooooo", "oxxxxxo", ".oxxxo.", "..oxo..", "...o..."],
+  owl: [".o........o.", ".obo....obo.", ".obboooobbo.", "obbbbbbbbbBo", "obwwwbbwwwBo", "obwkwbbwkwBo", "obwwwyywwwBo", "obbbbYYbbbBo", "oblnnnnnnlBo", "obnNnnnNnnBo", ".obnnnnnnBo.", "..ooyoooyoo."],
+  owlBlink: [".o........o.", ".obo....obo.", ".obboooobbo.", "obbbbbbbbbBo", "obbbbbbbbbBo", "obkkkbbkkkBo", "obbbbyybbbBo", "obbbbYYbbbBo", "oblnnnnnnlBo", "obnNnnnNnnBo", ".obnnnnnnBo.", "..ooyoooyoo."],
+  send: ["....o....", "....oo...", "....oxo..", "ooooooxo.", "oxxxxxxxo", "ooooooxo.", "....oxo..", "....oo...", "....o...."],
   leaf: ["....oo", "..oogo", ".oggGo", "oggGo.", "oGGo..", ".oo..."]
 };
 const SH = {done: {f: "#f1c24c", F: "#b8812a", h: "#ffe593"}, cur: {f: "#d8463f", F: "#8f2b2b", h: "#f17a6f"}, ahead: {f: "#4a4552", F: "#2e2a35", h: "#6b6575"}};
@@ -476,6 +531,7 @@ const STAGES = [
   [0, "В любое время", "Души фей, гонки, реликвии и испытания костра: делайте, когда удобно."]
 ];
 const TABS = [
+  {id: "ask", key: "Q", name: "Спросить", ic: "owl"},
   {id: "path", key: "1", name: "Путь", ic: "map"},
   {id: "coop", key: "2", name: "Кооп", ic: "heads"},
   {id: "quests", key: "3", name: "Квесты", ic: "scroll"},
@@ -586,8 +642,8 @@ function renderHud() {
 function renderHotbar() {
   const hb = $("hotbar");
   if (!hb.firstChild) {
-    hb.innerHTML = TABS.map(t => `<button class="hb fr-slot${t.id === "done" ? " sep" : ""}" role="tab" data-tab="${t.id}" aria-label="${t.name}" title="${t.name} (${t.key})">`
-      + `${t.id === "done" ? `<span class="chest-c">${icon("chest", 2)}</span><span class="chest-o" hidden>${icon("chestOpen", 2)}</span>` : icon(t.ic, 2)}<span class="key">${t.key}</span></button>`).join("")
+    hb.innerHTML = TABS.map(t => `<button class="hb fr-slot${t.id === "done" ? " sep" : t.id === "ask" ? " sepr" : ""}" role="tab" data-tab="${t.id}" aria-label="${t.name}" title="${t.name} (${t.key})">`
+      + `${t.id === "done" ? `<span class="chest-c">${icon("chest", 2)}</span><span class="chest-o" hidden>${icon("chestOpen", 2)}</span>` : t.id === "ask" ? owl(2) : icon(t.ic, 2)}<span class="key">${t.key}</span></button>`).join("")
       + `<span class="leaf" style="left:-10px;top:-14px">${icon("leaf", 3)}</span><span class="leaf b" style="right:-8px;top:-12px;transform:scaleX(-1)">${icon("leaf", 3)}</span>`;
     if (!REDUCED) hb.classList.add("in");
   }
@@ -596,6 +652,7 @@ function renderHotbar() {
     b.classList.toggle("sel", on); b.setAttribute("aria-selected", on);
     if (b.dataset.tab === "done") { b.querySelector(".chest-c").hidden = on; b.querySelector(".chest-o").hidden = !on; }
   });
+  renderBadge();
   document.documentElement.style.setProperty("--hb", hb.offsetHeight + "px");
 }
 function itemName(text) {
@@ -797,9 +854,141 @@ function viewMore() {
     + `<li>Шаги пути закрываются сами: таблица коопа раз в 10 минут берёт прогресс из Hypixel API. То, чего не видно через API, отмечается кнопкой на вкладке «Путь» или командой /done в боте.</li>`
     + `<li>Квесты журнала отмечаются сами, когда в игре выполнен их последний шаг. Главы и Rift через API не видны.</li>`
     + `<li>Коллекции, крафты миньонов и банк в коопе общие, а навыки, квесты и слейеры у каждого свои.</li>`
-    + `<li>Клавиши: 1–7 — разделы, E — пройденное, F — сменить игрока, ← → — шаги на пути.</li></ul></article>`
+    + `<li>Вкладка «Спросить» (Q) — ИИ-советник коопа. Он видит ваш путь и помнит прошлые вопросы: история и память лежат в таблице, на листах «Вопросы ИИ» и «Память ИИ». В боте то же самое: /ask вопрос.</li>`
+    + `<li>Клавиши: Q — спросить, 1–7 — разделы, E — пройденное, F — сменить игрока, ← → — шаги на пути.</li></ul></article>`
     + `<article class="card fr-parch prose" style="--i:1"><h3>Квесты, которых нет в журнале</h3><ul>${(D.other || []).map(([n, d, u]) => `<li><a href="${esc(u)}" target="_blank" rel="noopener" style="color:var(--wood)">${esc(n)}</a>${d ? ": " + esc(d) : ""}</li>`).join("")}</ul></article>`
     + `<p class="px muted" style="--i:2;text-align:center;font-size:13px;color:#c9c1d3">ПОДСКАЗКИ: ВИКИ СООБЩЕСТВА · ПРОГРЕСС: HYPIXEL API</p>`;
+}
+
+// =====================================================================
+// Ask: the co-op's advisor (a Claude routine). Questions, answers and memory live in the sheet.
+// =====================================================================
+const ASK = {loaded: false, items: [], memo: [], ready: true, err: "", sending: false, toType: {}, draft: "", badge: 0, sig: ""};
+const SUGG = ["Что мне делать дальше?", "Как быстрее заработать первые 100k?", "Какие миньоны ставить первыми?", "Как быстрее прокачать мою роль?"];
+const DOTS = '<span class="dots"><i></i><i></i><i></i></span>';
+let askTimer = 0;
+const asker = () => players.find(p => p.id === LIVE.me) || curPlayer();
+const owl = (s, cls) => `<span class="owlbox ${cls || ""}"><span class="o1">${icon("owl", s)}</span><span class="blink">${icon("owlBlink", s)}</span></span>`;
+const when = t => t ? new Date(t).toLocaleString("ru-RU", {day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit"}) : "";
+function askItemHtml(x, last) {
+  const p = players.find(pl => pl.name === x.who);
+  const q = `<div class="msg q"><div class="bub fr-sign"><span class="mt">${esc(x.who)} · ${esc(when(x.t))}${x.src === "Telegram" ? " · Telegram" : ""}</span><p>${esc(x.q)}</p></div><span class="face fr-slot">${head(p)}</span></div>`;
+  const a = x.st === "думает" ? `<div class="bub fr-parch"><p>Думаю ${DOTS.replace("dots", "dots ink")}</p></div>`
+    : x.st === "готово" ? `<div class="bub fr-parch${last ? " last" : ""}" data-aid="${esc(x.id)}"><p class="txt">${ASK.toType[x.id] ? "" : esc(x.a)}</p></div>`
+    : `<div class="bub fr-parch dim"><p>Ответ не пришёл. Спроси ещё раз.</p></div>`;
+  return `<div class="pair">${x.q ? q : ""}<div class="msg a"><span class="face fr-slot">${owl(2, x.st === "думает" ? "think" : "")}</span>${a}</div></div>`;
+}
+function chatHtml() {
+  if (ASK.err === "old") return `<article class="card fr-parch empty"><h3>Нужно обновить скрипт таблицы</h3><p>Чтобы спрашивать прямо здесь, владельцу таблицы нужно вставить новый код скрипта. Пока можно спросить в боте: /ask вопрос.</p></article>`;
+  if (!ASK.loaded) return ASK.err === "net" ? `<p class="ask-note">Не получилось загрузить вопросы, пробую ещё раз…</p>` : `<p class="ask-note">${DOTS}</p>`;
+  const done = ASK.items.filter(x => x.st === "готово"), last = done[done.length - 1];
+  return (ASK.items.length ? ASK.items.map(x => askItemHtml(x, x === last)).join("") : `<p class="ask-note">Пока никто ничего не спрашивал. Начни с подсказки или задай свой вопрос.</p>`)
+    + `<div class="sugg${ASK.items.length ? " row" : ""}">${SUGG.map(t => `<button class="chip" type="button" data-sugg="${esc(t)}">${esc(t)}</button>`).join("")}</div>`;
+}
+function memoHtml() {
+  return `<summary>${icon("book", 2)}Память коопа · ${ASK.memo.length}</summary>`
+    + (ASK.memo.length ? `<ul class="how">${ASK.memo.map(n => `<li>${esc(n)}</li>`).join("")}</ul>` : `<p class="muted">Пока пусто.</p>`)
+    + `<p class="note">Память лежит в таблице, на листе «Память ИИ»: там её можно дописать или почистить. Скажи советнику «запомни, что…» — он добавит заметку сам.</p>`;
+}
+function viewAsk() {
+  if (!LIVE.auto || !players.length) return needLive("Здесь можно задать вопрос ИИ-советнику коопа.");
+  const me = asker(), off = !ASK.ready || ASK.err === "old";
+  return `<article class="card fr-parch advisor" style="--i:0"><div class="adv"><span class="slotbig fr-slot">${owl(4)}</span><div><h2>Советник</h2>`
+    + `<p class="muted">Знает SkyBlock, видит путь каждого и помнит, о чём кооп спрашивал раньше. Отвечает за 1–2 минуты, а вопросы и ответы сохраняются в таблице.</p></div></div>`
+    + (ASK.ready ? "" : `<p class="note">ИИ ещё не подключён: владельцу таблицы нужно вставить токен (меню «Квесты коопа → Подключить ИИ для /ask»).</p>`)
+    + `<details class="memo" id="memo">${memoHtml()}</details></article>`
+    + `<section class="chat" id="chat" style="--i:1" aria-live="polite">${chatHtml()}</section>`
+    + `<form class="composer fr-wood-s" id="askf" style="--i:2"><span class="me fr-slot" title="Спрашивает ${esc(me ? me.name : "")}">${head(me)}</span>`
+    + `<textarea id="askq" rows="1" maxlength="1500" placeholder="Спроси про SkyBlock…" aria-label="Вопрос советнику">${esc(ASK.draft)}</textarea>`
+    + `<button class="btn send" type="submit" aria-label="Спросить"${ASK.sending || off ? " disabled" : ""}>${ASK.sending ? DOTS : icon("send", 2)}</button></form>`;
+}
+function autosize(ta) { ta.style.height = "auto"; ta.style.height = Math.min(132, Math.max(44, ta.scrollHeight + 12)) + "px"; }
+const atEnd = () => innerHeight + scrollY >= document.documentElement.scrollHeight - 160;
+function toEnd(smooth) { window.scrollTo({top: document.documentElement.scrollHeight, behavior: smooth && !REDUCED ? "smooth" : "auto"}); }
+function typeOut(el, text) {
+  if (REDUCED) { el.textContent = text; return; }
+  const bub = el.closest(".bub"); let i = 0;
+  const finish = () => { const stick = ui.tab === "ask" && atEnd(); clearTimeout(el._t); el.textContent = text; bub.classList.remove("typing"); if (stick) toEnd(false); };
+  const step = () => {
+    const stick = ui.tab === "ask" && atEnd();
+    i = Math.min(text.length, i + 3); el.textContent = text.slice(0, i);
+    if (stick) toEnd(false);
+    if (i < text.length) el._t = setTimeout(step, 28); else finish();
+  };
+  bub.classList.add("typing"); bub.addEventListener("click", finish, {once: true}); step();
+}
+function runTyping() {
+  Object.keys(ASK.toType).forEach(id => {
+    const el = document.querySelector(`[data-aid="${CSS.escape(id)}"] .txt`), x = ASK.items.find(y => y.id === id);
+    if (!el || !x) return;
+    delete ASK.toType[id]; typeOut(el, x.a);
+  });
+}
+function renderBadge() {
+  const b = document.querySelector('.hb[data-tab="ask"]'); if (!b) return;
+  let g = b.querySelector(".badge");
+  if (ASK.badge && ui.tab !== "ask") { if (!g) { g = document.createElement("span"); g.className = "badge"; b.appendChild(g); } g.textContent = ASK.badge > 9 ? "9+" : ASK.badge; }
+  else if (g) g.remove();
+}
+/** Updates the chat in place, so the text being typed stays as it is. */
+function askRender() {
+  if (ui.tab !== "ask" || !$("chat")) return;
+  const end = atEnd();
+  $("chat").innerHTML = chatHtml();
+  const memo = $("memo"); if (memo) memo.innerHTML = memoHtml();
+  const btn = document.querySelector("#askf .send");
+  if (btn) { btn.disabled = ASK.sending || !ASK.ready || ASK.err === "old"; btn.innerHTML = ASK.sending ? DOTS : icon("send", 2); }
+  runTyping();
+  if (end) toEnd(true);
+}
+function askFetch(after) {
+  const me = asker(), run = window.google && google.script && google.script.run;
+  const ok = d => {
+    if (!d || !Array.isArray(d.items)) { ASK.err = "old"; ASK.loaded = true; askRender(); if (after) after(); return; }
+    const prev = {}; ASK.items.forEach(x => { prev[x.id] = x.st; });
+    const fresh = d.items.filter(x => x.st === "готово" && prev[x.id] === "думает");
+    const local = ASK.items.filter(x => x.local && !d.items.some(y => y.id === x.id));
+    ASK.items = d.items.concat(local); ASK.memo = Array.isArray(d.memo) ? d.memo : []; ASK.ready = d.ready !== false; ASK.loaded = true; ASK.err = "";
+    fresh.forEach(x => { ASK.toType[x.id] = 1; });
+    if (fresh.length) {
+      haptic("ok");
+      if (ui.tab !== "ask") { ASK.badge += fresh.length; renderBadge(); toast("Советник ответил: вкладка «Спросить» (Q)"); }
+    }
+    const sg = JSON.stringify([ASK.items.map(x => [x.id, x.st]), ASK.memo, ASK.ready]);
+    if (sg !== ASK.sig) { ASK.sig = sg; askRender(); }
+    if (after) after();
+  };
+  const fail = e => { ASK.err = e && e.name === "SyntaxError" ? "old" : "net"; if (ASK.err === "old") ASK.loaded = true; askRender(); if (after) after(); };
+  if (API_URL) { callApi("api=asks&p=" + encodeURIComponent(me ? me.id : ""), ok, fail); return; }
+  if (run) { try { google.script.run.withSuccessHandler(ok).withFailureHandler(fail).askList(me ? me.id : ""); } catch (e) { fail({name: "SyntaxError"}); } return; }
+  fail({});
+}
+/** Polls while an answer is pending (every 5 s) or while the tab is open (every 30 s). */
+function askSchedule() {
+  clearTimeout(askTimer);
+  const pending = ASK.items.some(x => x.st === "думает");
+  if (ASK.err === "old" || (!pending && ui.tab !== "ask")) return;
+  askTimer = setTimeout(() => askFetch(askSchedule), pending ? 5000 : (ASK.err ? 10000 : 30000));
+}
+function askSend() {
+  const ta = $("askq"), me = asker(), text = (ta ? ta.value : "").trim(), run = window.google && google.script && google.script.run;
+  if (!text || ASK.sending) return;
+  if (!me) { toast("Открой приложение из бота"); return; }
+  if (ASK.items.some(x => x.st === "думает" && x.who === me.name)) { toast("Советник ещё отвечает на твой прошлый вопрос"); return; }
+  ASK.sending = true; ASK.draft = ""; ta.value = ""; autosize(ta);
+  const tmp = {id: "tmp" + Date.now(), t: Date.now(), who: me.name, src: "приложение", q: text, a: "", st: "думает", local: true};
+  ASK.items.push(tmp); askRender(); toEnd(true); haptic("light");
+  const done = d => {
+    ASK.sending = false;
+    if (d && d.ok) { tmp.id = d.id; askRender(); askFetch(askSchedule); return; }
+    ASK.items = ASK.items.filter(x => x !== tmp); ASK.draft = text;
+    const t2 = $("askq"); if (t2) { t2.value = text; autosize(t2); }
+    askRender(); toast((d && d.error) || "Не получилось отправить, попробуй ещё раз.");
+  };
+  const fail = e => done({error: e && e.name === "SyntaxError" ? "Скрипт таблицы ещё не обновлён: пока спроси в боте через /ask." : "Не получилось отправить: проверь интернет и попробуй ещё раз."});
+  if (API_URL) fetch(API_URL, {method: "POST", body: JSON.stringify({api: "ask", p: me.id, q: text})}).then(r => r.json()).then(done, fail);
+  else if (run) { try { google.script.run.withSuccessHandler(done).withFailureHandler(fail).askAi(me.id, text); } catch (e) { fail({name: "SyntaxError"}); } }
+  else fail({});
 }
 
 // =====================================================================
@@ -807,11 +996,12 @@ function viewMore() {
 // =====================================================================
 function renderView(animate) {
   const v = $("view"), sk = $("sky-path"), keepX = sk ? sk.scrollLeft : 0;
-  const html = {path: viewPath, coop: viewCoop, done: viewDone, quests: viewQuests, chapters: viewChapters, rift: viewRift, factions: viewFactions, more: viewMore}[ui.tab]();
+  const html = {ask: viewAsk, path: viewPath, coop: viewCoop, done: viewDone, quests: viewQuests, chapters: viewChapters, rift: viewRift, factions: viewFactions, more: viewMore}[ui.tab]();
   v.classList.remove("enter"); v.innerHTML = html;
   if (animate && !REDUCED) { void v.offsetWidth; v.classList.add("enter"); }
   pathIntro = false;
   animateBars(v);
+  if (ui.tab === "ask") { const ta = $("askq"); if (ta) autosize(ta); runTyping(); toEnd(false); }
   const sk2 = $("sky-path");
   if (sk2) {
     const c = sk2.querySelector(".isl[data-cur]") || sk2.querySelector(`.isl[data-pq="${CSS.escape(ui.pq)}"]`);
@@ -819,7 +1009,7 @@ function renderView(animate) {
     else sk2.scrollLeft = keepX;
   }
 }
-function renderAll(animate) { renderHud(); renderHotbar(); renderView(animate); }
+function renderAll(animate) { document.body.classList.toggle("asking", ui.tab === "ask"); renderHud(); renderHotbar(); renderView(animate); }
 /** Retro block transition: tiles over the view shrink away, starting from the hotbar slot that was pressed. */
 function wipe(fromX) {
   if (REDUCED || document.body.classList.contains("obs")) return;
@@ -839,7 +1029,8 @@ function setTab(id) {
   const t = TABS.find(x => x.id === id); itemName(t ? t.name : "");
   renderAll(true);
   const b = document.querySelector(`.hb[data-tab="${id}"]`); if (b && !REDUCED) { b.classList.remove("pulse"); void b.offsetWidth; b.classList.add("pulse"); }
-  window.scrollTo({top: 0});
+  document.body.classList.remove("typing");
+  if (id === "ask") { ASK.badge = 0; renderBadge(); toEnd(false); askFetch(askSchedule); } else window.scrollTo({top: 0});
 }
 function setPlayer(id) {
   if (!players.some(p => p.id === id)) return;
@@ -884,7 +1075,8 @@ const callApi = (q, ok, fail) => fetch(API_URL + (API_URL.includes("?") ? "&" : 
 function takeLive(d) {
   if (!d || !Array.isArray(d.players)) return;
   const old = sig; applyLive(d, false);
-  if (sig !== old) renderAll(false);
+  if (sig === old) return;
+  if (ui.tab === "ask") { renderHud(); renderHotbar(); } else renderAll(false);
 }
 function mark(btn) {
   const on = btn.dataset.on === "1", run = window.google && google.script && google.script.run;
@@ -912,7 +1104,7 @@ function mark(btn) {
 // Events
 // =====================================================================
 document.addEventListener("click", e => {
-  const t = e.target.closest("[data-tab],[data-act],[data-pp],[data-pq],[data-mark],[data-cat],[data-isl],[data-who]");
+  const t = e.target.closest("[data-tab],[data-act],[data-pp],[data-pq],[data-mark],[data-cat],[data-isl],[data-who],[data-sugg]");
   if (!t) { if (!e.target.closest("#who-pop")) $("who-pop").classList.remove("open"); return; }
   if (t.dataset.tab) { setTab(t.dataset.tab); return; }
   if (t.dataset.act === "who") {
@@ -932,13 +1124,19 @@ document.addEventListener("click", e => {
   if (t.dataset.mark) { mark(t); return; }
   if (t.dataset.cat) { ui.cat = t.dataset.cat; saveUi(); renderView(false); return; }
   if (t.dataset.isl) { ui.isl = t.dataset.isl; saveUi(); renderView(false); return; }
+  if (t.dataset.sugg) { const ta = $("askq"); if (ta) { ta.value = ASK.draft = t.dataset.sugg; autosize(ta); ta.focus(); } return; }
 });
+document.addEventListener("submit", e => { if (e.target.id === "askf") { e.preventDefault(); askSend(); } });
+const coarse = matchMedia("(pointer: coarse)").matches;
+document.addEventListener("focusin", e => { if (e.target.id === "askq" && coarse) document.body.classList.add("typing"); });
+document.addEventListener("focusout", e => { if (e.target.id === "askq") document.body.classList.remove("typing"); });
 document.addEventListener("keydown", e => {
+  if (e.target.id === "askq" && e.key === "Enter" && !e.shiftKey && !e.isComposing && !coarse) { e.preventDefault(); askSend(); return; }
   const g = e.target.closest && e.target.closest("[data-pq]");
   if (g && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); g.dispatchEvent(new MouseEvent("click", {bubbles: true})); return; }
   if (e.target.matches && e.target.matches("input,select,textarea")) return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
-  const k = e.key.toLowerCase(), tab = TABS.find(t => t.key.toLowerCase() === k || (k === "у" && t.key === "E"));
+  const k = e.key.toLowerCase(), tab = TABS.find(t => t.key.toLowerCase() === k || (k === "у" && t.key === "E") || (k === "й" && t.key === "Q"));
   if (tab) { setTab(tab.id); return; }
   if (k === "f" || k === "а") { const i = players.findIndex(p => p.id === ui.pp); if (players.length > 1) { setPlayer(players[(i + 1) % players.length].id); itemName(curPlayer().name); } return; }
   if (ui.tab === "path" && (e.key === "ArrowLeft" || e.key === "ArrowRight")) {
@@ -951,6 +1149,7 @@ document.addEventListener("keydown", e => {
 });
 let qt = 0;
 document.addEventListener("input", e => {
+  if (e.target.id === "askq") { ASK.draft = e.target.value; autosize(e.target); return; }
   if (e.target.id === "q") { ui.q = e.target.value; clearTimeout(qt); qt = setTimeout(() => { const pos = e.target.selectionStart; renderView(false); const q = $("q"); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (er) {} } }, 160); }
 });
 document.addEventListener("change", e => { if (e.target.id === "hide") { ui.hide = e.target.value; renderView(false); } });
@@ -967,6 +1166,7 @@ addEventListener("resize", () => { const hb = $("hotbar"); if (hb.firstChild) do
   if (L && Array.isArray(L.players)) { API_URL = typeof L.api === "string" ? L.api : ""; applyLive(L, true); }
   renderAll(true);
   if (LIVE.auto) itemName((TABS.find(t => t.id === ui.tab) || {}).name || "");
+  if (LIVE.auto && ui.tab === "ask") askFetch(askSchedule);
   const run = window.google && google.script && google.script.run;
   if (LIVE.auto && (run || API_URL)) setInterval(() => {
     if (API_URL) { callApi("api=live&p=" + encodeURIComponent(LIVE.me || "") + (LIVE.obs ? "&obs=1" : ""), takeLive); return; }
